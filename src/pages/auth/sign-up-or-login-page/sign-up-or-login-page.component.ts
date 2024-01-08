@@ -1,12 +1,23 @@
 import { Component } from '@angular/core';
+import { AuthInitialPageMode } from '../types/auth.enums';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-sign-up-or-login-page',
+  selector: 'sign-up-or-login-page',
   templateUrl: './sign-up-or-login-page.component.html',
   styleUrl: './sign-up-or-login-page.component.scss',
 })
 export class SignUpOrLoginPageComponent {
-  constructor() {
-    console.log('Hola');
+  public mode: AuthInitialPageMode | undefined = undefined;
+
+  constructor(private readonly route: ActivatedRoute) {
+    this.mode = this.route.snapshot.data['mode'];
+  }
+
+  public get signInMode() {
+    return AuthInitialPageMode.SIGN_UP;
+  }
+  public get loginMode() {
+    return AuthInitialPageMode.LOGIN;
   }
 }

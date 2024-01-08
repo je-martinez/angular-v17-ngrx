@@ -7,12 +7,12 @@ const routes: Routes = [
   {
     path: 'sign-up',
     component: SignUpOrLoginPageComponent,
-    data: { initialPageMode: AuthInitialPageMode.SIGN_UP },
+    data: { mode: AuthInitialPageMode.SIGN_UP },
   },
   {
     path: 'login',
     component: SignUpOrLoginPageComponent,
-    data: { initialPageMode: AuthInitialPageMode.LOGIN },
+    data: { mode: AuthInitialPageMode.LOGIN },
   },
 ];
 
