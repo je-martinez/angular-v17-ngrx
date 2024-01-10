@@ -8,11 +8,13 @@ const routes: Routes = [
     path: 'sign-up',
     component: SignUpOrLoginPageComponent,
     data: { mode: AuthInitialPageMode.SIGN_UP },
+    title: 'Sign Up',
   },
   {
     path: 'login',
     component: SignUpOrLoginPageComponent,
     data: { mode: AuthInitialPageMode.LOGIN },
+    title: 'Login',
   },
 ];
 
