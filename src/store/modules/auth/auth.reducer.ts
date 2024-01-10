@@ -4,26 +4,26 @@ import { UserCredential } from '@angular/fire/auth';
 
 export const authFeatureKey = 'auth';
 
-export interface State {
+export interface AuthState {
   userCrendentials: UserCredential | undefined;
   onErrorLoginWithGoogle: Error | undefined;
 }
 
-export const initialState: State = {
+export const initialState: AuthState = {
   userCrendentials: undefined,
   onErrorLoginWithGoogle: undefined,
 };
 
 export const reducer = createReducer(
   initialState,
-  on(AuthActions.loadAuths, (state) => state),
-  on(AuthActions.loadAuthsSuccess, (state, action) => ({
+  on(AuthActions.loginWGoogle, (state) => state),
+  on(AuthActions.loginWGoogleSuccess, (state, action) => ({
     ...state,
-    userCrendentials: action.data,
+    userCrendentials: { ...action.data },
   })),
-  on(AuthActions.loadAuthsFailure, (state, action) => ({
+  on(AuthActions.loginWGoogleFailure, (state, action) => ({
     ...state,
-    onErrorLoginWithGoogle: action.error,
+    onErrorLoginWithGoogle: { ...action.error },
   }))
 );
 

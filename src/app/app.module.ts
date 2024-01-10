@@ -10,6 +10,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { AuthStoreModule } from 'src/store/modules/auth/auth.store.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,10 +20,10 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],
