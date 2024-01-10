@@ -19,7 +19,7 @@ import { AuthStoreModule } from 'src/store/modules/auth/auth.store.module';
     AuthModule,
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(),
     EffectsModule.forRoot([]),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

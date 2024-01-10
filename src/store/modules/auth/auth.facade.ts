@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthState } from './auth.reducer';
 import { AuthActions } from './auth.actions';
-import { selectAuthState } from './auth.selectors';
+import { RootState } from 'src/store';
+import { selectUser } from './auth.selectors';
 
 @Injectable()
 export class AuthFacade {
-  public readonly user = selectAuthState(this.store)?.user;
+  public readonly user$ = this.store.select(selectUser);
 
-  constructor(private store: Store<AuthState>) {}
+  constructor(private store: Store<RootState>) {}
   loginWGoogle() {
     this.store.dispatch(AuthActions.loginWGoogle());
   }
