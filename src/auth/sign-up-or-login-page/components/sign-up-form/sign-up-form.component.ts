@@ -24,13 +24,8 @@ export class SignUpFormComponent implements OnDestroy {
     this.auth
       .loginWithGoogle()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(
-        (data) => {
-          console.log({ data });
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      .subscribe((data) => {
+        console.log({ data });
+      });
   }
 }
