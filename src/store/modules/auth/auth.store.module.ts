@@ -8,7 +8,10 @@ import { authFeature } from './auth.reducer';
 @NgModule({
   providers: [AuthFacade],
   imports: [
-    StoreModule.forFeature(authFeature),
+    StoreModule.forFeature({
+      name: authFeature.name,
+      reducer: authFeature.reducer,
+    }),
     EffectsModule.forFeature([AuthEffects]),
   ],
 })

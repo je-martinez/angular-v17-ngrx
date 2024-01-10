@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SignUpOrLoginPageComponent } from './sign-up-or-login-page/sign-up-or-login-page.component';
+import { SignUpOrLoginPageComponent } from './pages/sign-up-or-login-page/sign-up-or-login-page.component';
 import { AuthInitialPageMode } from './types/auth.enums';
 
 const routes: Routes = [

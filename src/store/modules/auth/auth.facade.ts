@@ -12,4 +12,8 @@ export class AuthFacade {
   loginWGoogle() {
     this.store.dispatch(AuthActions.loginWGoogle());
   }
+
+  recoveUserFromStorage() {
+    this.store.dispatch(AuthActions.recoverUserFromStorage());
+  }
 }

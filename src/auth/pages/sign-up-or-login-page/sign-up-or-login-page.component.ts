@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthInitialPageMode } from '../types/auth.enums';
+import { AuthInitialPageMode } from '../../types/auth.enums';
 
 @Component({
   selector: 'sign-up-or-login-page',

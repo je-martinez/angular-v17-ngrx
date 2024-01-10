@@ -16,6 +16,7 @@ export const initialState: AuthState = {
 
 export const reducer = createReducer(
   initialState,
+  //Login w/ Google
   on(AuthActions.loginWGoogle, (state) => state),
   on(AuthActions.loginWGoogleSuccess, (state, action) => ({
     ...state,
@@ -24,6 +25,16 @@ export const reducer = createReducer(
   on(AuthActions.loginWGoogleFailure, (state, action) => ({
     ...state,
     onErrorLoginWithGoogle: { ...action.error },
+  })),
+  //Recover User From Storage
+  on(AuthActions.recoverUserFromStorage, (state) => state),
+  on(AuthActions.recoverUserFromStorageSuccess, (state, action) => ({
+    ...state,
+    user: action.data,
+  })),
+  on(AuthActions.recoverUserFromStorageFailure, (state) => ({
+    ...state,
+    user: undefined,
   }))
 );
 
