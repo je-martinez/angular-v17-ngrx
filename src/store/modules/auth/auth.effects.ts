@@ -9,14 +9,14 @@ import { of } from 'rxjs';
 export class AuthEffects {
   loginWGoogle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.loginWGoogle),
+      ofType(AuthActions.signInWGoogle),
       exhaustMap(() =>
-        this.authService.loginWithGoogle().pipe(
+        this.authService.signInWithGoogle().pipe(
           tap({
             next: (data) => this.authService.saveUserOnLocalStorage(data),
           }),
-          map((data) => AuthActions.loginWGoogleSuccess({ data })),
-          catchError((error) => of(AuthActions.loginWGoogleFailure({ error })))
+          map((data) => AuthActions.signInWGoogleSuccess({ data })),
+          catchError((error) => of(AuthActions.signInWGoogleFailure({ error })))
         )
       )
     );

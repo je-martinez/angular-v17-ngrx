@@ -30,7 +30,7 @@ export class AuthService {
     return of(user ? JSON.parse(user) : undefined);
   }
 
-  loginWithGoogle(): Observable<User> {
+  signInWithGoogle(): Observable<User> {
     return from(signInWithPopup(this.auth, new GoogleAuthProvider())).pipe(
       map((userCredential) => userCredential.user.toJSON() as User)
     );

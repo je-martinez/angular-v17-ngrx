@@ -6,25 +6,25 @@ export const authFeatureKey = 'auth';
 
 export interface AuthState {
   user: User | undefined;
-  onErrorLoginWithGoogle: Error | undefined;
+  onErrorSignInWithGoogle: Error | undefined;
 }
 
 export const initialState: AuthState = {
   user: undefined,
-  onErrorLoginWithGoogle: undefined,
+  onErrorSignInWithGoogle: undefined,
 };
 
 export const reducer = createReducer(
   initialState,
   //Login w/ Google
-  on(AuthActions.loginWGoogle, (state) => state),
-  on(AuthActions.loginWGoogleSuccess, (state, action) => ({
+  on(AuthActions.signInWGoogle, (state) => state),
+  on(AuthActions.signInWGoogleSuccess, (state, action) => ({
     ...state,
     user: action.data,
   })),
-  on(AuthActions.loginWGoogleFailure, (state, action) => ({
+  on(AuthActions.signInWGoogleFailure, (state, action) => ({
     ...state,
-    onErrorLoginWithGoogle: { ...action.error },
+    onErrorSignInWithGoogle: { ...action.error },
   })),
   //Recover User From Storage
   on(AuthActions.recoverUserFromStorage, (state) => state),

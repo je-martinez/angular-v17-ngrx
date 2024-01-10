@@ -10,7 +10,7 @@ export class AuthFacade {
 
   constructor(private store: Store<RootState>) {}
   loginWGoogle() {
-    this.store.dispatch(AuthActions.loginWGoogle());
+    this.store.dispatch(AuthActions.signInWGoogle());
   }
 
   recoveUserFromStorage() {
