@@ -10,8 +10,9 @@ import {
   signOut,
   sendEmailVerification,
   User,
+  UserCredential,
 } from '@angular/fire/auth';
-import { from } from 'rxjs';
+import { ReplaySubject, catchError, from, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,8 @@ export class AuthService {
   constructor(private auth: Auth) {}
 
   loginWithGoogle() {
-    return from(signInWithPopup(this.auth, new GoogleAuthProvider()));
+    return from(signInWithPopup(this.auth, new GoogleAuthProvider())).pipe(
+      map((userCredential) => userCredential.user.toJSON() as User)
+    );
   }
 }

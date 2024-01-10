@@ -6,8 +6,7 @@ import { selectAuthState } from './auth.selectors';
 
 @Injectable()
 export class AuthFacade {
-  public readonly userCredentials = selectAuthState(this.store)
-    .userCrendentials;
+  public readonly user = selectAuthState(this.store)?.user;
 
   constructor(private store: Store<AuthState>) {}
   loginWGoogle() {

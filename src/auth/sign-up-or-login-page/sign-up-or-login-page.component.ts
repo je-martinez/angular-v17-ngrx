@@ -1,10 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthInitialPageMode } from '../types/auth.enums';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { AuthState } from 'src/store/modules/auth/auth.reducer';
-import { AuthActions } from 'src/store/modules/auth/auth.actions';
+import { AuthInitialPageMode } from '../types/auth.enums';
 
 @Component({
   selector: 'sign-up-or-login-page',
@@ -13,26 +9,14 @@ import { AuthActions } from 'src/store/modules/auth/auth.actions';
 })
 export class SignUpOrLoginPageComponent implements OnInit, OnDestroy {
   public mode: AuthInitialPageMode | undefined = undefined;
-  private readonly unsubscribe$ = new Subject<void>();
 
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly store: Store<AuthState>
-  ) {
+  constructor(private readonly route: ActivatedRoute) {
     this.mode = this.route.snapshot.data['mode'];
   }
 
-  ngOnInit(): void {
-    this.store.subscribe((state) => {
-      console.log(state);
-    });
-    this.store.dispatch(AuthActions.loginWGoogle());
-  }
+  ngOnInit(): void {}
 
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
+  ngOnDestroy(): void {}
 
   public get signInMode() {
     return AuthInitialPageMode.SIGN_UP;
