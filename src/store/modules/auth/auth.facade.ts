@@ -9,8 +9,8 @@ export class AuthFacade {
   public readonly user$ = this.store.select(selectUser);
 
   constructor(private store: Store<RootState>) {}
-  signInWGoogle() {
-    this.store.dispatch(AuthActions.signInWGoogle());
+  signUpWGoogle() {
+    this.store.dispatch(AuthActions.signUpWGoogle());
   }
 
   recoveUserFromStorage() {

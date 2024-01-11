@@ -18,7 +18,7 @@ export class SignUpOrLoginPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
-  public get signInMode() {
+  public get signUpMode() {
     return AuthInitialPageMode.SIGN_UP;
   }
 

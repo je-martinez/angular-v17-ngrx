@@ -3,17 +3,16 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   sendEmailVerification,
-  User,
-  UserCredential
+  User
 } from '@angular/fire/auth';
-import { ReplaySubject, catchError, from, map, of, Observable } from 'rxjs';
+import { from, map, of, Observable } from 'rxjs';
 import { USER_LOCAL_STORAGE_KEY } from '../constants/auth.constants';
+import { SignUpForm } from '../types/auth.DTOs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +29,36 @@ export class AuthService {
     return of(user ? JSON.parse(user) : undefined);
   }
 
-  signInWithGoogle(): Observable<User> {
+  signUpWithGoogle(): Observable<User> {
     return from(signInWithPopup(this.auth, new GoogleAuthProvider())).pipe(
       map((userCredential) => userCredential.user.toJSON() as User)
     );
+  }
+
+  signInWithEmailAndPassword({
+    email,
+    password
+  }: SignUpForm): Observable<User> {
+    return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
+      map((userCredential) => userCredential.user.toJSON() as User)
+    );
+  }
+
+  createAccount({ email, password }: SignUpForm): Observable<User> {
+    return from(
+      createUserWithEmailAndPassword(this.auth, email, password)
+    ).pipe(map((userCredential) => userCredential.user.toJSON() as User));
+  }
+
+  sendEmailVerification(): Observable<void> {
+    return from(sendEmailVerification(this.auth.currentUser!));
+  }
+
+  signOut(): Observable<void> {
+    return from(signOut(this.auth));
+  }
+
+  sendPasswordResetEmail(email: string): Observable<void> {
+    return from(sendPasswordResetEmail(this.auth, email));
   }
 }

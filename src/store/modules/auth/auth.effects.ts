@@ -7,21 +7,41 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
-  signInWGoogle$ = createEffect(() => {
+  //Sign Up w/ Google
+  signUpWGoogle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.signInWGoogle),
+      ofType(AuthActions.signUpWGoogle),
       exhaustMap(() =>
-        this.authService.signInWithGoogle().pipe(
+        this.authService.signUpWithGoogle().pipe(
           tap({
             next: (data) => this.authService.saveUserOnLocalStorage(data)
           }),
-          map((data) => AuthActions.signInWGoogleSuccess({ data })),
-          catchError((error) => of(AuthActions.signInWGoogleFailure({ error })))
+          map((data) => AuthActions.signUpWGoogleSuccess({ data })),
+          catchError((error) => of(AuthActions.signUpWGoogleFailure({ error })))
         )
       )
     );
   });
 
+  //Sign Up w/ Email and Password
+  signUpWEmailAndPassword$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.signUpWEmailAndPassword),
+      exhaustMap(({ input }) =>
+        this.authService.createAccount(input).pipe(
+          tap({
+            next: (data) => this.authService.saveUserOnLocalStorage(data)
+          }),
+          map((data) => AuthActions.signUpWEmailAndPasswordSuccess({ data })),
+          catchError((error) =>
+            of(AuthActions.signUpWEmailAndPasswordFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  //Recover User From Storage
   recoverUserFromStorage$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.recoverUserFromStorage),
@@ -32,7 +52,7 @@ export class AuthEffects {
               ? AuthActions.recoverUserFromStorageSuccess({ data })
               : AuthActions.recoverUserFromStorageFailure();
           }),
-          catchError((_) => of(AuthActions.recoverUserFromStorageFailure()))
+          catchError(() => of(AuthActions.recoverUserFromStorageFailure()))
         )
       )
     );

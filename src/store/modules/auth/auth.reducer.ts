@@ -6,26 +6,53 @@ export const authFeatureKey = 'auth';
 
 export interface AuthState {
   user: User | undefined;
-  onErrorSignInWithGoogle: Error | undefined;
+  loadingSignUpWithGoogle: boolean;
+  onErrorsignUpWithGoogle: Error | undefined;
+  loadingSignUpWithEmailAndPassword: boolean;
+  onErrorSignUpWithEmailAndPassword: Error | undefined;
 }
 
 export const initialState: AuthState = {
   user: undefined,
-  onErrorSignInWithGoogle: undefined
+  loadingSignUpWithGoogle: false,
+  onErrorsignUpWithGoogle: undefined,
+  loadingSignUpWithEmailAndPassword: false,
+  onErrorSignUpWithEmailAndPassword: undefined
 };
 
 export const reducer = createReducer(
   initialState,
-  //Login w/ Google
-  on(AuthActions.signInWGoogle, (state) => state),
-  on(AuthActions.signInWGoogleSuccess, (state, action) => ({
+  //Sign Up w/ Google
+  on(AuthActions.signUpWGoogle, (state) => ({
     ...state,
+    loadingsignUpWithGoogle: true
+  })),
+  on(AuthActions.signUpWGoogleSuccess, (state, action) => ({
+    ...state,
+    loadingsignUpWithGoogle: false,
     user: action.data
   })),
-  on(AuthActions.signInWGoogleFailure, (state, action) => ({
+  on(AuthActions.signUpWGoogleFailure, (state, action) => ({
     ...state,
-    onErrorSignInWithGoogle: { ...action.error }
+    loadingsignUpWithGoogle: false,
+    onErrorsignUpWithGoogle: { ...action.error }
   })),
+
+  //Sign Up w/ Email and Password
+  on(AuthActions.signUpWEmailAndPassword, (state) => ({
+    ...state,
+    loadingSignUpWithEmailAndPassword: true
+  })),
+  on(AuthActions.signUpWEmailAndPasswordSuccess, (state, action) => ({
+    ...state,
+    user: action.data,
+    loadingSignUpWithEmailAndPassword: false
+  })),
+  on(AuthActions.signUpWEmailAndPasswordFailure, (state) => ({
+    ...state,
+    loadingSignUpWithEmailAndPassword: false
+  })),
+
   //Recover User From Storage
   on(AuthActions.recoverUserFromStorage, (state) => state),
   on(AuthActions.recoverUserFromStorageSuccess, (state, action) => ({
