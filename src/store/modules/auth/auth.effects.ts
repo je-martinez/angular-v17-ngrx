@@ -13,7 +13,7 @@ export class AuthEffects {
       exhaustMap(() =>
         this.authService.signInWithGoogle().pipe(
           tap({
-            next: (data) => this.authService.saveUserOnLocalStorage(data),
+            next: (data) => this.authService.saveUserOnLocalStorage(data)
           }),
           map((data) => AuthActions.signInWGoogleSuccess({ data })),
           catchError((error) => of(AuthActions.signInWGoogleFailure({ error })))

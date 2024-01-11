@@ -5,7 +5,7 @@ import { AuthInitialPageMode } from '../../types/auth.enums';
 @Component({
   selector: 'sign-up-or-login-page',
   templateUrl: './sign-up-or-login-page.component.html',
-  styleUrl: './sign-up-or-login-page.component.scss',
+  styleUrl: './sign-up-or-login-page.component.scss'
 })
 export class SignUpOrLoginPageComponent implements OnInit, OnDestroy {
   public mode: AuthInitialPageMode | undefined = undefined;

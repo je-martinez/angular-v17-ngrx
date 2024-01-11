@@ -10,13 +10,13 @@ import {
   signOut,
   sendEmailVerification,
   User,
-  UserCredential,
+  UserCredential
 } from '@angular/fire/auth';
 import { ReplaySubject, catchError, from, map, of, Observable } from 'rxjs';
 import { USER_LOCAL_STORAGE_KEY } from '../constants/auth.constants';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
   constructor(private auth: Auth) {}

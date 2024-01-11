@@ -8,17 +8,17 @@ const routes: Routes = [
     path: 'sign-up',
     component: SignUpOrLoginPageComponent,
     data: { mode: AuthInitialPageMode.SIGN_UP },
-    title: 'Sign Up',
+    title: 'Sign Up'
   },
   {
     path: 'login',
     component: SignUpOrLoginPageComponent,
     data: { mode: AuthInitialPageMode.LOGIN },
-    title: 'Login',
-  },
+    title: 'Login'
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)]
 })
 export class AuthRoutingModule {}

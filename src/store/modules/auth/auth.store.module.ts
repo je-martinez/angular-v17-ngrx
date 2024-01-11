@@ -10,9 +10,9 @@ import { authFeature } from './auth.reducer';
   imports: [
     StoreModule.forFeature({
       name: authFeature.name,
-      reducer: authFeature.reducer,
+      reducer: authFeature.reducer
     }),
-    EffectsModule.forFeature([AuthEffects]),
-  ],
+    EffectsModule.forFeature([AuthEffects])
+  ]
 })
 export class AuthStoreModule {}

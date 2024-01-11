@@ -11,8 +11,8 @@ import { CommonModule } from '@angular/common';
     SignUpFormComponent,
     LoginFormComponent,
     AuthStoreModule,
-    CommonModule,
+    CommonModule
   ],
-  exports: [SignUpOrLoginPageComponent],
+  exports: [SignUpOrLoginPageComponent]
 })
 export class SignUpOrLoginPageModule {}

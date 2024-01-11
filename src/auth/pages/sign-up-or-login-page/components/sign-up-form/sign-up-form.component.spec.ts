@@ -9,9 +9,8 @@ describe('SignUpFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SignUpFormComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SignUpFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

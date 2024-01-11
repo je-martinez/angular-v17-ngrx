@@ -9,6 +9,6 @@ export const AuthActions = createActionGroup({
     'SignIn w Google Failure': props<{ error: Error }>(),
     'Recover User From Storage': emptyProps(),
     'Recover User From Storage Success': props<{ data: User }>(),
-    'Recover User From Storage Failure': emptyProps(),
-  },
+    'Recover User From Storage Failure': emptyProps()
+  }
 });
