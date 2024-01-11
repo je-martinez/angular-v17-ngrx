@@ -6,16 +6,21 @@ import { UserLoggedGuard } from 'src/infrastructure/guards/user-logged.guard';
 const routes: Routes = [
   {
     path: 'auth',
-    canActivateChild: [NoUserLoggedGuard],
+    canActivate: [NoUserLoggedGuard],
     loadChildren: () => import('src/auth/auth.module').then((m) => m.AuthModule)
   },
   {
     path: 'home',
-    canActivateChild: [UserLoggedGuard],
+    canActivate: [UserLoggedGuard],
     loadChildren: () => import('src/home/home.module').then((m) => m.HomeModule)
   },
   {
     path: '',
+    redirectTo: 'auth/sign-up',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
     redirectTo: 'auth/sign-up',
     pathMatch: 'full'
   }

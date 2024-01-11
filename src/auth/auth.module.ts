@@ -3,7 +3,6 @@ import { SignUpOrLoginPageModule } from './pages/sign-up-or-login-page/sign-up-o
 import { AuthRoutingModule } from './auth.routing.module';
 
 @NgModule({
-  imports: [SignUpOrLoginPageModule, AuthRoutingModule],
-  exports: [SignUpOrLoginPageModule]
+  imports: [SignUpOrLoginPageModule, AuthRoutingModule]
 })
 export class AuthModule {}

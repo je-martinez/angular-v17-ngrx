@@ -4,6 +4,7 @@ import { catchError, map, exhaustMap, tap } from 'rxjs/operators';
 import { AuthActions } from './auth.actions';
 import { AuthService } from '../../../auth/services/auth.service';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
@@ -15,6 +16,9 @@ export class AuthEffects {
         this.authService.signInWithGoogle().pipe(
           tap({
             next: (data) => this.authService.saveUserOnLocalStorage(data)
+          }),
+          tap({
+            next: () => this.router.navigate(['home/content-wall'])
           }),
           map((data) => AuthActions.signInWGoogleSuccess({ data })),
           catchError((error) => of(AuthActions.signInWGoogleFailure({ error })))
@@ -60,6 +64,7 @@ export class AuthEffects {
 
   constructor(
     private actions$: Actions,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
 }
