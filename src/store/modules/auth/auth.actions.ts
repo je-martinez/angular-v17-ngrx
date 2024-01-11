@@ -1,6 +1,6 @@
 import { User } from '@angular/fire/auth';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { SignUpForm } from 'src/auth/types/auth.DTOs';
+import { SignUpFormDTO } from 'src/auth/types/auth.DTOs';
 
 export const AuthActions = createActionGroup({
   source: 'Auth',
@@ -14,7 +14,7 @@ export const AuthActions = createActionGroup({
     'Recover User From Storage Success': props<{ data: User }>(),
     'Recover User From Storage Failure': emptyProps(),
     //Sign In w/ Email and Password
-    'Sign Up w Email And Password': props<{ input: SignUpForm }>(),
+    'Sign Up w Email And Password': props<{ input: SignUpFormDTO }>(),
     'Sign Up w Email And Password Success': props<{ data: User }>(),
     'Sign Up w Email And Password Failure': props<{ error: Error }>()
   }

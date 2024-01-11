@@ -12,7 +12,7 @@ import {
 } from '@angular/fire/auth';
 import { from, map, of, Observable } from 'rxjs';
 import { USER_LOCAL_STORAGE_KEY } from '../constants/auth.constants';
-import { SignUpForm } from '../types/auth.DTOs';
+import { SignUpFormDTO } from '../types/auth.DTOs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,13 +38,13 @@ export class AuthService {
   signInWithEmailAndPassword({
     email,
     password
-  }: SignUpForm): Observable<User> {
+  }: SignUpFormDTO): Observable<User> {
     return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
       map((userCredential) => userCredential.user.toJSON() as User)
     );
   }
 
-  createAccount({ email, password }: SignUpForm): Observable<User> {
+  createAccount({ email, password }: SignUpFormDTO): Observable<User> {
     return from(
       createUserWithEmailAndPassword(this.auth, email, password)
     ).pipe(map((userCredential) => userCredential.user.toJSON() as User));

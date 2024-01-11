@@ -1,4 +1,4 @@
-export interface SignUpForm {
+export interface SignUpFormDTO {
   email: string;
   password: string;
 }

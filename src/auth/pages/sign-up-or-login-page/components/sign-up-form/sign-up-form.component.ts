@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -20,7 +20,8 @@ import { AuthStoreModule } from 'src/store/modules/auth/auth.store.module';
     AuthStoreModule,
     FormsModule,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    NgFor
   ],
   templateUrl: './sign-up-form.component.html',
   styleUrl: './sign-up-form.component.scss'
@@ -45,6 +46,10 @@ export class SignUpFormComponent {
     return this.signUpForm?.get('password')?.value;
   }
 
+  private get wasPasswordInputTouched() {
+    return this.signUpForm?.get('password')?.touched;
+  }
+
   public get formValue() {
     return this.signUpForm?.value;
   }
@@ -53,7 +58,15 @@ export class SignUpFormComponent {
     return this.signUpForm?.valid;
   }
 
-  public getErrorsFromPassword() {
+  public get emailErrors() {
+    return this.signUpForm?.get('email')?.errors;
+  }
+
+  public get passwordErrors() {
+    if (!this.wasPasswordInputTouched) {
+      return undefined;
+    }
+
     const errors = [];
 
     if (!/(?=.*[A-Za-z])/.test(this.password)) {
@@ -76,11 +89,12 @@ export class SignUpFormComponent {
   }
 
   public onGoogleSignUp() {
-    this.authFacade.signUpWGoogle();
+    this.authFacade.signInWGoogle();
   }
 
   public onEmailAndPasswordSignUp() {
     if (this.isFormValid) {
+      this.authFacade.signInWEmailAndPassword(this.formValue);
     }
   }
 }
