@@ -7,5 +7,5 @@ export const selectAuthState = createFeatureSelector<fromAuth.AuthState>(
 
 export const selectUser = createSelector(
   selectAuthState,
-  (state: fromAuth.AuthState) => state.user
+  (state: fromAuth.AuthState) => state?.user
 );

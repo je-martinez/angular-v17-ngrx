@@ -11,10 +11,13 @@ import { AppComponent } from './app.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthFacade } from 'src/store/modules/auth/auth.facade';
+import { AuthStoreModule } from 'src/store/modules/auth/auth.store.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    //Auth Store Module
+    AuthStoreModule,
     //Modules
     BrowserModule,
     BrowserAnimationsModule,
