@@ -8,5 +8,9 @@ export const environment = {
     messagingSenderId: import.meta.env['NG_APP_FIREBASE_MESSAGING_SENDER_ID'],
     appId: import.meta.env['NG_APP_FIREBASE_APP_ID'],
     measurementId: import.meta.env['NG_APP_FIREBASE_MEASUREMENT_ID']
+  },
+  encryption: {
+    localStorageKey: import.meta.env['NG_APP_ENCRYPTION_KEY_LOCAL_STORAGE'],
+    passwordKey: import.meta.env['NG_APP_ENCRYPTION_KEY_PASSWORD']
   }
 };

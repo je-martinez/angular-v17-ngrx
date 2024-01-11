@@ -13,19 +13,23 @@ import {
 import { from, map, of, Observable } from 'rxjs';
 import { USER_LOCAL_STORAGE_KEY } from '../constants/auth.constants';
 import { SignUpFormDTO } from '../types/auth.DTOs';
+import { LocalStorageService } from 'src/shared/services';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private auth: Auth) {}
+  constructor(
+    private auth: Auth,
+    private localStorageS: LocalStorageService
+  ) {}
 
   saveUserOnLocalStorage(user: User) {
-    localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
+    this.localStorageS.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
   }
 
   getUserFromLocalStorage(): Observable<User | undefined> {
-    const user = localStorage.getItem(USER_LOCAL_STORAGE_KEY);
+    const user = this.localStorageS.getItem(USER_LOCAL_STORAGE_KEY);
     return of(user ? JSON.parse(user) : undefined);
   }
 
