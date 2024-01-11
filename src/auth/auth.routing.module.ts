@@ -15,6 +15,11 @@ const routes: Routes = [
     component: SignUpOrLoginPageComponent,
     data: { mode: AuthInitialPageMode.LOGIN },
     title: 'Login'
+  },
+  {
+    path: '',
+    redirectTo: 'sign-up',
+    pathMatch: 'full'
   }
 ];
 
