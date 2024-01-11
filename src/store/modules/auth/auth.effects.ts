@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
-  loginWGoogle$ = createEffect(() => {
+  signInWGoogle$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.signInWGoogle),
       exhaustMap(() =>

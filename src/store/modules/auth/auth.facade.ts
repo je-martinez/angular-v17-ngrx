@@ -9,7 +9,7 @@ export class AuthFacade {
   public readonly user$ = this.store.select(selectUser);
 
   constructor(private store: Store<RootState>) {}
-  loginWGoogle() {
+  signInWGoogle() {
     this.store.dispatch(AuthActions.signInWGoogle());
   }
 

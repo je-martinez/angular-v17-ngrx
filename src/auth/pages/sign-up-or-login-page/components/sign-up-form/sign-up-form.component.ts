@@ -20,6 +20,6 @@ export class SignUpFormComponent implements OnInit {
   }
 
   public onGoogleSignUp() {
-    this.authFacade.loginWGoogle();
+    this.authFacade.signInWGoogle();
   }
 }
