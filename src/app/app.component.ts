@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthFacade } from '../store/modules/auth/auth.facade';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ export class AppComponent implements OnInit {
   constructor(private readonly authFacade: AuthFacade) {}
 
   ngOnInit(): void {
+    initFlowbite();
     this.authFacade.recoveUserFromStorage();
   }
 }

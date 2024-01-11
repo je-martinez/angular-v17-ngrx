@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PASSWORD_REGEX } from 'src/auth/constants/auth.constants';
+import { ToastService } from 'src/shared/services/toast.service';
 import { FormErrorMessageComponent } from 'src/shared/ui/components/form-error-message/form-error-message.component';
 import { AuthFacade } from 'src/store/modules/auth/auth.facade';
 import { AuthStoreModule } from 'src/store/modules/auth/auth.store.module';
@@ -26,6 +27,7 @@ import { AuthStoreModule } from 'src/store/modules/auth/auth.store.module';
     NgIf,
     NgFor
   ],
+  providers: [ToastService],
   templateUrl: './sign-up-form.component.html',
   styleUrl: './sign-up-form.component.scss'
 })
@@ -33,7 +35,8 @@ export class SignUpFormComponent {
   public readonly signUpForm: FormGroup | undefined;
   constructor(
     private authFacade: AuthFacade,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toasts: ToastService
   ) {
     this.signUpForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
