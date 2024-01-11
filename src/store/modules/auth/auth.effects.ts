@@ -36,6 +36,9 @@ export class AuthEffects {
           tap({
             next: (data) => this.authService.saveUserOnLocalStorage(data)
           }),
+          tap({
+            next: () => this.router.navigate(['home/content-wall'])
+          }),
           map((data) => AuthActions.signUpWEmailAndPasswordSuccess({ data })),
           catchError((error) =>
             of(AuthActions.signUpWEmailAndPasswordFailure({ error }))
