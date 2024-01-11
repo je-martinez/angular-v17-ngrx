@@ -3,9 +3,6 @@ import { ContentWallPageModule } from './pages/content-wall-page/content-wall-pa
 import { HomeRoutingModule } from './home.routing.module';
 
 @NgModule({
-  imports: [
-    HomeRoutingModule,
-    ContentWallPageModule,
-  ]
+  imports: [HomeRoutingModule, ContentWallPageModule]
 })
-export class HomeModule { }
+export class HomeModule {}

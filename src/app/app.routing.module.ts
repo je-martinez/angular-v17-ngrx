@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NoUserLoggedGuard } from 'src/infrastructure/guards/no-user-logged.guard';
 import { UserLoggedGuard } from 'src/infrastructure/guards/user-logged.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
+    canActivateChild: [NoUserLoggedGuard],
     loadChildren: () => import('src/auth/auth.module').then((m) => m.AuthModule)
   },
   {
