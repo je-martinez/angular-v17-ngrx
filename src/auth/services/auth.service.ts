@@ -14,6 +14,8 @@ import { from, map, of, Observable } from 'rxjs';
 import { USER_LOCAL_STORAGE_KEY } from '../constants/auth.constants';
 import { SignUpFormDTO } from '../types/auth.DTOs';
 import { LocalStorageService } from 'src/shared/services';
+import { encryptString } from 'src/shared/utils';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -43,9 +45,13 @@ export class AuthService {
     email,
     password
   }: SignUpFormDTO): Observable<User> {
-    return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
-      map((userCredential) => userCredential.user.toJSON() as User)
+    const encryptPassword = encryptString(
+      password,
+      environment.encryption.passwordKey
     );
+    return from(
+      signInWithEmailAndPassword(this.auth, email, encryptPassword)
+    ).pipe(map((userCredential) => userCredential.user.toJSON() as User));
   }
 
   createAccount({ email, password }: SignUpFormDTO): Observable<User> {
