@@ -5,10 +5,12 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  ValidationErrors,
   Validators
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PASSWORD_REGEX } from 'src/auth/constants/auth.constants';
+import { FormErrorMessageComponent } from 'src/shared/ui/components/form-error-message/form-error-message.component';
 import { AuthFacade } from 'src/store/modules/auth/auth.facade';
 import { AuthStoreModule } from 'src/store/modules/auth/auth.store.module';
 
@@ -16,6 +18,7 @@ import { AuthStoreModule } from 'src/store/modules/auth/auth.store.module';
   selector: 'sign-up-form',
   standalone: true,
   imports: [
+    FormErrorMessageComponent,
     RouterModule,
     AuthStoreModule,
     FormsModule,
@@ -46,6 +49,10 @@ export class SignUpFormComponent {
     return this.signUpForm?.get('password')?.value;
   }
 
+  private get wasEmailInputTouched() {
+    return this.signUpForm?.get('email')?.touched;
+  }
+
   private get wasPasswordInputTouched() {
     return this.signUpForm?.get('password')?.touched;
   }
@@ -59,15 +66,37 @@ export class SignUpFormComponent {
   }
 
   public get emailErrors() {
-    return this.signUpForm?.get('email')?.errors;
+    if (!this.wasEmailInputTouched) {
+      return [];
+    }
+
+    const errors: string[] = [];
+    const emailControlErrors: ValidationErrors | null | undefined =
+      this.signUpForm?.get('email')?.errors;
+
+    if (emailControlErrors?.['required']) {
+      errors.push('This field is required.');
+    }
+
+    if (emailControlErrors?.['email']) {
+      errors.push('Invalid email address.');
+    }
+    return errors;
   }
 
   public get passwordErrors() {
     if (!this.wasPasswordInputTouched) {
-      return undefined;
+      return [];
     }
 
     const errors = [];
+
+    const passwordControlErrors: ValidationErrors | null | undefined =
+      this.signUpForm?.get('password')?.errors;
+
+    if (passwordControlErrors?.['required']) {
+      errors.push('This field is required.');
+    }
 
     if (!/(?=.*[A-Za-z])/.test(this.password)) {
       errors.push('It must contain at least one alphabetical character.');
@@ -85,7 +114,7 @@ export class SignUpFormComponent {
       errors.push('It must have a minimum length of 8 characters.');
     }
 
-    return errors.length === 0 ? undefined : errors;
+    return errors;
   }
 
   public onGoogleSignUp() {
