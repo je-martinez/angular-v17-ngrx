@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -25,7 +25,8 @@ import { AuthStoreModule } from 'src/store/modules/auth/auth.store.module';
     FormsModule,
     ReactiveFormsModule,
     NgIf,
-    NgFor
+    NgFor,
+    NgClass
   ],
   providers: [ToastService],
   templateUrl: './sign-up-form.component.html',
@@ -48,8 +49,16 @@ export class SignUpFormComponent {
     return this.signUpForm?.get('password')?.value;
   }
 
+  public get emailInputHasErrors() {
+    return this.emailErrors?.length > 0;
+  }
+
   private get wasEmailInputTouched() {
     return this.signUpForm?.get('email')?.touched;
+  }
+
+  public get passwordInputHasErrors() {
+    return this.passwordErrors?.length > 0;
   }
 
   private get wasPasswordInputTouched() {
