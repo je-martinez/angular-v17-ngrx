@@ -10,14 +10,14 @@ export class AuthEffects {
   //Sign Up w/ Google
   signUpWGoogle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.signUpWGoogle),
+      ofType(AuthActions.signInWGoogle),
       exhaustMap(() =>
-        this.authService.signUpWithGoogle().pipe(
+        this.authService.signInWithGoogle().pipe(
           tap({
             next: (data) => this.authService.saveUserOnLocalStorage(data)
           }),
-          map((data) => AuthActions.signUpWGoogleSuccess({ data })),
-          catchError((error) => of(AuthActions.signUpWGoogleFailure({ error })))
+          map((data) => AuthActions.signInWGoogleSuccess({ data })),
+          catchError((error) => of(AuthActions.signInWGoogleFailure({ error })))
         )
       )
     );

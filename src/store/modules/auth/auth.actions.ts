@@ -6,16 +6,16 @@ export const AuthActions = createActionGroup({
   source: 'Auth',
   events: {
     //Sign In w/ Google
-    'SignUp w Google': emptyProps(),
-    'SignUp w Google Success': props<{ data: User }>(),
-    'SignUp w Google Failure': props<{ error: Error }>(),
+    'Sign In w Google': emptyProps(),
+    'Sign In w Google Success': props<{ data: User }>(),
+    'Sign In w Google Failure': props<{ error: Error }>(),
     //Recover User From Storage
     'Recover User From Storage': emptyProps(),
     'Recover User From Storage Success': props<{ data: User }>(),
     'Recover User From Storage Failure': emptyProps(),
     //Sign In w/ Email and Password
-    'SignUp w Email And Password': props<{ input: SignUpForm }>(),
-    'SignUp w Email And Password Success': props<{ data: User }>(),
-    'SignUp w Email And Password Failure': props<{ error: Error }>()
+    'Sign Up w Email And Password': props<{ input: SignUpForm }>(),
+    'Sign Up w Email And Password Success': props<{ data: User }>(),
+    'Sign Up w Email And Password Failure': props<{ error: Error }>()
   }
 });

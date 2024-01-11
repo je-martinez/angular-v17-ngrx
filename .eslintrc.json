@@ -1,9 +1,13 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -16,7 +20,6 @@
           "error",
           {
             "type": "attribute",
-            // "prefix": "app",
             "prefix": "",
             "style": "camelCase"
           }
@@ -25,7 +28,6 @@
           "error",
           {
             "type": "element",
-            // "prefix": "app",
             "prefix": "",
             "style": "kebab-case"
           }
@@ -33,13 +35,23 @@
       }
     },
     {
-      "files": ["*.html"],
+      "files": [
+        "*.html"
+      ],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
         "plugin:@angular-eslint/template/accessibility",
         "plugin:prettier/recommended"
       ],
       "rules": {}
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/all-requiring-type-checking"
+      ]
     }
   ]
 }
