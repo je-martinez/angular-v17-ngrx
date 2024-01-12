@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AuthActions } from './auth.actions';
 import { RootState } from 'src/store';
 import { selectUser } from './auth.selectors';
-import { SignUpFormDTO } from 'src/auth/types/auth.DTOs';
+import { SignUpOrLoginFormDTO } from 'src/auth/types/auth.DTOs';
 
 @Injectable()
 export class AuthFacade {
@@ -14,8 +14,12 @@ export class AuthFacade {
     this.store.dispatch(AuthActions.signInWGoogle());
   }
 
-  signInWEmailAndPassword(input: SignUpFormDTO) {
+  signUpWEmailAndPassword(input: SignUpOrLoginFormDTO) {
     this.store.dispatch(AuthActions.signUpWEmailAndPassword({ input }));
+  }
+
+  signInWEmailAndPassword(input: SignUpOrLoginFormDTO) {
+    this.store.dispatch(AuthActions.signInWEmailAndPassword({ input }));
   }
   recoveUserFromStorage() {
     this.store.dispatch(AuthActions.recoverUserFromStorage());

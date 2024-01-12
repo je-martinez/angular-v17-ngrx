@@ -12,7 +12,7 @@ import {
 } from '@angular/fire/auth';
 import { from, map, of, Observable } from 'rxjs';
 import { USER_LOCAL_STORAGE_KEY } from '../constants/auth.constants';
-import { SignUpFormDTO } from '../types/auth.DTOs';
+import { SignUpOrLoginFormDTO } from '../types/auth.DTOs';
 import { LocalStorageService } from 'src/shared/services';
 import { encryptString } from 'src/shared/utils';
 import { environment } from 'src/environments/environment';
@@ -44,7 +44,7 @@ export class AuthService {
   signInWithEmailAndPassword({
     email,
     password
-  }: SignUpFormDTO): Observable<User> {
+  }: SignUpOrLoginFormDTO): Observable<User> {
     const encryptPassword = encryptString(
       password,
       environment.encryption.passwordKey
@@ -54,7 +54,7 @@ export class AuthService {
     ).pipe(map((userCredential) => userCredential.user.toJSON() as User));
   }
 
-  createAccount({ email, password }: SignUpFormDTO): Observable<User> {
+  createAccount({ email, password }: SignUpOrLoginFormDTO): Observable<User> {
     return from(
       createUserWithEmailAndPassword(this.auth, email, password)
     ).pipe(map((userCredential) => userCredential.user.toJSON() as User));

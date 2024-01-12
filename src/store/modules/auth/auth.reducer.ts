@@ -10,6 +10,8 @@ export interface AuthState {
   onErrorSignInWithGoogle: Error | undefined;
   loadingSignUpWithEmailAndPassword: boolean;
   onErrorSignUpWithEmailAndPassword: Error | undefined;
+  loadingSignInWithEmailAndPassword: boolean;
+  onErrorSignInWithEmailAndPassword: Error | undefined;
 }
 
 export const initialState: AuthState = {
@@ -17,7 +19,9 @@ export const initialState: AuthState = {
   loadingSignInWithGoogle: false,
   onErrorSignInWithGoogle: undefined,
   loadingSignUpWithEmailAndPassword: false,
-  onErrorSignUpWithEmailAndPassword: undefined
+  onErrorSignUpWithEmailAndPassword: undefined,
+  loadingSignInWithEmailAndPassword: false,
+  onErrorSignInWithEmailAndPassword: undefined
 };
 
 export const reducer = createReducer(
@@ -68,6 +72,30 @@ export const reducer = createReducer(
     (state): AuthState => ({
       ...state,
       loadingSignUpWithEmailAndPassword: false
+    })
+  ),
+
+  //Sign In w/ Email and Password
+  on(
+    AuthActions.signInWEmailAndPassword,
+    (state): AuthState => ({
+      ...state,
+      loadingSignInWithEmailAndPassword: true
+    })
+  ),
+  on(
+    AuthActions.signInWEmailAndPasswordSuccess,
+    (state, action): AuthState => ({
+      ...state,
+      user: action.data,
+      loadingSignInWithEmailAndPassword: false
+    })
+  ),
+  on(
+    AuthActions.signInWEmailAndPasswordFailure,
+    (state): AuthState => ({
+      ...state,
+      loadingSignInWithEmailAndPassword: false
     })
   ),
 

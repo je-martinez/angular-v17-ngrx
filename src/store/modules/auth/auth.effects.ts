@@ -48,6 +48,27 @@ export class AuthEffects {
     );
   });
 
+  //Sign In w/ Email and Password
+  signInWEmailAndPassword$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.signInWEmailAndPassword),
+      exhaustMap(({ input }) =>
+        this.authService.signInWithEmailAndPassword(input).pipe(
+          tap({
+            next: (data) => this.authService.saveUserOnLocalStorage(data)
+          }),
+          tap({
+            next: () => this.router.navigate(['home/content-wall'])
+          }),
+          map((data) => AuthActions.signInWEmailAndPasswordSuccess({ data })),
+          catchError((error) =>
+            of(AuthActions.signInWEmailAndPasswordFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
   //Recover User From Storage
   recoverUserFromStorage$ = createEffect(() => {
     return this.actions$.pipe(
