@@ -1,5 +1,10 @@
 @if(mode === signUpMode){
-<sign-up-form></sign-up-form>
+<sign-up-form
+  [signUpForm]="signUpOrLoginForm"
+  [emailErrors]="emailErrors"
+  [passwordErrors]="passwordErrors"
+  (signUpWithEmailAndPassword)="onSubmit()"
+  (googleSignUp)="onGoogleSignUp()"></sign-up-form>
 } @if(mode === loginMode){
 <login-form></login-form>
 }
