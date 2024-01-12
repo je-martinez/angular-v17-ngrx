@@ -30,6 +30,10 @@ export class AuthService {
     this.localStorageS.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
   }
 
+  removeUserFromLocalStorage() {
+    this.localStorageS.removeItem(USER_LOCAL_STORAGE_KEY);
+  }
+
   getUserFromLocalStorage(): Observable<User | undefined> {
     const user = this.localStorageS.getItem(USER_LOCAL_STORAGE_KEY);
     return of(user ? JSON.parse(user) : undefined);

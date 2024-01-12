@@ -12,6 +12,7 @@ export interface AuthState {
   onErrorSignUpWithEmailAndPassword: Error | undefined;
   loadingSignInWithEmailAndPassword: boolean;
   onErrorSignInWithEmailAndPassword: Error | undefined;
+  loadingSignOut: boolean;
 }
 
 export const initialState: AuthState = {
@@ -21,7 +22,8 @@ export const initialState: AuthState = {
   loadingSignUpWithEmailAndPassword: false,
   onErrorSignUpWithEmailAndPassword: undefined,
   loadingSignInWithEmailAndPassword: false,
-  onErrorSignInWithEmailAndPassword: undefined
+  onErrorSignInWithEmailAndPassword: undefined,
+  loadingSignOut: false
 };
 
 export const reducer = createReducer(
@@ -96,6 +98,31 @@ export const reducer = createReducer(
     (state): AuthState => ({
       ...state,
       loadingSignInWithEmailAndPassword: false
+    })
+  ),
+
+  //Sign Out
+  on(
+    AuthActions.signOut,
+    (state): AuthState => ({
+      ...state,
+      loadingSignOut: true
+    })
+  ),
+  on(
+    AuthActions.signOutSuccess,
+    (state): AuthState => ({
+      ...state,
+      user: undefined,
+      loadingSignOut: false
+    })
+  ),
+  on(
+    AuthActions.signOutFailure,
+    (state): AuthState => ({
+      ...state,
+      user: undefined,
+      loadingSignOut: false
     })
   ),
 

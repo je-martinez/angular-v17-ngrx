@@ -21,6 +21,11 @@ export class AuthFacade {
   signInWEmailAndPassword(input: SignUpOrLoginFormDTO) {
     this.store.dispatch(AuthActions.signInWEmailAndPassword({ input }));
   }
+
+  signOut() {
+    this.store.dispatch(AuthActions.signOut());
+  }
+
   recoveUserFromStorage() {
     this.store.dispatch(AuthActions.recoverUserFromStorage());
   }

@@ -19,4 +19,8 @@ export class LocalStorageService {
       encryptString(value, environment.encryption.localStorageKey)
     );
   }
+
+  public removeItem(key: string) {
+    return localStorage.removeItem(key);
+  }
 }

@@ -20,6 +20,10 @@ export const AuthActions = createActionGroup({
     //Sign Up w/ Email and Password
     'Sign In w Email And Password': props<{ input: SignUpOrLoginFormDTO }>(),
     'Sign In w Email And Password Success': props<{ data: User }>(),
-    'Sign In w Email And Password Failure': props<{ error: Error }>()
+    'Sign In w Email And Password Failure': props<{ error: Error }>(),
+    //Sign Out
+    'Sign Out': emptyProps(),
+    'Sign Out Success': emptyProps(),
+    'Sign Out Failure': emptyProps()
   }
 });

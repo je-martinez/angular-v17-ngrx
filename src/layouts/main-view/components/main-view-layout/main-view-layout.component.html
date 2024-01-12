@@ -118,10 +118,9 @@
               </li>
             </ul>
             <div class="space-y-2 pt-2">
-              <a
-                href="#"
-                target="_blank"
-                class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
+              <button
+                (click)="signOut()"
+                class="text-base w-full text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
                 <svg
                   class="w-[17px] h-[17px] text-gray-800 dark:text-white"
                   aria-hidden="true"
@@ -135,8 +134,8 @@
                     stroke-width="2"
                     d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3" />
                 </svg>
-                <span class="ml-3">Help</span>
-              </a>
+                <span class="ml-3">Sign Out</span>
+              </button>
             </div>
           </div>
         </div>

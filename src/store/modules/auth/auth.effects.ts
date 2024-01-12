@@ -78,6 +78,24 @@ export class AuthEffects {
     );
   });
 
+  signOut$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.signOut),
+      exhaustMap(() =>
+        this.authService.signOut().pipe(
+          tap({
+            next: () => this.authService.removeUserFromLocalStorage()
+          }),
+          map(() => AuthActions.signOutSuccess()),
+          catchError(() => of(AuthActions.signOutFailure())),
+          tap({
+            next: () => this.router.navigate(['auth/login'])
+          })
+        )
+      )
+    );
+  });
+
   //Recover User From Storage
   recoverUserFromStorage$ = createEffect(() => {
     return this.actions$.pipe(
