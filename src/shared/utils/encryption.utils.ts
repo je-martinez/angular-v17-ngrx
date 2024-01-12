@@ -10,3 +10,10 @@ export const encryptString = (
 export const decryptString = (encrypted: string, secret: string) => {
   return CryptoJS.AES.decrypt(encrypted, secret).toString(CryptoJS.enc.Utf8);
 };
+
+export const hashString = (stringToHash: string, secret: string) => {
+  const hashedPassword = CryptoJS.HmacSHA256(stringToHash, secret).toString(
+    CryptoJS.enc.Hex
+  );
+  return hashedPassword;
+};
