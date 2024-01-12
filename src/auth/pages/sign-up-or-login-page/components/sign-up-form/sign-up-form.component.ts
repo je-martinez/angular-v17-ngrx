@@ -1,6 +1,7 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ToastService } from 'src/shared/services/toast.service';
 import { FormErrorMessageComponent } from 'src/shared/ui/components/form-error-message/form-error-message.component';
 
@@ -13,7 +14,8 @@ import { FormErrorMessageComponent } from 'src/shared/ui/components/form-error-m
     NgFor,
     NgClass,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   providers: [ToastService],
   templateUrl: './sign-up-form.component.html',
