@@ -6,5 +6,10 @@
   (signUpWithEmailAndPassword)="onSubmit()"
   (googleSignUp)="onGoogleSignUp()"></sign-up-form>
 } @if(mode === loginMode){
-<login-form></login-form>
+<login-form
+  [loginForm]="signUpOrLoginForm"
+  [emailErrors]="emailErrors"
+  [passwordErrors]="passwordErrors"
+  (loginWithEmailAndPassword)="onSubmit()"
+  (googleSignIn)="onGoogleSignUp()"></login-form>
 }
