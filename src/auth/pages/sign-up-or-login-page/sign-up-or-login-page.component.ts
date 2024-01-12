@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { AuthFacade } from 'src/store/modules/auth/auth.facade';
 import { PASSWORD_REGEX } from 'src/auth/constants/auth.constants';
+import { SignUpOrLoginErrorForm } from 'src/auth/types';
 
 @Component({
   selector: 'sign-up-or-login-page',
@@ -72,16 +73,24 @@ export class SignUpOrLoginPageComponent {
       return [];
     }
 
-    const errors: string[] = [];
+    const errors: SignUpOrLoginErrorForm[] = [];
     const emailControlErrors: ValidationErrors | null | undefined =
       this.signUpOrLoginForm?.get('email')?.errors;
 
     if (emailControlErrors?.['required']) {
-      errors.push('This field is required.');
+      errors.push({
+        message: 'This field is required.',
+        ignoreOnLogin: false,
+        ignoreOnSignUp: false
+      });
     }
 
     if (emailControlErrors?.['email']) {
-      errors.push('Invalid email address.');
+      errors.push({
+        message: 'Invalid email address.',
+        ignoreOnLogin: false,
+        ignoreOnSignUp: false
+      });
     }
     return errors;
   }
@@ -91,29 +100,49 @@ export class SignUpOrLoginPageComponent {
       return [];
     }
 
-    const errors = [];
+    const errors: SignUpOrLoginErrorForm[] = [];
 
     const passwordControlErrors: ValidationErrors | null | undefined =
       this.signUpOrLoginForm?.get('password')?.errors;
 
     if (passwordControlErrors?.['required']) {
-      errors.push('This field is required.');
+      errors.push({
+        message: 'This field is required.',
+        ignoreOnLogin: false,
+        ignoreOnSignUp: false
+      });
     }
 
     if (!/(?=.*[A-Za-z])/.test(this.password)) {
-      errors.push('It must contain at least one alphabetical character.');
+      errors.push({
+        message: 'It must contain at least one alphabetical character.',
+        ignoreOnLogin: true,
+        ignoreOnSignUp: false
+      });
     }
 
     if (!/(?=.*\d)/.test(this.password)) {
-      errors.push('It must contain at least one digit.');
+      errors.push({
+        message: 'It must contain at least one digit.',
+        ignoreOnLogin: true,
+        ignoreOnSignUp: false
+      });
     }
 
     if (!/(?=.*[@$!%*?&])/.test(this.password)) {
-      errors.push('It must contain at least one special character (@$!%*?&).');
+      errors.push({
+        message: 'It must contain at least one special character (@$!%*?&).',
+        ignoreOnLogin: true,
+        ignoreOnSignUp: false
+      });
     }
 
     if (this.password.length < 8) {
-      errors.push('It must have a minimum length of 8 characters.');
+      errors.push({
+        message: 'It must have a minimum length of 8 characters.',
+        ignoreOnLogin: true,
+        ignoreOnSignUp: false
+      });
     }
 
     return errors;

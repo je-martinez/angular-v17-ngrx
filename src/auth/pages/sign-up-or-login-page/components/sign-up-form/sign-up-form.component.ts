@@ -2,6 +2,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SignUpOrLoginErrorForm } from 'src/auth/types';
 import { ToastService } from 'src/shared/services/toast.service';
 import { FormErrorMessageComponent } from 'src/shared/ui/components/form-error-message/form-error-message.component';
 
@@ -23,8 +24,8 @@ import { FormErrorMessageComponent } from 'src/shared/ui/components/form-error-m
 })
 export class SignUpFormComponent {
   @Input() public signUpForm: FormGroup | undefined;
-  @Input() public emailErrors: string[] = [];
-  @Input() public passwordErrors: string[] = [];
+  @Input() public emailErrors: SignUpOrLoginErrorForm[] = [];
+  @Input() public passwordErrors: SignUpOrLoginErrorForm[] = [];
   @Output() public signUpWithEmailAndPassword = new EventEmitter();
   @Output() public googleSignUp = new EventEmitter();
 

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -8,4 +9,10 @@ import { RouterModule } from '@angular/router';
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'
 })
-export class LoginFormComponent {}
+export class LoginFormComponent {
+  @Input() public signUpForm: FormGroup | undefined;
+  @Input() public emailErrors: string[] = [];
+  @Input() public passwordErrors: string[] = [];
+  @Output() public signUpWithEmailAndPassword = new EventEmitter();
+  @Output() public googleSignUp = new EventEmitter();
+}
