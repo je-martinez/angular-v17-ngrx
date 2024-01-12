@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { MainViewLayoutRoutingModule } from './main-view.layout.routing.module';
+import { NgModule } from '@angular/core';
+import { MainViewLayoutComponent } from './components/main-view-layout/main-view-layout.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, MainViewLayoutRoutingModule]
+  declarations: [MainViewLayoutComponent],
+  imports: [RouterModule, CommonModule]
 })
 export class MainViewLayoutModule {}
