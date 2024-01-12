@@ -36,8 +36,7 @@ export class SignUpFormComponent {
   public readonly signUpForm: FormGroup | undefined;
   constructor(
     private authFacade: AuthFacade,
-    private fb: FormBuilder,
-    private toasts: ToastService
+    private fb: FormBuilder
   ) {
     this.signUpForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
