@@ -1,2 +1,16 @@
-<p>Hola</p>
-<router-outlet></router-outlet>
+<!-- component -->
+<div class="flex h-screen">
+  <!-- Left Pane -->
+  <div
+    class="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+    <div class="max-w-md text-center">
+      <logo-interaction></logo-interaction>
+    </div>
+  </div>
+  <!-- Right Pane -->
+  <div class="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
+    <div class="max-w-md w-full p-6">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

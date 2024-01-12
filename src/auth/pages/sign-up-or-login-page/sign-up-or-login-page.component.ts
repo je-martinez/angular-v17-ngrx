@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthInitialPageMode } from '../../types/auth.enums';
 
@@ -7,16 +7,12 @@ import { AuthInitialPageMode } from '../../types/auth.enums';
   templateUrl: './sign-up-or-login-page.component.html',
   styleUrl: './sign-up-or-login-page.component.scss'
 })
-export class SignUpOrLoginPageComponent implements OnInit, OnDestroy {
+export class SignUpOrLoginPageComponent {
   public mode: AuthInitialPageMode | undefined = undefined;
 
   constructor(private readonly route: ActivatedRoute) {
     this.mode = this.route.snapshot.data['mode'];
   }
-
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {}
 
   public get signUpMode() {
     return AuthInitialPageMode.SIGN_UP;

@@ -4,6 +4,6 @@ import { AuthRoutingModule } from './auth.routing.module';
 import { AuthLayoutModule } from 'src/layouts/auth/auth.layout.module';
 
 @NgModule({
-  imports: [AuthLayoutModule, SignUpOrLoginPageModule, AuthRoutingModule]
+  imports: [AuthLayoutModule, AuthRoutingModule, SignUpOrLoginPageModule]
 })
 export class AuthModule {}
