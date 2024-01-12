@@ -2,7 +2,9 @@
 
 <div class="relative flex h-screen">
   <div class="w-full absolute">
-    <!-- <progress-bar color="bg-neutral-950"></progress-bar> -->
+    <ng-container *ngIf="topProgressBar$ | async">
+      <progress-bar color="bg-neutral-950"></progress-bar>
+    </ng-container>
   </div>
   <!-- Left Pane -->
   <div
