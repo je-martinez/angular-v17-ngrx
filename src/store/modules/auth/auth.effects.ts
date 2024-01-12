@@ -5,6 +5,7 @@ import { AuthActions } from './auth.actions';
 import { AuthService } from '../../../auth/services/auth.service';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthLayoutService } from '../../../layouts/auth/services/auth-layout.service';
 
 @Injectable()
 export class AuthEffects {
@@ -12,6 +13,7 @@ export class AuthEffects {
   signInWGoogle$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.signInWGoogle),
+      tap({ next: () => this.authLayoutService.showTopProgressBar(true) }),
       exhaustMap(() =>
         this.authService.signInWithGoogle().pipe(
           tap({
@@ -21,7 +23,10 @@ export class AuthEffects {
             next: () => this.router.navigate(['home/content-wall'])
           }),
           map((data) => AuthActions.signInWGoogleSuccess({ data })),
-          catchError((error) => of(AuthActions.signInWGoogleFailure({ error })))
+          catchError((error) =>
+            of(AuthActions.signInWGoogleFailure({ error }))
+          ),
+          tap(() => this.authLayoutService.showTopProgressBar(false))
         )
       )
     );
@@ -31,6 +36,7 @@ export class AuthEffects {
   signUpWEmailAndPassword$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.signUpWEmailAndPassword),
+      tap({ next: () => this.authLayoutService.showTopProgressBar(true) }),
       exhaustMap(({ input }) =>
         this.authService.createAccount(input).pipe(
           tap({
@@ -42,7 +48,8 @@ export class AuthEffects {
           map((data) => AuthActions.signUpWEmailAndPasswordSuccess({ data })),
           catchError((error) =>
             of(AuthActions.signUpWEmailAndPasswordFailure({ error }))
-          )
+          ),
+          tap({ next: () => this.authLayoutService.showTopProgressBar(false) })
         )
       )
     );
@@ -52,6 +59,7 @@ export class AuthEffects {
   signInWEmailAndPassword$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.signInWEmailAndPassword),
+      tap({ next: () => this.authLayoutService.showTopProgressBar(true) }),
       exhaustMap(({ input }) =>
         this.authService.signInWithEmailAndPassword(input).pipe(
           tap({
@@ -63,7 +71,8 @@ export class AuthEffects {
           map((data) => AuthActions.signInWEmailAndPasswordSuccess({ data })),
           catchError((error) =>
             of(AuthActions.signInWEmailAndPasswordFailure({ error }))
-          )
+          ),
+          tap({ next: () => this.authLayoutService.showTopProgressBar(false) })
         )
       )
     );
@@ -89,6 +98,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private readonly authService: AuthService,
+    private readonly authLayoutService: AuthLayoutService,
     private readonly router: Router
   ) {}
 }

@@ -65,7 +65,7 @@
       <div *ngIf="emailErrors" class="items-center pt-3">
         <ng-container *ngFor="let error of emailErrors">
           <form-error-message
-            *ngIf="!error.ignoreOnSignUp"
+            *ngIf="!error.ignoreOnLogin"
             [message]="error.message"></form-error-message>
         </ng-container>
       </div>
@@ -84,7 +84,7 @@
       <div *ngIf="passwordErrors" class="items-center pt-3">
         <ng-container *ngFor="let error of passwordErrors">
           <form-error-message
-            *ngIf="!error.ignoreOnSignUp"
+            *ngIf="!error.ignoreOnLogin"
             [message]="error.message"></form-error-message>
         </ng-container>
       </div>
@@ -94,7 +94,7 @@
         (click)="onSubmit()"
         type="submit"
         class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300">
-        Sign Up
+        Login
       </button>
     </div>
   </form>

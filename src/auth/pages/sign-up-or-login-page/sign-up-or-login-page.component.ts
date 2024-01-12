@@ -160,5 +160,9 @@ export class SignUpOrLoginPageComponent {
     if (this.mode === AuthInitialPageMode.SIGN_UP) {
       this.authFacade.signUpWEmailAndPassword(this.formValue);
     }
+
+    if (this.mode === AuthInitialPageMode.LOGIN) {
+      this.authFacade.signInWEmailAndPassword(this.formValue);
+    }
   }
 }

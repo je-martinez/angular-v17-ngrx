@@ -55,8 +55,12 @@ export class AuthService {
   }
 
   createAccount({ email, password }: SignUpOrLoginFormDTO): Observable<User> {
+    const encryptPassword = encryptString(
+      password,
+      environment.encryption.passwordKey
+    );
     return from(
-      createUserWithEmailAndPassword(this.auth, email, password)
+      createUserWithEmailAndPassword(this.auth, email, encryptPassword)
     ).pipe(map((userCredential) => userCredential.user.toJSON() as User));
   }
 
