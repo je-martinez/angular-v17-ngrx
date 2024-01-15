@@ -19,7 +19,7 @@ import { ToastNotification } from '@shared/types/toast-provider.types';
   styleUrl: './toast-notification.component.scss'
 })
 export class ToastNotificationComponent implements OnInit, OnDestroy {
-  @ViewChild('closeBtn', { static: true }) public closeBtn:
+  @ViewChild('closeBtn', { static: false }) public closeBtn:
     | ElementRef
     | undefined = undefined;
   @Input({ required: true }) public toast: ToastNotification =

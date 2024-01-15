@@ -6,6 +6,8 @@ import { AuthService } from '@modules/auth/services/auth.service';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthLayoutService } from '@layouts/auth/services/auth-layout.service';
+import { ToastProviderService } from '@shared/services/toast-provider.service';
+import { ToastType } from '@shared/types/toast-provider.enums';
 
 @Injectable()
 export class AuthEffects {
@@ -21,6 +23,14 @@ export class AuthEffects {
           }),
           tap({
             next: () => this.router.navigate(['home/content-wall'])
+          }),
+          tap({
+            next: () => {
+              this.toastProvider.show({
+                message: 'Welcome to the app!',
+                type: ToastType.Success
+              });
+            }
           }),
           map((data) => AuthActions.signInWGoogleSuccess({ data })),
           catchError((error) =>
@@ -139,6 +149,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private readonly authService: AuthService,
+    private readonly toastProvider: ToastProviderService,
     private readonly authLayoutService: AuthLayoutService,
     private readonly router: Router
   ) {}
