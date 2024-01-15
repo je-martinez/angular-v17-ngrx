@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'toast-info',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './toast-info.component.html',
   styleUrl: './toast-info.component.scss'
 })
-export class ToastInfoComponent {}
+export class ToastInfoComponent {
+  @Input({ required: true }) public message: string = '';
+}

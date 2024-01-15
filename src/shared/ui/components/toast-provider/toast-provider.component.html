@@ -1,3 +1,16 @@
-<toast-info></toast-info>
-<toast-success></toast-success>
-<toast-error></toast-error>
+<toast-info [message]="'Message'"></toast-info>
+<toast-success [message]="'Message'"></toast-success>
+<toast-error [message]="'Message'"></toast-error>
+@for (item of toasts$ | async; track $index) {
+  @switch (item.type) {
+    @case (types.Info) {
+      <toast-info [message]="item.message"></toast-info>
+    }
+    @case (types.Success) {
+      <toast-success [message]="item.message"></toast-success>;
+    }
+    @case (types.Error) {
+      <toast-error [message]="item.message"></toast-error>
+    }
+  }
+}
