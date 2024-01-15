@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Flowbite } from '@infrastructure/decorators/flowbite';
 import { AuthFacade } from '@store/modules/auth/auth.facade';
 
 @Component({
@@ -6,6 +7,7 @@ import { AuthFacade } from '@store/modules/auth/auth.facade';
   templateUrl: './main-view-layout.component.html',
   styleUrl: './main-view-layout.component.scss'
 })
+@Flowbite()
 export class MainViewLayoutComponent {
   constructor(private readonly authFacade: AuthFacade) {}
 
