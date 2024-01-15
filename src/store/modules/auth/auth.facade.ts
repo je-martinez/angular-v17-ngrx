@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthActions } from './auth.actions';
 import { selectUser } from './auth.selectors';
-import { RootState } from '@store/index';
 import { SignUpOrLoginFormDTO } from '@modules/auth/types/auth.DTOs';
+import { RootState } from './store.types';
 
 @Injectable()
 export class AuthFacade {
