@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ToastPosition, ToastType } from '@shared/types/toast-provider.enums';
 import {
   IToastNotification,
   ToastNotification
