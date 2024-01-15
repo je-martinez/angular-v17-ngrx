@@ -1,6 +1,14 @@
 import { NgClass, NgSwitch, NgSwitchCase } from '@angular/common';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { ToastType } from '@shared/types/toast-provider.enums';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import { ToastProviderService } from '@shared/services/toast-provider.service';
+import { ToastPosition, ToastType } from '@shared/types/toast-provider.enums';
 import { ToastNotification } from '@shared/types/toast-provider.types';
 
 @Component({
@@ -10,14 +18,35 @@ import { ToastNotification } from '@shared/types/toast-provider.types';
   templateUrl: './toast-notification.component.html',
   styleUrl: './toast-notification.component.scss'
 })
-export class ToastNotificationComponent {
-  @ViewChild(ElementRef) public closeBtn: ElementRef | undefined = undefined;
+export class ToastNotificationComponent implements OnInit, OnDestroy {
+  @ViewChild('closeBtn', { static: true }) public closeBtn:
+    | ElementRef
+    | undefined = undefined;
   @Input({ required: true }) public toast: ToastNotification =
     {} as ToastNotification;
 
   public readonly types = ToastType;
 
-  constructor() {}
+  constructor(private toastProviderService: ToastProviderService) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.closeToast();
+    }, this.toast.timeout);
+  }
+
+  public get classAligment() {
+    switch (this.toast.position) {
+      case ToastPosition.TopCenter:
+        return 'justify-center';
+      case ToastPosition.TopLeft:
+        return 'justify-start';
+      case ToastPosition.TopRight:
+        return 'justify-end';
+      default:
+        return 'justify-center';
+    }
+  }
 
   public get toastClass(): string {
     switch (this.toast.type) {
@@ -32,19 +61,6 @@ export class ToastNotificationComponent {
     }
   }
 
-  public get toastIconClass(): string {
-    switch (this.toast.type) {
-      case ToastType.Success:
-        return 'fa-check-circle';
-      case ToastType.Error:
-        return 'fa-exclamation-circle';
-      case ToastType.Warning:
-        return 'fa-info-circle';
-      default:
-        return 'fa-info-circle';
-    }
-  }
-
   public get toastElementId() {
     switch (this.toast.type) {
       case ToastType.Success:
@@ -56,6 +72,14 @@ export class ToastNotificationComponent {
       default:
         return `toast-default-${this.toast.id}`;
     }
+  }
+
+  closeToast() {
+    this.closeBtn?.nativeElement?.click();
+  }
+
+  ngOnDestroy(): void {
+    this.toastProviderService.remove(this.toast.id);
   }
 
   public get dismissTargetId() {

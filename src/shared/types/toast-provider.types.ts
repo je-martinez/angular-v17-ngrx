@@ -1,4 +1,5 @@
-import { ToastType } from './toast-provider.enums';
+import { TOAST_DEFAULT_TIMEOUT } from '@shared/constants/toast-provider.constants';
+import { ToastPosition, ToastType } from './toast-provider.enums';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface IToastNotification {
@@ -6,6 +7,7 @@ export interface IToastNotification {
   message: string;
   type: ToastType;
   timeout?: number;
+  position?: ToastPosition;
 }
 
 export class ToastNotification implements IToastNotification {
@@ -13,10 +15,18 @@ export class ToastNotification implements IToastNotification {
   public message: string;
   public type: ToastType;
   public timeout: number;
-  constructor({ id = uuidv4(), message, type, timeout }: IToastNotification) {
+  public position: ToastPosition;
+  constructor({
+    id = uuidv4(),
+    message,
+    type,
+    timeout,
+    position
+  }: IToastNotification) {
     this.id = id;
     this.message = message;
     this.type = type;
-    this.timeout = timeout || 5000;
+    this.timeout = timeout || TOAST_DEFAULT_TIMEOUT;
+    this.position = position || ToastPosition.TopCenter;
   }
 }

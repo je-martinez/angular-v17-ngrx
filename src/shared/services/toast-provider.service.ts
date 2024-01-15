@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastType } from '@shared/types/toast-provider.enums';
+import { ToastPosition, ToastType } from '@shared/types/toast-provider.enums';
 import {
   IToastNotification,
   ToastNotification
@@ -10,29 +10,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ToastProviderService {
-  private readonly DEFAULT_TIMEOUT = 5000;
   private toastsBS = new BehaviorSubject<ToastNotification[]>([]);
   public toasts$ = this.toastsBS.asObservable();
 
-  constructor() {
-    this.show({
-      type: ToastType.Success,
-      message: 'Welcome to the app!'
-    });
-    this.show({
-      type: ToastType.Error,
-      message: 'Welcome to the app!'
-    });
-    this.show({
-      type: ToastType.Warning,
-      message: 'Welcome to the app!'
-    });
-  }
-
   public show(toast: IToastNotification): void {
     const newToast = new ToastNotification({
-      ...toast,
-      timeout: toast.timeout || this.DEFAULT_TIMEOUT
+      ...toast
     });
     this.toastsBS.next([...this.toastsBS.value, newToast]);
   }
