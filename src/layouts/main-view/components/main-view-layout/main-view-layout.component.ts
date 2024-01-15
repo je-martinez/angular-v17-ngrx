@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthFacade } from 'src/store/modules/auth/auth.facade';
+import { AuthFacade } from '@store/modules/auth/auth.facade';
 
 @Component({
   selector: 'main-view-layout',

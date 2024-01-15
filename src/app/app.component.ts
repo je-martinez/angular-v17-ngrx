@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthFacade } from '../store/modules/auth/auth.facade';
+import { AuthFacade } from '@store/modules/auth/auth.facade';
 import { initFlowbite } from 'flowbite';
 
 @Component({

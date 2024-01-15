@@ -5,13 +5,13 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app.routing.module';
-import { AppComponent } from './app.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthFacade } from 'src/store/modules/auth/auth.facade';
-import { AuthStoreModule } from 'src/store/modules/auth/auth.store.module';
+import { AuthStoreModule } from '@store/modules/auth/auth.store.module';
+import { environment } from '@env/environment';
+import { AuthFacade } from '@store/modules/auth/auth.facade';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { encryptString, decryptString } from '../utils';
-import { environment } from 'src/environments/environment';
+import { environment } from '@env/environment';
+import { decryptString, encryptString } from '@shared/utils/encryption.utils';
 
 @Injectable({
   providedIn: 'root'
