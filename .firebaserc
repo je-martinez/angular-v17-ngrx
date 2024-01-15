@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-v17-ngrx": {
+      "hosting": {
+        "angular-v17-ngrx": [
+          "angular-v17-ngrx"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-v17-ngrx"
+  }
+}
