@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SignUpOrLoginErrorForm } from 'src/modules/auth/types';
-import { ToastService } from 'src/shared/services/toast.service';
 import { FormErrorMessageComponent } from 'src/shared/ui/components/form-error-message/form-error-message.component';
 
 @Component({
@@ -18,7 +17,7 @@ import { FormErrorMessageComponent } from 'src/shared/ui/components/form-error-m
     ReactiveFormsModule,
     RouterModule
   ],
-  providers: [ToastService],
+  providers: [],
   templateUrl: './sign-up-form.component.html',
   styleUrl: './sign-up-form.component.scss'
 })
