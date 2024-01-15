@@ -1,6 +1,6 @@
 import { User } from '@angular/fire/auth';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { SignUpOrLoginFormDTO } from 'src/auth/types/auth.DTOs';
+import { SignUpOrLoginFormDTO } from 'src/modules/auth/types/auth.DTOs';
 
 export const AuthActions = createActionGroup({
   source: 'Auth',

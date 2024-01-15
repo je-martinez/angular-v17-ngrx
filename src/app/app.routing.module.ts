@@ -7,12 +7,14 @@ const routes: Routes = [
   {
     path: 'auth',
     canActivate: [NoUserLoggedGuard],
-    loadChildren: () => import('src/auth/auth.module').then((m) => m.AuthModule)
+    loadChildren: () =>
+      import('src/modules/auth/auth.module').then((m) => m.AuthModule)
   },
   {
     path: 'home',
     canActivate: [UserLoggedGuard],
-    loadChildren: () => import('src/home/home.module').then((m) => m.HomeModule)
+    loadChildren: () =>
+      import('src/modules/home/home.module').then((m) => m.HomeModule)
   },
   {
     path: '',

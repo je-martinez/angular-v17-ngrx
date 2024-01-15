@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AuthActions } from './auth.actions';
 import { RootState } from 'src/store';
 import { selectUser } from './auth.selectors';
-import { SignUpOrLoginFormDTO } from 'src/auth/types/auth.DTOs';
+import { SignUpOrLoginFormDTO } from 'src/modules/auth/types/auth.DTOs';
 
 @Injectable()
 export class AuthFacade {

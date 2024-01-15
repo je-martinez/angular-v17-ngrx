@@ -8,8 +8,8 @@ import {
   Validators
 } from '@angular/forms';
 import { AuthFacade } from 'src/store/modules/auth/auth.facade';
-import { PASSWORD_REGEX } from 'src/auth/constants/auth.constants';
-import { SignUpOrLoginErrorForm } from 'src/auth/types';
+import { PASSWORD_REGEX } from 'src/modules/auth/constants/auth.constants';
+import { SignUpOrLoginErrorForm } from 'src/modules/auth/types';
 
 @Component({
   selector: 'sign-up-or-login-page',
