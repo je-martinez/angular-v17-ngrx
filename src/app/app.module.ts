@@ -12,6 +12,7 @@ import { AuthStoreModule } from '@store/modules/auth/auth.store.module';
 import { environment } from '@env/environment';
 import { AuthFacade } from '@store/modules/auth/auth.facade';
 import { AppComponent } from './app.component';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +35,11 @@ import { AppComponent } from './app.component';
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    LoggerModule.forRoot({
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.ERROR
+    })
   ],
   providers: [AuthFacade],
   bootstrap: [AppComponent]

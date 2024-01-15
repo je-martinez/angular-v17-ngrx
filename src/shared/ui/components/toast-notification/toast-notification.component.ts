@@ -7,6 +7,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
+import { Flowbite } from '@infrastructure/decorators/flowbite';
 import { ToastProviderService } from '@shared/services/toast-provider.service';
 import { ToastPosition, ToastType } from '@shared/types/toast-provider.enums';
 import { ToastNotification } from '@shared/types/toast-provider.types';
@@ -18,6 +19,7 @@ import { ToastNotification } from '@shared/types/toast-provider.types';
   templateUrl: './toast-notification.component.html',
   styleUrl: './toast-notification.component.scss'
 })
+@Flowbite()
 export class ToastNotificationComponent implements OnInit, OnDestroy {
   @ViewChild('closeBtn', { static: false }) public closeBtn:
     | ElementRef
