@@ -28,6 +28,7 @@ export class SignUpFormComponent {
   @Input() public passwordErrors: SignUpOrLoginErrorForm[] = [];
   @Output() public signUpWithEmailAndPassword = new EventEmitter();
   @Output() public googleSignUp = new EventEmitter();
+  @Output() public githubSignUp = new EventEmitter();
 
   public get emailInputHasErrors() {
     return this.emailErrors?.length > 0;
@@ -41,7 +42,11 @@ export class SignUpFormComponent {
     this.signUpWithEmailAndPassword.emit();
   }
 
-  public onGoogleSignUp() {
+  public onGoogleSignIn() {
     this.googleSignUp.emit();
+  }
+
+  public onGithubSignIn() {
+    this.githubSignUp.emit();
   }
 }

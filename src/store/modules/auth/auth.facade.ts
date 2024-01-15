@@ -14,6 +14,10 @@ export class AuthFacade {
     this.store.dispatch(AuthActions.signInWGoogle());
   }
 
+  signInWGithub() {
+    this.store.dispatch(AuthActions.signInWGithub());
+  }
+
   signUpWEmailAndPassword(input: SignUpOrLoginFormDTO) {
     this.store.dispatch(AuthActions.signUpWEmailAndPassword({ input }));
   }

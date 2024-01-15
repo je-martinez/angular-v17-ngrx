@@ -8,7 +8,8 @@ import {
   signInWithPopup,
   signOut,
   sendEmailVerification,
-  User
+  User,
+  GithubAuthProvider
 } from '@angular/fire/auth';
 import { from, map, of, Observable } from 'rxjs';
 import { USER_LOCAL_STORAGE_KEY } from '../constants/auth.constants';
@@ -41,6 +42,12 @@ export class AuthService {
 
   signInWithGoogle(): Observable<User> {
     return from(signInWithPopup(this.auth, new GoogleAuthProvider())).pipe(
+      map((userCredential) => userCredential.user.toJSON() as User)
+    );
+  }
+
+  signInWithGithub(): Observable<User> {
+    return from(signInWithPopup(this.auth, new GithubAuthProvider())).pipe(
       map((userCredential) => userCredential.user.toJSON() as User)
     );
   }

@@ -7,6 +7,7 @@ export const authFeatureKey = 'auth';
 export interface AuthState {
   user: User | undefined;
   loadingSignInWithGoogle: boolean;
+  loadingSignInWithGithub: boolean;
   onErrorSignInWithGoogle: Error | undefined;
   loadingSignUpWithEmailAndPassword: boolean;
   onErrorSignUpWithEmailAndPassword: Error | undefined;
@@ -18,6 +19,7 @@ export interface AuthState {
 export const initialState: AuthState = {
   user: undefined,
   loadingSignInWithGoogle: false,
+  loadingSignInWithGithub: false,
   onErrorSignInWithGoogle: undefined,
   loadingSignUpWithEmailAndPassword: false,
   onErrorSignUpWithEmailAndPassword: undefined,
@@ -49,6 +51,31 @@ export const reducer = createReducer(
     (state, action): AuthState => ({
       ...state,
       loadingSignInWithGoogle: false,
+      onErrorSignInWithGoogle: { ...action.error }
+    })
+  ),
+
+  //Sign In w/ Github
+  on(
+    AuthActions.signInWGithub,
+    (state): AuthState => ({
+      ...state,
+      loadingSignInWithGithub: true
+    })
+  ),
+  on(
+    AuthActions.signInWGithubSuccess,
+    (state, action): AuthState => ({
+      ...state,
+      loadingSignInWithGithub: false,
+      user: action.data
+    })
+  ),
+  on(
+    AuthActions.signInWGithubFailure,
+    (state, action): AuthState => ({
+      ...state,
+      loadingSignInWithGithub: false,
       onErrorSignInWithGoogle: { ...action.error }
     })
   ),

@@ -32,6 +32,29 @@ export class AuthEffects {
     );
   });
 
+  //Sign Up w/ Github
+  signInWGithub$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.signInWGithub),
+      tap({ next: () => this.authLayoutService.showTopProgressBar(true) }),
+      exhaustMap(() =>
+        this.authService.signInWithGithub().pipe(
+          tap({
+            next: (data) => this.authService.saveUserOnLocalStorage(data)
+          }),
+          tap({
+            next: () => this.router.navigate(['home/content-wall'])
+          }),
+          map((data) => AuthActions.signInWGithubSuccess({ data })),
+          catchError((error) =>
+            of(AuthActions.signInWGithubFailure({ error }))
+          ),
+          tap(() => this.authLayoutService.showTopProgressBar(false))
+        )
+      )
+    );
+  });
+
   //Sign Up w/ Email and Password
   signUpWEmailAndPassword$ = createEffect(() => {
     return this.actions$.pipe(

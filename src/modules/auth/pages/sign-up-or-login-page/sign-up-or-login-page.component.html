@@ -4,12 +4,14 @@
   [emailErrors]="emailErrors"
   [passwordErrors]="passwordErrors"
   (signUpWithEmailAndPassword)="onSubmit()"
-  (googleSignUp)="onGoogleSignUp()"></sign-up-form>
+  (googleSignUp)="onGoogleSignIn()"
+  (githubSignUp)="onGithubSignIn()"></sign-up-form>
 } @if(mode === loginMode){
 <login-form
   [loginForm]="signUpOrLoginForm"
   [emailErrors]="emailErrors"
   [passwordErrors]="passwordErrors"
   (loginWithEmailAndPassword)="onSubmit()"
-  (googleSignIn)="onGoogleSignUp()"></login-form>
+  (googleSignIn)="onGoogleSignIn()"
+  (githubSignUp)="onGithubSignIn()"></login-form>
 }

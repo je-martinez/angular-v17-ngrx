@@ -148,8 +148,12 @@ export class SignUpOrLoginPageComponent {
     return errors;
   }
 
-  public onGoogleSignUp() {
+  public onGoogleSignIn() {
     this.authFacade.signInWGoogle();
+  }
+
+  public onGithubSignIn() {
+    this.authFacade.signInWGithub();
   }
 
   public onSubmit() {
