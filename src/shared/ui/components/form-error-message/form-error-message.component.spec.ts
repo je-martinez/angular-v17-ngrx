@@ -9,9 +9,8 @@ describe('FormErrorMessageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FormErrorMessageComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(FormErrorMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -9,9 +9,8 @@ describe('ToastInfoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ToastInfoComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ToastInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

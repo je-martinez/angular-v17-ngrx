@@ -9,9 +9,8 @@ describe('ContentWallPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ContentWallPageComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ContentWallPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

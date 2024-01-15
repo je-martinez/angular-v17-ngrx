@@ -9,9 +9,8 @@ describe('LogoInteractionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LogoInteractionComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LogoInteractionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

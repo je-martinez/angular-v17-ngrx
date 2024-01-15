@@ -9,9 +9,8 @@ describe('ToastSuccessComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ToastSuccessComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ToastSuccessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

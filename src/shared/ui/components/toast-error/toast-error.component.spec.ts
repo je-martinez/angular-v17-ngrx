@@ -9,9 +9,8 @@ describe('ToastErrorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ToastErrorComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ToastErrorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
