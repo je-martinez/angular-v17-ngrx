@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
-import { ToastSuccessComponent } from '../toast-success/toast-success.component';
-import { ToastErrorComponent } from '../toast-error/toast-error.component';
-import { ToastInfoComponent } from '../toast-info/toast-info.component';
 import { ToastType } from '@shared/types/toast-provider.enums';
-import { AsyncPipe, NgForOf, NgSwitch, NgSwitchCase } from '@angular/common';
+import {
+  AsyncPipe,
+  NgForOf,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase
+} from '@angular/common';
 import { ToastProviderService } from '@shared/services/toast-provider.service';
+import { ToastNotificationComponent } from '../toast-notification/toast-notification.component';
 
 @Component({
   selector: 'toast-provider',
   standalone: true,
   imports: [
-    ToastInfoComponent,
-    ToastSuccessComponent,
-    ToastErrorComponent,
+    ToastNotificationComponent,
     NgForOf,
+    NgIf,
     AsyncPipe,
     NgSwitch,
     NgSwitchCase
@@ -24,6 +27,14 @@ import { ToastProviderService } from '@shared/services/toast-provider.service';
 export class ToastProviderComponent {
   public readonly types = ToastType;
   constructor(private readonly toastProviderService: ToastProviderService) {}
+
+  public isDefaultToastType(toast: ToastType) {
+    return (
+      toast === ToastType.Success ||
+      toast === ToastType.Error ||
+      toast === ToastType.Warning
+    );
+  }
 
   public get toasts$() {
     return this.toastProviderService.toasts$;
