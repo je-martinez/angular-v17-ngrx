@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthLayoutService } from '@layouts/auth/services/auth-layout.service';
 import { ToastProviderService } from '@shared/services/toast-provider.service';
-import { ToastType } from '@shared/types/toast-provider.enums';
+import { ToastPosition, ToastType } from '@shared/types/toast-provider.enums';
 
 @Injectable()
 export class AuthEffects {
@@ -55,6 +55,14 @@ export class AuthEffects {
           tap({
             next: () => this.router.navigate(['home/content-wall'])
           }),
+          tap({
+            next: () => {
+              this.toastProvider.show({
+                message: 'Welcome to the app!',
+                type: ToastType.Success
+              });
+            }
+          }),
           map((data) => AuthActions.signInWGithubSuccess({ data })),
           catchError((error) =>
             of(AuthActions.signInWGithubFailure({ error }))
@@ -77,6 +85,14 @@ export class AuthEffects {
           }),
           tap({
             next: () => this.router.navigate(['home/content-wall'])
+          }),
+          tap({
+            next: () => {
+              this.toastProvider.show({
+                message: 'Welcome to the app!',
+                type: ToastType.Success
+              });
+            }
           }),
           map((data) => AuthActions.signUpWEmailAndPasswordSuccess({ data })),
           catchError((error) =>
@@ -118,6 +134,15 @@ export class AuthEffects {
         this.authService.signOut().pipe(
           tap({
             next: () => this.authService.removeUserFromLocalStorage()
+          }),
+          tap({
+            next: () => {
+              this.toastProvider.show({
+                message: 'Bye bye!',
+                type: ToastType.Success,
+                position: ToastPosition.TopRight
+              });
+            }
           }),
           map(() => AuthActions.signOutSuccess()),
           catchError(() => of(AuthActions.signOutFailure())),
