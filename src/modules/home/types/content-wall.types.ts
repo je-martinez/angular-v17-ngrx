@@ -42,3 +42,8 @@ export interface Company {
   catchPhrase: string;
   bs: string;
 }
+
+export interface Content extends Post {
+  comments: PostComment[];
+  user: User;
+}

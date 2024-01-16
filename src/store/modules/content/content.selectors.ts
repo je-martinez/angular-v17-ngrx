@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromContent from './content.reducer';
+import { Content } from '@modules/home/types/content-wall.types';
 
 export const selectContentState =
   createFeatureSelector<fromContent.ContentState>(
@@ -34,4 +35,19 @@ export const selectComments = createSelector(
 export const selectUsers = createSelector(
   selectContentState,
   (state: fromContent.ContentState) => state?.users
+);
+
+export const selectContent = createSelector(
+  selectPosts,
+  selectComments,
+  selectUsers,
+  (posts, comments, users) => {
+    return posts?.map((post) => {
+      return {
+        ...post,
+        comments: comments?.filter((comment) => comment?.postId === post?.id),
+        user: users.find((user) => user?.id === post?.userId)
+      };
+    }) as Content[];
+  }
 );

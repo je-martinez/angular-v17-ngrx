@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { ContentActions } from './content.actions';
 import {
   selectComments,
+  selectContent,
   selectLoadingGetComments,
   selectLoadingGetPosts,
   selectLoadingGetUsers,
@@ -23,6 +24,7 @@ export class ContentFacade {
   public readonly posts$ = this.store.select(selectPosts);
   public readonly comments$ = this.store.select(selectComments);
   public readonly users$ = this.store.select(selectUsers);
+  public readonly content$ = this.store.select(selectContent);
 
   constructor(private store: Store<RootState>) {}
 
