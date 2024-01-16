@@ -1,13 +1,23 @@
 import { createMap, createMapper } from '@automapper/core';
 import { pojos } from '@automapper/pojos';
 import {
+  AddressApiResponse,
+  CompanyApiResponse,
+  GeoApiResponse,
   PostApiResponse,
   PostCommentApiResponse,
   UserApiResponse
 } from '../types/content-wall.api.types';
 import { createPostCommentMetadata } from './comment.mapper';
 import { createPostMetadata } from './post.mapper';
-import { Post, PostComment, User } from '../types/content-wall.types';
+import {
+  Address,
+  Company,
+  Geo,
+  Post,
+  PostComment,
+  User
+} from '../types/content-wall.types';
 import { MapperKeys } from './mappers.keys';
 import { createUserMetadata } from './user.mapper';
 
@@ -29,7 +39,22 @@ export const registerMappers = () => {
   );
   // User Mapper
   createUserMetadata();
-  createMap<PostCommentApiResponse, PostComment>(
+  createMap<GeoApiResponse, Geo>(
+    mapper,
+    MapperKeys.GeoApiResponse,
+    MapperKeys.Geo
+  );
+  createMap<CompanyApiResponse, Company>(
+    mapper,
+    MapperKeys.CompanyApiResponse,
+    MapperKeys.Company
+  );
+  createMap<AddressApiResponse, Address>(
+    mapper,
+    MapperKeys.AddressApiResponse,
+    MapperKeys.Address
+  );
+  createMap<UserApiResponse, User>(
     mapper,
     MapperKeys.UserApiResponse,
     MapperKeys.User
