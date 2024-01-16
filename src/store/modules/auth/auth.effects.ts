@@ -73,6 +73,7 @@ export class AuthEffects {
               });
             }
           }),
+
           map((data) => AuthActions.signInWGithubSuccess({ data })),
           catchError((error: FirebaseAuthError) => {
             this.logger.error({ error });

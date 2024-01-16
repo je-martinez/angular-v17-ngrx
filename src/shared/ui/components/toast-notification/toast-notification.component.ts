@@ -81,6 +81,7 @@ export class ToastNotificationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (!this.toast.id) return;
     this.toastProviderService.remove(this.toast.id);
   }
 
@@ -88,7 +89,7 @@ export class ToastNotificationComponent implements OnInit, OnDestroy {
     return `#${this.toastElementId}`;
   }
 
-  public get id(): string {
+  public get id(): string | undefined {
     return this.toast.id;
   }
 
