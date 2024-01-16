@@ -5,7 +5,7 @@ export interface PostApiResponse {
   body: string;
 }
 
-export interface CommentApiResponse {
+export interface PostCommentApiResponse {
   postId: number;
   id: number;
   name: string;
