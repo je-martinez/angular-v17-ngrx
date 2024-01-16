@@ -2,11 +2,12 @@ import { createMap, createMapper } from '@automapper/core';
 import { pojos } from '@automapper/pojos';
 import {
   PostApiResponse,
-  PostCommentApiResponse
+  PostCommentApiResponse,
+  UserApiResponse
 } from '../types/content-wall.api.types';
 import { createPostCommentMetadata } from './comment.mapper';
 import { createPostMetadata } from './post.mapper';
-import { Post, PostComment } from '../types/content-wall.types';
+import { Post, PostComment, User } from '../types/content-wall.types';
 import { MapperKeys } from './mappers.keys';
 import { createUserMetadata } from './user.mapper';
 
@@ -33,4 +34,40 @@ export const registerMappers = () => {
     MapperKeys.UserApiResponse,
     MapperKeys.User
   );
+};
+
+export const mapSinglePost = (post: PostApiResponse): Post => {
+  return mapper.map(post, MapperKeys.PostApiResponse, MapperKeys.Post);
+};
+
+export const mapArrayPost = (posts: PostApiResponse[]): Post[] => {
+  return mapper.mapArray(posts, MapperKeys.PostApiResponse, MapperKeys.Post);
+};
+
+export const mapSingleComment = (
+  comment: PostCommentApiResponse
+): PostComment => {
+  return mapper.map(
+    comment,
+    MapperKeys.PostCommentApiResponse,
+    MapperKeys.PostComment
+  );
+};
+
+export const mapArrayComment = (
+  comments: PostCommentApiResponse[]
+): PostComment[] => {
+  return mapper.mapArray(
+    comments,
+    MapperKeys.PostCommentApiResponse,
+    MapperKeys.PostComment
+  );
+};
+
+export const mapSingleUser = (user: UserApiResponse): User => {
+  return mapper.map(user, MapperKeys.UserApiResponse, MapperKeys.User);
+};
+
+export const mapArrayUser = (users: UserApiResponse[]): User[] => {
+  return mapper.mapArray(users, MapperKeys.UserApiResponse, MapperKeys.User);
 };
