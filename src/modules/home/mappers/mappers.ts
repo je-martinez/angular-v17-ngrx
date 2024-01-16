@@ -35,9 +35,11 @@ export const registerMappers = () => {
     MapperKeys.Post,
     forMember(
       (d) => d.createdAt,
-      mapFrom(() =>
-        getRandomDate(new Date('2022-01-01'), new Date('2022-02-24'))
-      )
+      mapFrom(() => {
+        const now = new Date();
+        const oneMonthAgo = new Date(new Date().setMonth(now.getMonth() - 1));
+        return getRandomDate(now, oneMonthAgo);
+      })
     )
   );
   //Comment Mapper
