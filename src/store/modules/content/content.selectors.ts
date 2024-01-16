@@ -42,12 +42,16 @@ export const selectContent = createSelector(
   selectComments,
   selectUsers,
   (posts, comments, users) => {
-    return posts?.map((post) => {
-      return {
-        ...post,
-        comments: comments?.filter((comment) => comment?.postId === post?.id),
-        user: users.find((user) => user?.id === post?.userId)
-      };
-    }) as Content[];
+    return posts
+      ?.map((post) => {
+        return {
+          ...post,
+          comments: comments?.filter((comment) => comment?.postId === post?.id),
+          user: users.find((user) => user?.id === post?.userId)
+        };
+      })
+      .sort(
+        (a, b) => +new Date(b.createdAt) - +new Date(a.createdAt)
+      ) as Content[];
   }
 );

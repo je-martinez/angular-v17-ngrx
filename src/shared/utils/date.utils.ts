@@ -16,11 +16,11 @@ export const timeAgo = (date: Date) => {
   }
 
   interval = Math.floor(interval / 24);
-  if (interval < 30) {
+  if (interval < 100) {
     return `${interval} day${interval > 1 ? 's' : ''} ago`;
   }
 
   // You can add more intervals like weeks, months, and years as needed
 
-  return 'Long time ago';
+  return '99+ days ago';
 };
