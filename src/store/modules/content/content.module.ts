@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ContentEffects } from './content.effects';
-import { ContentFacade } from './content.facade.service';
+import { ContentFacade } from './content.facade';
 import { contentFeature } from './content.reducer';
 
 @NgModule({
