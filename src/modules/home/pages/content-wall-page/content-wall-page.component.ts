@@ -18,4 +18,8 @@ export class ContentWallPageComponent implements OnInit {
   public get allContentAvailable$() {
     return this.contentFacade.content$;
   }
+
+  public get loading() {
+    return this.contentFacade.showLoadingContent$;
+  }
 }

@@ -37,6 +37,33 @@ export const selectUsers = createSelector(
   (state: fromContent.ContentState) => state?.users
 );
 
+export const selectEmptyData = createSelector(
+  selectPosts,
+  selectComments,
+  selectUsers,
+  (posts, comments, users) => {
+    return !posts?.length || !comments?.length || !users?.length;
+  }
+);
+
+export const selectLoadingContent = createSelector(
+  selectLoadingGetPosts,
+  selectLoadingGetComments,
+  selectLoadingGetUsers,
+  selectEmptyData,
+  (loadingGetPosts, loadingGetComments, loadingGetUsers) => {
+    return loadingGetPosts || loadingGetComments || loadingGetUsers;
+  }
+);
+
+export const selectShowLoadingContent = createSelector(
+  selectEmptyData,
+  selectLoadingContent,
+  (emptyData, loadingContent) => {
+    return emptyData && loadingContent;
+  }
+);
+
 export const selectContent = createSelector(
   selectPosts,
   selectComments,

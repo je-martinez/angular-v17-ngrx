@@ -9,6 +9,7 @@ import {
   selectLoadingGetPosts,
   selectLoadingGetUsers,
   selectPosts,
+  selectShowLoadingContent,
   selectUsers
 } from './content.selectors';
 
@@ -25,6 +26,9 @@ export class ContentFacade {
   public readonly comments$ = this.store.select(selectComments);
   public readonly users$ = this.store.select(selectUsers);
   public readonly content$ = this.store.select(selectContent);
+  public readonly showLoadingContent$ = this.store.select(
+    selectShowLoadingContent
+  );
 
   constructor(private store: Store<RootState>) {}
 

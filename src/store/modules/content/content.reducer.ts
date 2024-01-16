@@ -5,6 +5,7 @@ import {
   PostComment,
   User
 } from '@modules/home/types/content-wall.types';
+import { AuthActions } from '../auth/auth.actions';
 
 export const contentFeatureKey = 'content';
 
@@ -95,6 +96,20 @@ export const reducer = createReducer(
       ...state,
       loadingGetUsers: false,
       errorGetUsers: action.error
+    })
+  ),
+  on(
+    AuthActions.signOutSuccess,
+    (state): ContentState => ({
+      ...state,
+      ...initialState
+    })
+  ),
+  on(
+    AuthActions.signOutFailure,
+    (state): ContentState => ({
+      ...state,
+      ...initialState
     })
   )
 );
