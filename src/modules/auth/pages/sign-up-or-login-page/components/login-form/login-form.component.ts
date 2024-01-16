@@ -2,8 +2,8 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SignUpOrLoginErrorForm } from 'src/modules/auth/types';
-import { FormErrorMessageComponent } from 'src/shared/ui/components/form-error-message/form-error-message.component';
+import { SignUpOrLoginErrorForm } from '@modules/auth/types/auth.types';
+import { FormErrorMessageComponent } from '@shared/ui/components/form-error-message/form-error-message.component';
 
 @Component({
   selector: 'login-form',

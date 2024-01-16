@@ -13,10 +13,10 @@ import {
 } from '@angular/fire/auth';
 import { from, map, of, Observable } from 'rxjs';
 import { USER_LOCAL_STORAGE_KEY } from '../constants/auth.constants';
+import { environment } from '@env/environment';
 import { SignUpOrLoginFormDTO } from '../types/auth.DTOs';
-import { LocalStorageService } from 'src/shared/services';
-import { hashString } from 'src/shared/utils';
-import { environment } from 'src/environments/environment';
+import { hashString } from '@shared/utils/encryption.utils';
+import { LocalStorageService } from '@shared/services/local-storage.service';
 
 @Injectable({
   providedIn: 'root'

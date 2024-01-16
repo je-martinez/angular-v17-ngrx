@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, exhaustMap, tap } from 'rxjs/operators';
 import { AuthActions } from './auth.actions';
-import { AuthService } from '../../../modules/auth/services/auth.service';
+import { AuthService } from '@modules/auth/services/auth.service';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
-import { AuthLayoutService } from '../../../layouts/auth/services/auth-layout.service';
+import { AuthLayoutService } from '@layouts/auth/services/auth-layout.service';
+import { ToastProviderService } from '@shared/services/toast-provider.service';
+import { ToastPosition, ToastType } from '@shared/types/toast-provider.enums';
+import { NGXLogger } from 'ngx-logger';
+import { FirebaseAuthError } from '@modules/auth/types/auth.types';
+import { getSignInWithPopupErrorByCode } from '@shared/utils/errors.utils';
 
 @Injectable()
 export class AuthEffects {
@@ -22,10 +27,24 @@ export class AuthEffects {
           tap({
             next: () => this.router.navigate(['home/content-wall'])
           }),
+          tap({
+            next: () => {
+              this.toastProvider.show({
+                message: 'Welcome to the app!',
+                type: ToastType.Success,
+                position: ToastPosition.TopRight
+              });
+            }
+          }),
           map((data) => AuthActions.signInWGoogleSuccess({ data })),
-          catchError((error) =>
-            of(AuthActions.signInWGoogleFailure({ error }))
-          ),
+          catchError((error: FirebaseAuthError) => {
+            this.logger.error({ error });
+            this.toastProvider.show({
+              message: getSignInWithPopupErrorByCode(error.code),
+              type: ToastType.Error
+            });
+            return of(AuthActions.signInWGoogleFailure({ error }));
+          }),
           tap(() => this.authLayoutService.showTopProgressBar(false))
         )
       )
@@ -45,10 +64,25 @@ export class AuthEffects {
           tap({
             next: () => this.router.navigate(['home/content-wall'])
           }),
+          tap({
+            next: () => {
+              this.toastProvider.show({
+                message: 'Welcome to the app!',
+                type: ToastType.Success,
+                position: ToastPosition.TopRight
+              });
+            }
+          }),
+
           map((data) => AuthActions.signInWGithubSuccess({ data })),
-          catchError((error) =>
-            of(AuthActions.signInWGithubFailure({ error }))
-          ),
+          catchError((error: FirebaseAuthError) => {
+            this.logger.error({ error });
+            this.toastProvider.show({
+              message: getSignInWithPopupErrorByCode(error.code),
+              type: ToastType.Error
+            });
+            return of(AuthActions.signInWGithubFailure({ error }));
+          }),
           tap(() => this.authLayoutService.showTopProgressBar(false))
         )
       )
@@ -68,10 +102,24 @@ export class AuthEffects {
           tap({
             next: () => this.router.navigate(['home/content-wall'])
           }),
+          tap({
+            next: () => {
+              this.toastProvider.show({
+                message: 'Welcome to the app!',
+                type: ToastType.Success,
+                position: ToastPosition.TopRight
+              });
+            }
+          }),
           map((data) => AuthActions.signUpWEmailAndPasswordSuccess({ data })),
-          catchError((error) =>
-            of(AuthActions.signUpWEmailAndPasswordFailure({ error }))
-          ),
+          catchError((error: FirebaseAuthError) => {
+            this.logger.error({ error });
+            this.toastProvider.show({
+              message: getSignInWithPopupErrorByCode(error.code),
+              type: ToastType.Error
+            });
+            return of(AuthActions.signUpWEmailAndPasswordFailure({ error }));
+          }),
           tap({ next: () => this.authLayoutService.showTopProgressBar(false) })
         )
       )
@@ -92,9 +140,15 @@ export class AuthEffects {
             next: () => this.router.navigate(['home/content-wall'])
           }),
           map((data) => AuthActions.signInWEmailAndPasswordSuccess({ data })),
-          catchError((error) =>
-            of(AuthActions.signInWEmailAndPasswordFailure({ error }))
-          ),
+          catchError((error: FirebaseAuthError) => {
+            this.logger.error({ error });
+            this.toastProvider.show({
+              message: getSignInWithPopupErrorByCode(error.code),
+              type: ToastType.Error,
+              position: ToastPosition.TopRight
+            });
+            return of(AuthActions.signInWEmailAndPasswordFailure({ error }));
+          }),
           tap({ next: () => this.authLayoutService.showTopProgressBar(false) })
         )
       )
@@ -109,8 +163,24 @@ export class AuthEffects {
           tap({
             next: () => this.authService.removeUserFromLocalStorage()
           }),
+          tap({
+            next: () => {
+              this.toastProvider.show({
+                message: 'Bye bye!',
+                type: ToastType.Success,
+                position: ToastPosition.TopRight
+              });
+            }
+          }),
           map(() => AuthActions.signOutSuccess()),
-          catchError(() => of(AuthActions.signOutFailure())),
+          catchError((error: FirebaseAuthError) => {
+            this.logger.error({ error });
+            this.toastProvider.show({
+              message: getSignInWithPopupErrorByCode(error.code),
+              type: ToastType.Error
+            });
+            return of(AuthActions.signOutFailure());
+          }),
           tap({
             next: () => this.router.navigate(['auth/login'])
           })
@@ -130,7 +200,10 @@ export class AuthEffects {
               ? AuthActions.recoverUserFromStorageSuccess({ data })
               : AuthActions.recoverUserFromStorageFailure();
           }),
-          catchError(() => of(AuthActions.recoverUserFromStorageFailure()))
+          catchError((error: FirebaseAuthError) => {
+            this.logger.error({ error });
+            return of(AuthActions.recoverUserFromStorageFailure());
+          })
         )
       )
     );
@@ -139,7 +212,9 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private readonly authService: AuthService,
+    private readonly toastProvider: ToastProviderService,
     private readonly authLayoutService: AuthLayoutService,
+    private readonly logger: NGXLogger,
     private readonly router: Router
   ) {}
 }

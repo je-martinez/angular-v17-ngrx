@@ -61,7 +61,7 @@
         id="email"
         name="email"
         formControlName="email"
-        [ngClass]="{'border-rose-500': emailInputHasErrors}"
+        [ngClass]="{ 'border-rose-500': emailInputHasErrors }"
         class="mt-1 p-2 w-full border-2 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300" />
       <div *ngIf="emailErrors" class="items-center pt-3">
         <ng-container *ngFor="let error of emailErrors">
@@ -80,7 +80,7 @@
         id="password"
         name="password"
         formControlName="password"
-        [ngClass]="{'border-rose-500': passwordInputHasErrors}"
+        [ngClass]="{ 'border-rose-500': passwordInputHasErrors }"
         class="mt-1 p-2 w-full border-2 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300" />
       <div *ngIf="passwordErrors" class="items-center pt-3">
         <ng-container *ngFor="let error of passwordErrors">

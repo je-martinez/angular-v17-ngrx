@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { AuthFacade } from '@store/modules/auth/auth.facade';
 import { map, tap } from 'rxjs';
-import { AuthFacade } from 'src/store/modules/auth/auth.facade';
 
 export const NoUserLoggedGuard: CanActivateFn = () => {
   const authFacade = inject(AuthFacade);

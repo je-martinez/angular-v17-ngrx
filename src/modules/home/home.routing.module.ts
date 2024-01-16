@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ContentWallPageComponent } from './pages/content-wall-page/content-wall-page.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MainViewLayoutComponent } from 'src/layouts/main-view/components/main-view-layout/main-view-layout.component';
+import { MainViewLayoutComponent } from '@layouts/main-view/components/main-view-layout/main-view-layout.component';
 
 const routes: Routes = [
   {

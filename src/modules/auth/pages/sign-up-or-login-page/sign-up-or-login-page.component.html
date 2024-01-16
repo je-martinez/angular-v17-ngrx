@@ -1,17 +1,18 @@
-@if(mode === signUpMode){
-<sign-up-form
-  [signUpForm]="signUpOrLoginForm"
-  [emailErrors]="emailErrors"
-  [passwordErrors]="passwordErrors"
-  (signUpWithEmailAndPassword)="onSubmit()"
-  (googleSignUp)="onGoogleSignIn()"
-  (githubSignUp)="onGithubSignIn()"></sign-up-form>
-} @if(mode === loginMode){
-<login-form
-  [loginForm]="signUpOrLoginForm"
-  [emailErrors]="emailErrors"
-  [passwordErrors]="passwordErrors"
-  (loginWithEmailAndPassword)="onSubmit()"
-  (googleSignIn)="onGoogleSignIn()"
-  (githubSignUp)="onGithubSignIn()"></login-form>
+@if (mode === signUpMode) {
+  <sign-up-form
+    [signUpForm]="signUpOrLoginForm"
+    [emailErrors]="emailErrors"
+    [passwordErrors]="passwordErrors"
+    (signUpWithEmailAndPassword)="onSubmit()"
+    (googleSignUp)="onGoogleSignIn()"
+    (githubSignUp)="onGithubSignIn()"></sign-up-form>
+}
+@if (mode === loginMode) {
+  <login-form
+    [loginForm]="signUpOrLoginForm"
+    [emailErrors]="emailErrors"
+    [passwordErrors]="passwordErrors"
+    (loginWithEmailAndPassword)="onSubmit()"
+    (googleSignIn)="onGoogleSignIn()"
+    (githubSignUp)="onGithubSignIn()"></login-form>
 }

@@ -9,9 +9,8 @@ describe('MainViewLayoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MainViewLayoutComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(MainViewLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { AuthLayoutService } from '../../services/auth-layout.service';
+import { Flowbite } from '@infrastructure/decorators/flowbite';
+import { AuthLayoutService } from '@layouts/auth/services/auth-layout.service';
 
 @Component({
   selector: 'auth-layout',
   templateUrl: './auth-layout.component.html',
   styleUrl: './auth-layout.component.scss'
 })
+@Flowbite()
 export class AuthLayoutComponent {
   constructor(private readonly authLayoutService: AuthLayoutService) {}
 

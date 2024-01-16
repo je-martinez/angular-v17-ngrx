@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SignUpOrLoginPageComponent } from './pages/sign-up-or-login-page/sign-up-or-login-page.component';
 import { AuthInitialPageMode } from './types/auth.enums';
-import { AuthLayoutComponent } from 'src/layouts/auth/components/auth-layout/auth-layout.component';
+import { AuthLayoutComponent } from '@layouts/auth/components/auth-layout/auth-layout.component';
 
 const routes: Routes = [
   {

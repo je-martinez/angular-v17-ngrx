@@ -4,8 +4,8 @@ import { CanActivateFn } from '@angular/router';
 import { noUserLoggedGuard } from './no-user-logged.guard';
 
 describe('noUserLoggedGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => noUserLoggedGuard(...guardParameters));
+  const executeGuard: CanActivateFn = (...guardParameters) =>
+    TestBed.runInInjectionContext(() => noUserLoggedGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
