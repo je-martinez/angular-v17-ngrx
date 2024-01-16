@@ -6,5 +6,6 @@ export enum SignInWithPopupErrorCodes {
   OPERATION_NOT_SUPPORTED_IN_THIS_ENVIRONMENT = 'auth/operation-not-supported-in-this-environment',
   POPUP_BLOCKED = 'auth/popup-blocked',
   POPUP_CLOSED_BY_USER = 'auth/popup-closed-by-user',
-  UNAUTHORIZED_DOMAIN = 'auth/unauthorized-domain'
+  UNAUTHORIZED_DOMAIN = 'auth/unauthorized-domain',
+  EMAIL_ALREADY_IN_USE = 'auth/email-already-in-use'
 }

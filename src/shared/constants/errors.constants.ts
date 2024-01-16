@@ -20,5 +20,9 @@ export const SignInWithPopupErrors = new Map([
   ],
   [SignInWithPopupErrorCodes.POPUP_BLOCKED, 'Popup blocked'],
   [SignInWithPopupErrorCodes.POPUP_CLOSED_BY_USER, 'Popup closed by user'],
-  [SignInWithPopupErrorCodes.UNAUTHORIZED_DOMAIN, 'Unauthorized domain']
+  [SignInWithPopupErrorCodes.UNAUTHORIZED_DOMAIN, 'Unauthorized domain'],
+  [
+    SignInWithPopupErrorCodes.EMAIL_ALREADY_IN_USE,
+    'The email address is already in use by another account.'
+  ]
 ]);

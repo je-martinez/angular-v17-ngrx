@@ -31,7 +31,8 @@ export class AuthEffects {
             next: () => {
               this.toastProvider.show({
                 message: 'Welcome to the app!',
-                type: ToastType.Success
+                type: ToastType.Success,
+                position: ToastPosition.TopRight
               });
             }
           }),
@@ -67,7 +68,8 @@ export class AuthEffects {
             next: () => {
               this.toastProvider.show({
                 message: 'Welcome to the app!',
-                type: ToastType.Success
+                type: ToastType.Success,
+                position: ToastPosition.TopRight
               });
             }
           }),
@@ -103,7 +105,8 @@ export class AuthEffects {
             next: () => {
               this.toastProvider.show({
                 message: 'Welcome to the app!',
-                type: ToastType.Success
+                type: ToastType.Success,
+                position: ToastPosition.TopRight
               });
             }
           }),
@@ -140,7 +143,8 @@ export class AuthEffects {
             this.logger.error({ error });
             this.toastProvider.show({
               message: getSignInWithPopupErrorByCode(error.code),
-              type: ToastType.Error
+              type: ToastType.Error,
+              position: ToastPosition.TopRight
             });
             return of(AuthActions.signInWEmailAndPasswordFailure({ error }));
           }),
