@@ -14,4 +14,8 @@ export class ContentWallPageComponent implements OnInit {
     this.contentFacade.getComments();
     this.contentFacade.getUsers();
   }
+
+  public get allContentAvailable$() {
+    return this.contentFacade.content$;
+  }
 }

@@ -1,5 +1,5 @@
 <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-3">
-  <content-card></content-card>
-  <content-card></content-card>
-  <content-card></content-card>
+  @for (item of allContentAvailable$ | async; track $index) {
+    <content-card [content]="item"></content-card>
+  }
 </div>

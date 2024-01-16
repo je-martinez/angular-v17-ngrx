@@ -36,7 +36,7 @@ export const registerMappers = () => {
     forMember(
       (d) => d.createdAt,
       mapFrom(() =>
-        getRandomDate(new Date('2022-01-01'), new Date('2022-12-31'))
+        getRandomDate(new Date('2022-01-01'), new Date('2022-02-24'))
       )
     )
   );
