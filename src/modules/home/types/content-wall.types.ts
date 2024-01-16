@@ -3,6 +3,7 @@ export interface Post {
   id: number;
   title: string;
   body: string;
+  createdAt: Date;
 }
 
 export interface PostComment {
@@ -22,6 +23,7 @@ export interface User {
   phone: string;
   website: string;
   company: Company;
+  avatar: string;
 }
 
 export interface Address {

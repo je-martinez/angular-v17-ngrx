@@ -1,4 +1,4 @@
-import { createMap, createMapper } from '@automapper/core';
+import { createMap, createMapper, forMember, mapFrom } from '@automapper/core';
 import { pojos } from '@automapper/pojos';
 import {
   AddressApiResponse,
@@ -20,6 +20,10 @@ import {
 } from '../types/content-wall.types';
 import { MapperKeys } from './mappers.keys';
 import { createUserMetadata } from './user.mapper';
+import {
+  getRandomAvatar,
+  getRandomDate
+} from '@shared/utils/random-data.utils';
 
 export const mapper = createMapper({ strategyInitializer: pojos() });
 export const registerMappers = () => {
@@ -28,7 +32,13 @@ export const registerMappers = () => {
   createMap<PostApiResponse, Post>(
     mapper,
     MapperKeys.PostApiResponse,
-    MapperKeys.Post
+    MapperKeys.Post,
+    forMember(
+      (d) => d.createdAt,
+      mapFrom(() =>
+        getRandomDate(new Date('2022-01-01'), new Date('2022-12-31'))
+      )
+    )
   );
   //Comment Mapper
   createPostCommentMetadata();
@@ -57,7 +67,11 @@ export const registerMappers = () => {
   createMap<UserApiResponse, User>(
     mapper,
     MapperKeys.UserApiResponse,
-    MapperKeys.User
+    MapperKeys.User,
+    forMember(
+      (d) => d.avatar,
+      mapFrom((d) => getRandomAvatar(d.email.toString()))
+    )
   );
 };
 

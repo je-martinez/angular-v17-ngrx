@@ -15,6 +15,7 @@ export function createPostMetadata() {
     userId: Number,
     id: Number,
     title: String,
-    body: String
+    body: String,
+    createdAt: Date
   });
 }
