@@ -19,6 +19,10 @@ export class ContentWallPageComponent implements OnInit {
     return this.contentFacade.content$;
   }
 
+  public get comments$() {
+    return this.contentFacade.comments$;
+  }
+
   public get loading() {
     return this.contentFacade.showLoadingContent$;
   }

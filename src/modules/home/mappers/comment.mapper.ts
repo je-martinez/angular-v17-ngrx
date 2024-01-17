@@ -20,6 +20,7 @@ export function createPostCommentMetadata() {
     id: Number,
     name: String,
     email: String,
-    body: String
+    body: String,
+    createdAt: Date
   });
 }

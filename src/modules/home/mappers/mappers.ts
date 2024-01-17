@@ -47,7 +47,15 @@ export const registerMappers = () => {
   createMap<PostCommentApiResponse, PostComment>(
     mapper,
     MapperKeys.PostCommentApiResponse,
-    MapperKeys.PostComment
+    MapperKeys.PostComment,
+    forMember(
+      (d) => d.createdAt,
+      mapFrom(() => {
+        const now = new Date();
+        const oneMonthAgo = new Date(new Date().setMonth(now.getMonth() - 1));
+        return getRandomDate(now, oneMonthAgo);
+      })
+    )
   );
   // User Mapper
   createUserMetadata();
