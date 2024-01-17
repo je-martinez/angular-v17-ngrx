@@ -9,9 +9,8 @@ describe('ContentCardSkeletonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ContentCardSkeletonComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ContentCardSkeletonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

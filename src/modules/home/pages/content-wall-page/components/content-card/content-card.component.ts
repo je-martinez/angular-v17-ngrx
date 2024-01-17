@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Flowbite } from '@infrastructure/decorators/flowbite';
 import { Content } from '@modules/home/types/content-wall.types';
 import { timeAgo } from '@shared/utils/date.utils';
 
@@ -10,6 +11,7 @@ import { timeAgo } from '@shared/utils/date.utils';
   templateUrl: './content-card.component.html',
   styleUrl: './content-card.component.scss'
 })
+@Flowbite()
 export class ContentCardComponent {
   @Input({ required: true }) content: Content | undefined;
 
