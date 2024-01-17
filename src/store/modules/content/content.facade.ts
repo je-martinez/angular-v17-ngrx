@@ -5,6 +5,7 @@ import { ContentActions } from './content.actions';
 import {
   selectComments,
   selectContent,
+  selectContentById,
   selectLoadingGetComments,
   selectLoadingGetPosts,
   selectLoadingGetUsers,
@@ -29,6 +30,7 @@ export class ContentFacade {
   public readonly showLoadingContent$ = this.store.select(
     selectShowLoadingContent
   );
+  public readonly contentById$ = this.store.select(selectContentById);
 
   constructor(private store: Store<RootState>) {}
 
@@ -40,5 +42,9 @@ export class ContentFacade {
   }
   getUsers() {
     this.store.dispatch(ContentActions.getUsers());
+  }
+
+  getContentById(data: number) {
+    this.store.dispatch(ContentActions.getContentById({ data }));
   }
 }

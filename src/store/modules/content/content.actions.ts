@@ -19,6 +19,9 @@ export const ContentActions = createActionGroup({
     //Users
     'Get Users': emptyProps(),
     'Get Users Success': props<{ data: User[] }>(),
-    'Get Users Failure': props<{ error: Error }>()
+    'Get Users Failure': props<{ error: Error }>(),
+    //Get Content By Id
+    'Get Content By Id': props<{ data: number }>(),
+    'Clear Content Id': emptyProps()
   }
 });

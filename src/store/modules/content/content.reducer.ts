@@ -19,6 +19,7 @@ export interface ContentState {
   users: User[];
   loadingGetUsers: boolean;
   errorGetUsers: Error | undefined;
+  contentId: number | undefined;
 }
 
 export const initialState: ContentState = {
@@ -30,7 +31,8 @@ export const initialState: ContentState = {
   errorGetComments: undefined,
   users: [],
   loadingGetUsers: false,
-  errorGetUsers: undefined
+  errorGetUsers: undefined,
+  contentId: undefined
 };
 
 export const reducer = createReducer(
@@ -98,6 +100,24 @@ export const reducer = createReducer(
       errorGetUsers: action.error
     })
   ),
+
+  // Get Content By Id
+  on(
+    ContentActions.getContentById,
+    (state, action): ContentState => ({
+      ...state,
+      contentId: action.data
+    })
+  ),
+  on(
+    ContentActions.clearContentId,
+    (state): ContentState => ({
+      ...state,
+      contentId: undefined
+    })
+  ),
+
+  //Clear State
   on(
     AuthActions.signOutSuccess,
     (state): ContentState => ({

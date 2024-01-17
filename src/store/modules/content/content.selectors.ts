@@ -82,3 +82,14 @@ export const selectContent = createSelector(
       ) as Content[];
   }
 );
+
+export const selectContentId = createSelector(
+  selectContentState,
+  (state: fromContent.ContentState) => state?.contentId
+);
+
+export const selectContentById = createSelector(
+  selectContent,
+  selectContentId,
+  (content, contentId) => content?.find((item) => item?.id === contentId)
+);
