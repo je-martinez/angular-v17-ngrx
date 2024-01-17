@@ -4,7 +4,7 @@ import { ContentModule } from '@store/modules/content/content.module';
 import { ContentCardComponent } from './components/content-card/content-card.component';
 import { CommonModule } from '@angular/common';
 import { ContentCardSkeletonComponent } from './components/content-card-skeleton/content-card-skeleton.component';
-import { PostCommentsModalComponent } from './components/post-comments-modal/post-comments-modal.component';
+import { ContentCommentsModalComponent } from './components/content-comments-modal/content-comments-modal.component';
 
 @NgModule({
   declarations: [ContentWallPageComponent],
@@ -12,7 +12,7 @@ import { PostCommentsModalComponent } from './components/post-comments-modal/pos
     ContentModule,
     ContentCardComponent,
     ContentCardSkeletonComponent,
-    PostCommentsModalComponent,
+    ContentCommentsModalComponent,
     CommonModule
   ]
 })

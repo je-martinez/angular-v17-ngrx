@@ -3,13 +3,13 @@ import { Component, Input } from '@angular/core';
 import { Flowbite } from '@infrastructure/decorators/flowbite';
 
 @Component({
-  selector: 'post-comment-card',
+  selector: 'content-comment-card',
   standalone: true,
   imports: [NgClass],
-  templateUrl: './post-comment-card.component.html',
-  styleUrl: './post-comment-card.component.scss'
+  templateUrl: './content-comment-card.component.html',
+  styleUrl: './content-comment-card.component.scss'
 })
 @Flowbite()
-export class PostCommentCardComponent {
+export class ContentCommentCardComponent {
   @Input() showTopDivider: boolean = true;
 }
