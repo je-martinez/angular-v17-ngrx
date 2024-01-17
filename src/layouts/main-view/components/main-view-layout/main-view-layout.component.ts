@@ -11,6 +11,10 @@ import { AuthFacade } from '@store/modules/auth/auth.facade';
 export class MainViewLayoutComponent {
   constructor(private readonly authFacade: AuthFacade) {}
 
+  public get user() {
+    return this.authFacade.user$;
+  }
+
   signOut() {
     this.authFacade.signOut();
   }

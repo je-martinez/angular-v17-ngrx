@@ -9,9 +9,8 @@ describe('MainViewLeftPanelComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MainViewLeftPanelComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(MainViewLeftPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
