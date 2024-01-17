@@ -37,14 +37,14 @@
           </button>
         </div>
         <!-- Modal body -->
-        <div class="p-4 md:p-5 space-y-4 h-1/6">
+        <div class="p-4 md:p-5 space-y-4">
           <section class="bg-white dark:bg-gray-900 antialiased">
-            <div class="max-w-2xl mx-auto px-4">
+            <div class="max-w-2xl mx-auto px-4 max-h-96 overflow-auto">
               @for (item of comments; track $index) {
                 <content-comment-card
                   [comment]="item"
                   [showTopDivider]="
-                    isFirstOrLastComment($index, comments.length)
+                    !isFirstOrLastComment($index)
                   "></content-comment-card>
               }
             </div>

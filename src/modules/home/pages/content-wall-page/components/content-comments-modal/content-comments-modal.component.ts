@@ -22,15 +22,10 @@ export class ContentCommentsModalComponent {
     );
   }
 
-  public isFirstOrLastComment(index: number, length: number) {
+  public isFirstOrLastComment(index: number) {
     if (index === 0) {
       return true;
     }
-
-    if (index === length - 1) {
-      return true;
-    }
-
     return false;
   }
 }
