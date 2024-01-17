@@ -47,4 +47,8 @@ export class ContentFacade {
   getContentById(data: number) {
     this.store.dispatch(ContentActions.getContentById({ data }));
   }
+
+  clearContentById() {
+    this.store.dispatch(ContentActions.clearContentId());
+  }
 }

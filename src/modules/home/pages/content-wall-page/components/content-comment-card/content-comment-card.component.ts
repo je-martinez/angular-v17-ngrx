@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Flowbite } from '@infrastructure/decorators/flowbite';
+import { PostComment } from '@modules/home/types/content-wall.types';
 
 @Component({
   selector: 'content-comment-card',
@@ -12,4 +13,5 @@ import { Flowbite } from '@infrastructure/decorators/flowbite';
 @Flowbite()
 export class ContentCommentCardComponent {
   @Input() showTopDivider: boolean = true;
+  @Input({ required: true }) comment!: PostComment;
 }

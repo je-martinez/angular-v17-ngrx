@@ -23,6 +23,8 @@
       <div class="flex items-center justify-between text-slate-500">
         <div class="flex space-x-4 md:space-x-8">
           <button
+            (click)="selectContentHandler()"
+            type="button"
             data-modal-show="content-comments-modal"
             class="flex cursor-pointer items-center transition hover:text-slate-600">
             <svg

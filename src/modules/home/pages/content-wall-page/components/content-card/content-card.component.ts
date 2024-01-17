@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Flowbite } from '@infrastructure/decorators/flowbite';
 import { Content } from '@modules/home/types/content-wall.types';
 import { timeAgo } from '@shared/utils/date.utils';
@@ -14,6 +14,7 @@ import { timeAgo } from '@shared/utils/date.utils';
 @Flowbite()
 export class ContentCardComponent {
   @Input({ required: true }) content: Content | undefined;
+  @Output() selectContent = new EventEmitter<Content>();
 
   constructor() {}
 
@@ -39,5 +40,9 @@ export class ContentCardComponent {
 
   public get time() {
     return this.content?.createdAt ? timeAgo(this.content?.createdAt) : '';
+  }
+
+  public selectContentHandler() {
+    this.selectContent.emit(this.content);
   }
 }

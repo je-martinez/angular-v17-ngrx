@@ -18,7 +18,9 @@
   } @else {
     @for (item of allContentAvailable$ | async; track $index) {
       <div class="animate-fadeIn animate-fadeOut">
-        <content-card [content]="item"></content-card>
+        <content-card
+          [content]="item"
+          (selectContent)="selectContent($event)"></content-card>
       </div>
     }
   }
