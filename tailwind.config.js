@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      zIndex: {
+        100: '100'
+      },
       keyframes: {
         progress: {
           '0%': { transform: 'translateX(0) scaleX(0)' },
