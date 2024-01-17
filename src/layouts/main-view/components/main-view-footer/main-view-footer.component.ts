@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   templateUrl: './main-view-footer.component.html',
   styleUrl: './main-view-footer.component.scss'
 })
-export class MainViewFooterComponent {
-
-}
+export class MainViewFooterComponent {}

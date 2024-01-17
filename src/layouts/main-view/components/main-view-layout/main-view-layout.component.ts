@@ -27,7 +27,6 @@ export class MainViewLayoutComponent {
     };
     const drawer = new Drawer($targetEl, {}, instanceOptions);
     drawer.hide();
-
     this.authFacade.signOut();
   }
 }
