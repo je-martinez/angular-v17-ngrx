@@ -21,6 +21,7 @@ export function createPostCommentMetadata() {
     name: String,
     email: String,
     body: String,
-    createdAt: Date
+    createdAt: Date,
+    avatar: String
   });
 }

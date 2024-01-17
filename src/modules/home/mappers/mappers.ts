@@ -55,6 +55,10 @@ export const registerMappers = () => {
         const oneMonthAgo = new Date(new Date().setMonth(now.getMonth() - 1));
         return getRandomDate(now, oneMonthAgo);
       })
+    ),
+    forMember(
+      (d) => d.avatar,
+      mapFrom((d) => getRandomAvatar(d.email.toString()))
     )
   );
   // User Mapper

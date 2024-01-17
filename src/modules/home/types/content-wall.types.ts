@@ -13,6 +13,7 @@ export interface PostComment {
   email: string;
   body: string;
   createdAt: Date;
+  avatar: string;
 }
 
 export interface User {
