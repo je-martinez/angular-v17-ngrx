@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Flowbite } from '@infrastructure/decorators/flowbite';
 import { AuthFacade } from '@store/modules/auth/auth.facade';
+import { Drawer } from 'flowbite';
 
 @Component({
   selector: 'main-view-layout',
@@ -8,23 +9,25 @@ import { AuthFacade } from '@store/modules/auth/auth.facade';
   styleUrl: './main-view-layout.component.scss'
 })
 @Flowbite()
-export class MainViewLayoutComponent implements OnInit {
+export class MainViewLayoutComponent {
   @ViewChild('mobileSideBarBtn', { static: false })
   public mobileSideBarBtn: ElementRef<HTMLButtonElement> | undefined =
     undefined;
   constructor(private readonly authFacade: AuthFacade) {}
-
-  ngOnInit(): void {
-    if (this.mobileSideBarBtn) {
-      this.mobileSideBarBtn.nativeElement.click();
-    }
-  }
 
   public get user() {
     return this.authFacade.user$;
   }
 
   signOut() {
+    const $targetEl = document.getElementById('default-sidebar');
+    const instanceOptions = {
+      id: 'default-sidebar',
+      override: true
+    };
+    const drawer = new Drawer($targetEl, {}, instanceOptions);
+    drawer.hide();
+
     this.authFacade.signOut();
   }
 }
