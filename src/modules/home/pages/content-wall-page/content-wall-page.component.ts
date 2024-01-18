@@ -20,7 +20,9 @@ export class ContentWallPageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.setupModalInstanceEvents();
+    setTimeout(() => {
+      this.setupModalInstanceEvents();
+    }, 0);
   }
 
   public get modal() {
@@ -39,7 +41,11 @@ export class ContentWallPageComponent implements OnInit, AfterViewInit {
     if (this.modalInstance) {
       return;
     }
-    const newInstance = getModalInstancebyId('content-comments-modal', {});
+    const newInstance = getModalInstancebyId('content-comments-modal', {
+      onHide: () => {
+        this.contentFacade.clearContentById();
+      }
+    });
     if (!newInstance) {
       return;
     }
