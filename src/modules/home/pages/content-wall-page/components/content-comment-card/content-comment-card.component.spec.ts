@@ -5,7 +5,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '@env/environment';
-import { mockComments } from '@mocks/comments.mock';
+import { mockComments } from '@mocks/data/comments.mock';
 
 describe('ContentCommentCardComponent', () => {
   let component: ContentCommentCardComponent;
