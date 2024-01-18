@@ -12,5 +12,8 @@ export const environment = {
   encryption: {
     localStorageKey: import.meta.env['NG_APP_ENCRYPTION_KEY_LOCAL_STORAGE'],
     passwordKey: import.meta.env['NG_APP_ENCRYPTION_KEY_PASSWORD']
+  },
+  api: {
+    baseUrlJSONPlaceholder: 'https://jsonplaceholder.typicode.com'
   }
 };

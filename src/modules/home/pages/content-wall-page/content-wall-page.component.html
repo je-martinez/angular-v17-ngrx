@@ -1,1 +1,27 @@
-<p>Holis</p>
+<content-comments-modal [modalInstance]="modal"></content-comments-modal>
+<div
+  class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3">
+  @if (loading | async) {
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+    <content-card-skeleton></content-card-skeleton>
+  } @else {
+    @for (item of allContentAvailable$ | async; track $index) {
+      <div class="animate-fadeIn animate-fadeOut">
+        <content-card
+          [content]="item"
+          (selectContent)="selectContent($event)"></content-card>
+      </div>
+    }
+  }
+</div>

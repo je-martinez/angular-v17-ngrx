@@ -140,16 +140,14 @@ export const reducer = createReducer(
     AuthActions.signOutSuccess,
     (state): AuthState => ({
       ...state,
-      user: undefined,
-      loadingSignOut: false
+      ...initialState
     })
   ),
   on(
     AuthActions.signOutFailure,
     (state): AuthState => ({
       ...state,
-      user: undefined,
-      loadingSignOut: false
+      ...initialState
     })
   ),
 

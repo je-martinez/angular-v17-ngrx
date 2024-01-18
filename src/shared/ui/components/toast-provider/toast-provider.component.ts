@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ToastType } from '@shared/types/toast-provider.enums';
 import {
   AsyncPipe,
+  CommonModule,
   NgForOf,
   NgIf,
   NgSwitch,
@@ -19,7 +20,8 @@ import { ToastNotificationComponent } from '../toast-notification/toast-notifica
     NgIf,
     AsyncPipe,
     NgSwitch,
-    NgSwitchCase
+    NgSwitchCase,
+    CommonModule
   ],
   templateUrl: './toast-provider.component.html',
   styleUrl: './toast-provider.component.scss'

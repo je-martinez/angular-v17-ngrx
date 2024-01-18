@@ -1,0 +1,42 @@
+<aside
+  id="default-sidebar"
+  class="fixed top-14 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+  aria-label="Sidenav">
+  <div
+    class="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <div class="p-4 flex flex-col items-center w-full">
+      @if (profilePhoto) {
+        <img
+          class="w-20 h-20 rounded-full"
+          [src]="profilePhoto"
+          alt="Rounded avatar" />
+      }
+      <p class="pt-4 text-base font-bold text-gray-900 dark:text-white">
+        {{ displayName }}
+      </p>
+      <p class="text-xs text-gray-400 dark:text-white">
+        {{ email }}
+      </p>
+    </div>
+
+    <button
+      (click)="onSignOut()"
+      type="button"
+      class="w-full relative text-gray-700 border border-gray-700 hover:text-gray-500 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-gray-500 dark:focus:ring-blue-800">
+      <svg
+        class="absolute w-4 h-4 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 16 16">
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3" />
+      </svg>
+      Logout
+    </button>
+  </div>
+</aside>

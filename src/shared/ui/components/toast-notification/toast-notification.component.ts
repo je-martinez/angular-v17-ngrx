@@ -78,6 +78,10 @@ export class ToastNotificationComponent implements OnInit, OnDestroy {
 
   closeToast() {
     this.closeBtn?.nativeElement?.click();
+    setTimeout(() => {
+      if (!this.toast.id) return;
+      this.toastProviderService.remove(this.toast.id);
+    }, 500);
   }
 
   ngOnDestroy(): void {

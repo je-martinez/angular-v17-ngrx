@@ -13,6 +13,7 @@ import { environment } from '@env/environment';
 import { AuthFacade } from '@store/modules/auth/auth.facade';
 import { AppComponent } from './app.component';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     StoreModule.forRoot(),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({

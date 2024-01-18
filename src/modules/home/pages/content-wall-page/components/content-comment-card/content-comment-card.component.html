@@ -1,0 +1,24 @@
+<article
+  [ngClass]="{ 'border-t border-gray-200': showTopDivider }"
+  class="p-6 mb-3 text-base bg-white dark:border-gray-700 dark:bg-gray-900">
+  <footer class="flex justify-between items-center mb-2">
+    <div class="flex items-center">
+      <p
+        class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+        <img
+          class="mr-2 w-6 h-6 rounded-full"
+          [src]="avatar"
+          alt="Bonnie Green" />{{ email }}
+      </p>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        <time pubdate datetime="2022-03-12" title="March 12th, 2022">{{
+          createdAt | date: 'mediumDate'
+        }}</time>
+      </p>
+    </div>
+  </footer>
+  <p class="text-gray-500 dark:text-gray-400">
+    {{ body }}
+  </p>
+  <div class="flex items-center mt-4 space-x-4"></div>
+</article>
