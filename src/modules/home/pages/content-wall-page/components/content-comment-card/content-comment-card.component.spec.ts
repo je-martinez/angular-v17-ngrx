@@ -5,6 +5,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '@env/environment';
+import { mockComments } from '@mocks/comments.mock';
 
 describe('ContentCommentCardComponent', () => {
   let component: ContentCommentCardComponent;
@@ -22,6 +23,7 @@ describe('ContentCommentCardComponent', () => {
 
     fixture = TestBed.createComponent(ContentCommentCardComponent);
     component = fixture.componentInstance;
+    component.comment = mockComments[0];
     fixture.detectChanges();
   });
 

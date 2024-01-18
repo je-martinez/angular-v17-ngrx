@@ -17,6 +17,9 @@ export class ContentWallPageComponent implements OnInit, AfterViewInit {
     this.contentFacade.getPosts();
     this.contentFacade.getComments();
     this.contentFacade.getUsers();
+    this.contentFacade.comments$.subscribe((comments) => {
+      console.log(comments.slice(0, 10));
+    });
   }
 
   ngAfterViewInit(): void {
