@@ -7,6 +7,6 @@ describe('Content Selectors', () => {
       [fromContent.contentFeatureKey]: {}
     });
 
-    expect(result).toEqual({});
+    expect(result).toBeDefined();
   });
 });

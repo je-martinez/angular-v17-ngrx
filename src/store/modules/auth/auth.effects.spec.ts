@@ -3,6 +3,12 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
 import { AuthEffects } from './auth.effects';
+import { AuthService } from '@modules/auth/services/auth.service';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '@env/environment';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 describe('AuthEffects', () => {
   let actions$: Observable<any>;
@@ -10,7 +16,16 @@ describe('AuthEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthEffects, provideMockActions(() => actions$)]
+      imports: [
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore()),
+        LoggerModule.forRoot({
+          level: NgxLoggerLevel.DEBUG,
+          serverLogLevel: NgxLoggerLevel.ERROR
+        })
+      ],
+      providers: [AuthService, AuthEffects, provideMockActions(() => actions$)]
     });
 
     effects = TestBed.inject(AuthEffects);

@@ -3,6 +3,8 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
 import { ContentEffects } from './content.effects';
+import { AuthService } from '@modules/auth/services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ContentEffects', () => {
   let actions$: Observable<any>;
@@ -10,7 +12,12 @@ describe('ContentEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ContentEffects, provideMockActions(() => actions$)]
+      imports: [HttpClientModule],
+      providers: [
+        AuthService,
+        ContentEffects,
+        provideMockActions(() => actions$)
+      ]
     });
 
     effects = TestBed.inject(ContentEffects);

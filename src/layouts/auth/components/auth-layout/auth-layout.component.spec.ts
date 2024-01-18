@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthLayoutComponent } from './auth-layout.component';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 describe('AuthLayoutComponent', () => {
   let component: AuthLayoutComponent;
@@ -8,7 +9,7 @@ describe('AuthLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthLayoutComponent]
+      imports: [CommonModule, AsyncPipe]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AuthLayoutComponent);
