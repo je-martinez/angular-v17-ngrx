@@ -10,30 +10,33 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthFacade } from '@store/modules/auth/auth.facade';
 import { generateMockAuthFacade } from '@mocks/facades/auth-facade.mock';
 import { Observable, take } from 'rxjs';
-import { mockRouter } from '@mocks/core/router.mock';
+import { generateMockRouter } from '@mocks/core/router.mock';
 
 describe('NoUserLoggedGuard', () => {
   const setup = async (emptyUser = false) => {
+    const facade = generateMockAuthFacade(emptyUser);
+    const router = generateMockRouter();
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       providers: [
         NoUserLoggedGuard,
         {
           provide: AuthFacade,
-          useValue: generateMockAuthFacade(emptyUser)
+          useValue: facade
         },
         {
           provide: Router,
-          useValue: mockRouter
+          useValue: router
         }
       ]
     });
-    return TestBed.runInInjectionContext(() =>
+    const guard = TestBed.runInInjectionContext(() =>
       NoUserLoggedGuard(
         {} as unknown as ActivatedRouteSnapshot,
         {} as unknown as RouterStateSnapshot
       )
     );
+    return { guard, facade, router };
   };
 
   it('should be created', async () => {
@@ -42,7 +45,7 @@ describe('NoUserLoggedGuard', () => {
   });
 
   it('should return false if user is logged', async () => {
-    const guard = await setup();
+    const { guard } = await setup();
 
     (guard as Observable<boolean>).pipe(take(1)).subscribe((result) => {
       expect(result).toBeFalse();
@@ -50,10 +53,18 @@ describe('NoUserLoggedGuard', () => {
   });
 
   it('should return true if user is not logged', async () => {
-    const guard = await setup(true);
+    const { guard } = await setup(true);
 
     (guard as Observable<boolean>).pipe(take(1)).subscribe((result) => {
       expect(result).toBeTrue();
+    });
+  });
+
+  it('should redirect to content wall if user is logged', async () => {
+    const { guard, router } = await setup();
+
+    (guard as Observable<boolean>).pipe(take(1)).subscribe(() => {
+      expect(router.navigate).toHaveBeenCalledWith(['home/content-wall']);
     });
   });
 });
