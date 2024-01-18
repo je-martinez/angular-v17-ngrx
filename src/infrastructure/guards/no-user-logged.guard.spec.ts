@@ -1,11 +1,16 @@
 import { TestBed } from '@angular/core/testing';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Router
+} from '@angular/router';
 
 import { NoUserLoggedGuard } from './no-user-logged.guard';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthFacade } from '@store/modules/auth/auth.facade';
 import { generateMockAuthFacade } from '@mocks/facades/auth-facade.mock';
 import { Observable, take } from 'rxjs';
+import { mockRouter } from '@mocks/core/router.mock';
 
 describe('NoUserLoggedGuard', () => {
   const setup = async (emptyUser = false) => {
@@ -16,6 +21,10 @@ describe('NoUserLoggedGuard', () => {
         {
           provide: AuthFacade,
           useValue: generateMockAuthFacade(emptyUser)
+        },
+        {
+          provide: Router,
+          useValue: mockRouter
         }
       ]
     });
