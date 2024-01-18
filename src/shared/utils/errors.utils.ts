@@ -6,6 +6,6 @@ export const getSignInWithPopupErrorByCode = (
 ) => {
   return (
     SignInWithPopupErrors.get(code as SignInWithPopupErrorCodes) ??
-    'Uknown error'
+    'Unknown error'
   );
 };
