@@ -8,7 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { take } from 'rxjs';
 import { environment } from '@env/environment';
 import { mockPosts } from '@mocks/data/posts.mock';
-import { mapArrayPost, registerMappers } from '../mappers/mappers';
+import { registerMappers } from '../mappers/mappers';
+import { mockComments } from '@mocks/data/comments.mock';
+import { mockUsers } from '@mocks/data/users.mock';
 
 describe('ContentService', () => {
   let httpClient: HttpClient;
@@ -49,5 +51,44 @@ describe('ContentService', () => {
     const req = httpTestingController.expectOne(url);
 
     req.flush(mockPosts);
+  });
+  it('should get comments via getCommentsFromApi method', () => {
+    const request = service.getCommentsFromApi();
+    const url = `${environment.api.baseUrlJSONPlaceholder}/comments`;
+
+    request.pipe(take(1)).subscribe((response) => {
+      const responseData = response.map((comment) => {
+        comment.createdAt = new Date('2022-01-01');
+        return comment;
+      });
+      const mockData = mockComments.map((comment) => {
+        comment.createdAt = new Date('2022-01-01');
+        return comment;
+      });
+      expect(responseData).toEqual(mockData);
+    });
+
+    const req = httpTestingController.expectOne(url);
+
+    req.flush(mockComments);
+  });
+
+  it('should get comments via getCommentsFromApi method', () => {
+    const request = service.getUsersFromApi();
+    const url = `${environment.api.baseUrlJSONPlaceholder}/users`;
+
+    request.pipe(take(1)).subscribe((response) => {
+      const responseData = response.map((user) => {
+        return user;
+      });
+      const mockData = mockUsers.map((user) => {
+        return user;
+      });
+      expect(responseData).toEqual(mockData);
+    });
+
+    const req = httpTestingController.expectOne(url);
+
+    req.flush(mockUsers);
   });
 });
