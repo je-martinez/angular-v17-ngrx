@@ -73,7 +73,7 @@ describe('ContentService', () => {
     req.flush(mockComments);
   });
 
-  it('should get comments via getCommentsFromApi method', () => {
+  it('should get users via getUsersFromApi method', () => {
     const request = service.getUsersFromApi();
     const url = `${environment.api.baseUrlJSONPlaceholder}/users`;
 

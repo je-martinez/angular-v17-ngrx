@@ -57,7 +57,8 @@ describe('MainViewLeftPanelComponent', () => {
 
   it('should signOut when the button logout is pressed', fakeAsync(() => {
     spyOn(component, 'onSignOut');
-    const button = fixture.debugElement.nativeElement.querySelector('button');
+    const button =
+      fixture.debugElement.nativeElement.querySelector('#logout-btn');
     button.click();
     tick();
     expect(component.onSignOut).toHaveBeenCalled();

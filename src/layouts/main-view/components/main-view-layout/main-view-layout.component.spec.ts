@@ -12,12 +12,20 @@ import { AuthStoreModule } from '@store/modules/auth/auth.store.module';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { MainViewLeftPanelComponent } from '../main-view-left-panel/main-view-left-panel.component';
 import { MainViewLayoutComponent } from './main-view-layout.component';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+import { AuthFacade } from '@store/modules/auth/auth.facade';
+import { generateMockAuthFacade } from '@mocks/facades/auth-facade.mock';
 
 describe('MainViewLayoutComponent', () => {
   let component: MainViewLayoutComponent;
   let fixture: ComponentFixture<MainViewLayoutComponent>;
+  // let sidePanelfixture: ComponentFixture<MainViewLeftPanelComponent>;
+  let childSidePanel: DebugElement;
+  let authFacade: AuthFacade;
 
   beforeEach(async () => {
+    authFacade = generateMockAuthFacade();
     await TestBed.configureTestingModule({
       declarations: [MainViewLayoutComponent],
       imports: [
@@ -34,15 +42,33 @@ describe('MainViewLayoutComponent', () => {
           level: NgxLoggerLevel.DEBUG,
           serverLogLevel: NgxLoggerLevel.ERROR
         })
-      ]
+      ],
+      providers: [{ provide: AuthFacade, useValue: authFacade }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainViewLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    childSidePanel = fixture.debugElement.query(
+      By.directive(MainViewLeftPanelComponent)
+    );
+    // sidePanelfixture = childSidePanel.componentInstance;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should trigger method on click button', () => {
+    spyOn(component, 'signOut');
+    const logoutButton = childSidePanel.query(By.css('#logout-btn'));
+    logoutButton.triggerEventHandler('click', null);
+    expect(component.signOut).toHaveBeenCalled();
+  });
+
+  it('should trigger authFacade method', () => {
+    component.signOut();
+    expect(authFacade.signOut).toHaveBeenCalled();
   });
 });
