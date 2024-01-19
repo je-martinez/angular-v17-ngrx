@@ -13,8 +13,7 @@ import { Flowbite } from '@infrastructure/decorators/flowbite';
 @Flowbite()
 export class MainViewLeftPanelComponent {
   @Input({ required: true }) user: User | undefined | null = undefined;
-  @Output()
-  private readonly signOut = new EventEmitter();
+  @Output() public readonly signOut = new EventEmitter();
   constructor() {}
 
   public get displayName() {

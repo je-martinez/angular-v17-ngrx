@@ -7,7 +7,7 @@ export const mockLoggedUser: User = {
   emailVerified: true,
   displayName: 'Fake User',
   isAnonymous: false,
-  photoURL: 'https://i.pravatar.cc/300    ',
+  photoURL: 'https://i.pravatar.cc/300',
   providerData: [
     {
       providerId: 'google.com',
