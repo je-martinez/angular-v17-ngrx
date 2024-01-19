@@ -20,7 +20,6 @@ import { generateMockAuthFacade } from '@mocks/facades/auth-facade.mock';
 describe('MainViewLayoutComponent', () => {
   let component: MainViewLayoutComponent;
   let fixture: ComponentFixture<MainViewLayoutComponent>;
-  // let sidePanelfixture: ComponentFixture<MainViewLeftPanelComponent>;
   let childSidePanel: DebugElement;
   let authFacade: AuthFacade;
 
@@ -53,7 +52,6 @@ describe('MainViewLayoutComponent', () => {
     childSidePanel = fixture.debugElement.query(
       By.directive(MainViewLeftPanelComponent)
     );
-    // sidePanelfixture = childSidePanel.componentInstance;
   });
 
   it('should create', () => {
@@ -68,6 +66,15 @@ describe('MainViewLayoutComponent', () => {
   });
 
   it('should trigger authFacade method', () => {
+    component.signOut();
+    expect(authFacade.signOut).toHaveBeenCalled();
+  });
+
+  it('should close menu if this is open on xs dimensions', () => {
+    const dummyElement = document.createElement('div');
+    document.getElementById = jasmine
+      .createSpy('HTML Element')
+      .and.returnValue(dummyElement);
     component.signOut();
     expect(authFacade.signOut).toHaveBeenCalled();
   });
