@@ -12,6 +12,8 @@ import { ContentFacade } from '@store/modules/content/content.facade';
 import { generateMockContentFacade } from '@mocks/facades/content.facade.mock';
 import { By } from '@angular/platform-browser';
 import { ModalUtils } from '@modules/home/utils/modal.utils';
+import { mockContent } from '@mocks/data/content.mock';
+import { Modal } from 'flowbite';
 
 describe('ContentWallPageComponent', () => {
   const setup = async ({ loading = false }) => {
@@ -78,5 +80,35 @@ describe('ContentWallPageComponent', () => {
 
     //Should be null since instance is not valid
     expect(component.modal).toBeFalsy();
+  }));
+
+  it('should select content when the button comments is clicked', fakeAsync(async () => {
+    const { component, fixture } = await setup({ loading: false });
+
+    spyOn(component, 'selectContent');
+
+    const button = fixture.debugElement.query(
+      By.css('#content-comments-button')
+    );
+
+    button.nativeElement.click();
+
+    tick();
+
+    expect(component.selectContent).toHaveBeenCalled();
+  }));
+
+  it('should select content when the button comments is clicked', fakeAsync(async () => {
+    const { component, facade } = await setup({ loading: false });
+
+    tick(1000);
+    spyOn(component?.modal as Modal, 'show');
+
+    const content = { ...mockContent[0] };
+
+    component.selectContent(content);
+
+    expect(component?.modal?.show).toHaveBeenCalled();
+    expect(facade.getContentById).toHaveBeenCalled();
   }));
 });
