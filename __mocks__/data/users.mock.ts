@@ -1,5 +1,11 @@
-import { User } from '@angular/fire/auth';
+import { User, UserCredential } from '@angular/fire/auth';
 import { User as PostUser } from '@modules/home/types/content-wall.types';
+
+export const mockUserCredentials = {
+  user: {
+    toJSON: () => mockLoggedUser
+  } as Partial<User>
+} as UserCredential;
 
 export const mockLoggedUser: User = {
   uid: '103245604871440207105',
