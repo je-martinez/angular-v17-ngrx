@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { generateMockAuthFacade } from '@mocks/facades/auth-facade.mock';
+import { generateMockAuthFacade } from '@mocks/facades/auth.facade.mock';
 import { AuthFacade } from '@store/modules/auth/auth.facade';
 import { Observable, take } from 'rxjs';
 import { UserLoggedGuard } from './user-logged.guard';

@@ -15,7 +15,7 @@ import { MainViewLayoutComponent } from './main-view-layout.component';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { AuthFacade } from '@store/modules/auth/auth.facade';
-import { generateMockAuthFacade } from '@mocks/facades/auth-facade.mock';
+import { generateMockAuthFacade } from '@mocks/facades/auth.facade.mock';
 
 describe('MainViewLayoutComponent', () => {
   let component: MainViewLayoutComponent;

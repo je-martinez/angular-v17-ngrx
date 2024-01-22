@@ -10,7 +10,7 @@ import { AuthFacade } from '@store/modules/auth/auth.facade';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
 import { SignUpOrLoginPageComponent } from './sign-up-or-login-page.component';
-import { generateMockAuthFacade } from '@mocks/facades/auth-facade.mock';
+import { generateMockAuthFacade } from '@mocks/facades/auth.facade.mock';
 
 describe('SignUpOrLoginPageComponent', () => {
   const setup = async (mode = AuthInitialPageMode.SIGN_UP) => {

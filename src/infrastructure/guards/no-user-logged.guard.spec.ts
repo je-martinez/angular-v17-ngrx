@@ -8,7 +8,7 @@ import {
 import { NoUserLoggedGuard } from './no-user-logged.guard';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthFacade } from '@store/modules/auth/auth.facade';
-import { generateMockAuthFacade } from '@mocks/facades/auth-facade.mock';
+import { generateMockAuthFacade } from '@mocks/facades/auth.facade.mock';
 import { Observable, take } from 'rxjs';
 import { generateMockRouter } from '@mocks/core/router.mock';
 
