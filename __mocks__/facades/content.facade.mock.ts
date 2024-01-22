@@ -5,7 +5,8 @@ import { ContentFacade } from '@store/modules/content/content.facade';
 import { of } from 'rxjs';
 
 export const generateMockContentFacade = ({
-  loading = false
+  loading = false,
+  customContentById = mockContent[0]
 }): ContentFacade => {
   const facade = jasmine.createSpyObj<ContentFacade>(
     'ContentFacade',
@@ -38,7 +39,7 @@ export const generateMockContentFacade = ({
     value: of(mockUsers)
   });
   Object.defineProperty(facade, 'contentById$', {
-    value: of({ ...mockContent })
+    value: of({ ...customContentById })
   });
   Object.defineProperty(facade, 'showLoadingContent$', {
     value: of(loading)
