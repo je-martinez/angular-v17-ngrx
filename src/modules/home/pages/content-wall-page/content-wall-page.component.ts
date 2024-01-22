@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Content } from '@modules/home/types/content-wall.types';
-import { getModalInstancebyId } from '@modules/home/utils/modal.utils';
 import { ContentFacade } from '@store/modules/content/content.facade';
 import { Modal } from 'flowbite';
+import { ModalUtils } from '@modules/home/utils/modal.utils';
 
 @Component({
   selector: 'content-wall-page',
@@ -46,11 +46,14 @@ export class ContentWallPageComponent implements OnInit, AfterViewInit {
     if (this.modalInstance) {
       return;
     }
-    const newInstance = getModalInstancebyId('content-comments-modal', {
-      onHide: () => {
-        this.contentFacade.clearContentById();
+    const newInstance = ModalUtils.getModalInstancebyId(
+      'content-comments-modal',
+      {
+        onHide: () => {
+          this.contentFacade.clearContentById();
+        }
       }
-    });
+    );
     if (!newInstance) {
       return;
     }

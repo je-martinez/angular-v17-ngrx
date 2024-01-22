@@ -1,10 +1,4 @@
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick
-} from '@angular/core/testing';
-
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ContentWallPageComponent } from './content-wall-page.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -17,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ContentFacade } from '@store/modules/content/content.facade';
 import { generateMockContentFacade } from '@mocks/facades/content.facade.mock';
 import { By } from '@angular/platform-browser';
-import * as utils from '@modules/home/utils/modal.utils';
+import { ModalUtils } from '@modules/home/utils/modal.utils';
 
 describe('ContentWallPageComponent', () => {
   const setup = async ({ loading = false }) => {
@@ -76,20 +70,13 @@ describe('ContentWallPageComponent', () => {
   }));
 
   it('should only set Modal instance if this utility returns a valid instance', fakeAsync(async () => {
-    spyOn(utils, 'getModalInstancebyId').and.returnValue(null);
+    spyOn(ModalUtils, 'getModalInstancebyId').and.returnValue(null);
 
-    const { component, fixture } = await setup({ loading: true });
-
-    const instance = component.modal;
-
-    //Trigger lifecyle hook
-
-    component.setupModalInstanceEvents();
-    fixture.detectChanges();
+    const { component } = await setup({ loading: true });
 
     tick(1000);
 
-    //Instance should be the same
-    expect(instance).toBe(component.modal);
+    //Should be null since instance is not valid
+    expect(component.modal).toBeFalsy();
   }));
 });

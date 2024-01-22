@@ -1,4 +1,4 @@
-import { getModalInstancebyId } from './modal.utils';
+import { ModalUtils } from './modal.utils';
 
 describe('getModalInstancebyId', () => {
   it('should return the correct modal instance', () => {
@@ -6,7 +6,7 @@ describe('getModalInstancebyId', () => {
     document.getElementById = jasmine
       .createSpy('HTML Element')
       .and.returnValue(dummyElement);
-    const modalInstance = getModalInstancebyId('dummy-id');
+    const modalInstance = ModalUtils.getModalInstancebyId('dummy-id');
     expect(modalInstance).toBeTruthy();
   });
 
@@ -14,7 +14,7 @@ describe('getModalInstancebyId', () => {
     document.getElementById = jasmine
       .createSpy('HTML Element')
       .and.returnValue(null);
-    const modalInstance = getModalInstancebyId('dummy-id');
+    const modalInstance = ModalUtils.getModalInstancebyId('dummy-id');
     expect(modalInstance).toBeNull();
   });
 });
