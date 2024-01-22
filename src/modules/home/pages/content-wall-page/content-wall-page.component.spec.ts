@@ -13,7 +13,7 @@ import { generateMockContentFacade } from '@mocks/facades/content.facade.mock';
 import { By } from '@angular/platform-browser';
 import { ModalUtils } from '@modules/home/utils/modal.utils';
 import { mockContent } from '@mocks/data/content.mock';
-import { Modal } from 'flowbite';
+import { Modal, ModalOptions } from 'flowbite';
 
 describe('ContentWallPageComponent', () => {
   const setup = async ({ loading = false }) => {
@@ -110,5 +110,45 @@ describe('ContentWallPageComponent', () => {
 
     expect(component?.modal?.show).toHaveBeenCalled();
     expect(facade.getContentById).toHaveBeenCalled();
+  }));
+
+  it('should trigger clear content method when the button comments is clicked', fakeAsync(async () => {
+    const { component, fixture } = await setup({ loading: false });
+
+    //Wait for after view init
+    tick(1000);
+
+    spyOn(
+      (component?.modal as Modal)?._options as ModalOptions,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      'onHide' as any
+    );
+
+    const content = { ...mockContent[0] };
+
+    component.selectContent(content);
+    fixture.detectChanges();
+
+    //Wait before close modal
+    tick(1000);
+    const closeButton = fixture.debugElement.query(By.css('#close-modal'));
+    closeButton.nativeElement.click();
+
+    fixture.detectChanges();
+    tick(1000);
+
+    expect(component?.modal?._options?.onHide).toHaveBeenCalled();
+  }));
+
+  it('should call facade when clear content method is triggered', fakeAsync(async () => {
+    const { component, fixture, facade } = await setup({ loading: false });
+    tick(1000);
+
+    component.clearContentSelected();
+    fixture.detectChanges();
+
+    tick();
+
+    expect(facade.clearContentById).toHaveBeenCalled();
   }));
 });

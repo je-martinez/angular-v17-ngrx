@@ -42,6 +42,10 @@ export class ContentWallPageComponent implements OnInit, AfterViewInit {
     return this.contentFacade.showLoadingContent$;
   }
 
+  public clearContentSelected() {
+    this.contentFacade.clearContentById();
+  }
+
   public setupModalInstanceEvents() {
     if (this.modalInstance) {
       return;
@@ -49,9 +53,7 @@ export class ContentWallPageComponent implements OnInit, AfterViewInit {
     const newInstance = ModalUtils.getModalInstancebyId(
       'content-comments-modal',
       {
-        onHide: () => {
-          this.contentFacade.clearContentById();
-        }
+        onHide: this.clearContentSelected
       }
     );
     if (!newInstance) {
