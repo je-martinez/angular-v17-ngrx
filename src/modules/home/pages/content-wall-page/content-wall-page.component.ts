@@ -25,6 +25,11 @@ export class ContentWallPageComponent implements OnInit, AfterViewInit {
     }, 0);
   }
 
+  public get skeletonItems() {
+    const n = 20;
+    return Array(n).fill(n);
+  }
+
   public get modal() {
     return this.modalInstance;
   }
