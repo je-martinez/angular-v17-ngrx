@@ -1,16 +1,23 @@
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { By } from '@angular/platform-browser';
-import { generateMockContentFacade } from '@mocks/facades/content.facade.mock';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { ContentFacade } from '@store/modules/content/content.facade';
-import { ContentModule } from '@store/modules/content/content.module';
-import { ContentCardSkeletonComponent } from './components/content-card-skeleton/content-card-skeleton.component';
-import { ContentCardComponent } from './components/content-card/content-card.component';
-import { ContentCommentsModalComponent } from './components/content-comments-modal/content-comments-modal.component';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick
+} from '@angular/core/testing';
+
 import { ContentWallPageComponent } from './content-wall-page.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { CommonModule } from '@angular/common';
+import { ContentModule } from '@store/modules/content/content.module';
+import { ContentCardComponent } from './components/content-card/content-card.component';
+import { ContentCardSkeletonComponent } from './components/content-card-skeleton/content-card-skeleton.component';
+import { ContentCommentsModalComponent } from './components/content-comments-modal/content-comments-modal.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ContentFacade } from '@store/modules/content/content.facade';
+import { generateMockContentFacade } from '@mocks/facades/content.facade.mock';
+import { By } from '@angular/platform-browser';
+import { getModalInstancebyId } from '@modules/home/utils/modal.utils';
 
 describe('ContentWallPageComponent', () => {
   const setup = async ({ loading = false }) => {
