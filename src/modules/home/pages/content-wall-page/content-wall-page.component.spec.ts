@@ -17,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ContentFacade } from '@store/modules/content/content.facade';
 import { generateMockContentFacade } from '@mocks/facades/content.facade.mock';
 import { By } from '@angular/platform-browser';
-import { getModalInstancebyId } from '@modules/home/utils/modal.utils';
+import * as utils from '@modules/home/utils/modal.utils';
 
 describe('ContentWallPageComponent', () => {
   const setup = async ({ loading = false }) => {
@@ -67,6 +67,24 @@ describe('ContentWallPageComponent', () => {
 
     //Trigger lifecyle hook
     component.ngAfterViewInit();
+    fixture.detectChanges();
+
+    tick(1000);
+
+    //Instance should be the same
+    expect(instance).toBe(component.modal);
+  }));
+
+  it('should only set Modal instance if this utility returns a valid instance', fakeAsync(async () => {
+    spyOn(utils, 'getModalInstancebyId').and.returnValue(null);
+
+    const { component, fixture } = await setup({ loading: true });
+
+    const instance = component.modal;
+
+    //Trigger lifecyle hook
+
+    component.setupModalInstanceEvents();
     fixture.detectChanges();
 
     tick(1000);
