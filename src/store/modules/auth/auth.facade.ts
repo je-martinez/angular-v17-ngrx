@@ -9,6 +9,7 @@ import { RootState } from '../types/store.types';
 export class AuthFacade {
   public readonly user$ = this.store.select(selectUser);
 
+  // eslint-disable-next-line @ngrx/no-typed-global-store
   constructor(private store: Store<RootState>) {}
   signInWGoogle() {
     this.store.dispatch(AuthActions.signInWGoogle());
