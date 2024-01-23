@@ -8,11 +8,19 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '@env/environment';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
+import { AuthLayoutService } from '@layouts/auth/services/auth-layout.service';
+import { ToastProviderService } from '@shared/services/toast-provider.service';
+import { Router } from '@angular/router';
 
 describe('AuthEffects', () => {
   let actions$: Observable<any>;
   let effects: AuthEffects;
+  let authService: AuthService;
+  let toastProvider: ToastProviderService;
+  let authLayoutService: AuthLayoutService;
+  let logger: NGXLogger;
+  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -25,7 +33,30 @@ describe('AuthEffects', () => {
           serverLogLevel: NgxLoggerLevel.ERROR
         })
       ],
-      providers: [AuthService, AuthEffects, provideMockActions(() => actions$)]
+      providers: [
+        {
+          provide: AuthService,
+          useValue: authService
+        },
+        {
+          provide: ToastProviderService,
+          useValue: toastProvider
+        },
+        {
+          provide: AuthLayoutService,
+          useValue: authLayoutService
+        },
+        {
+          provide: NGXLogger,
+          useValue: logger
+        },
+        {
+          provide: Router,
+          useValue: router
+        },
+        AuthEffects,
+        provideMockActions(() => actions$)
+      ]
     });
 
     effects = TestBed.inject(AuthEffects);
