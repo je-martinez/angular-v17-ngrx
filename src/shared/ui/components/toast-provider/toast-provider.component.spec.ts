@@ -1,15 +1,10 @@
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 
-import { ToastProviderComponent } from './toast-provider.component';
-import { ToastProviderService } from '@shared/services/toast-provider.service';
 import { generateMockToastProviderService } from '@mocks/services/toast-provider-service.mock';
+import { ToastProviderService } from '@shared/services/toast-provider.service';
 import { ToastNotification } from '@shared/types/toast-provider.types';
 import { take } from 'rxjs';
+import { ToastProviderComponent } from './toast-provider.component';
 
 describe('ToastProviderComponent', () => {
   let component: ToastProviderComponent;

@@ -37,8 +37,24 @@ export class ToastNotificationComponent implements OnInit, OnDestroy {
     }, this.toast.timeout);
   }
 
+  public get id(): string | undefined {
+    return this.toast.id;
+  }
+
+  public get message(): string {
+    return this.toast.message;
+  }
+
+  public get type(): string {
+    return this.toast.type;
+  }
+
+  public get position(): ToastPosition | undefined {
+    return this.toast.position;
+  }
+
   public get classAligment() {
-    switch (this.toast.position) {
+    switch (this.position) {
       case ToastPosition.TopCenter:
         return 'justify-center';
       case ToastPosition.TopLeft:
@@ -51,7 +67,7 @@ export class ToastNotificationComponent implements OnInit, OnDestroy {
   }
 
   public get toastClass(): string {
-    switch (this.toast.type) {
+    switch (this.type) {
       case ToastType.Success:
         return 'text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200';
       case ToastType.Error:
@@ -66,42 +82,30 @@ export class ToastNotificationComponent implements OnInit, OnDestroy {
   public get toastElementId() {
     switch (this.toast.type) {
       case ToastType.Success:
-        return `toast-success-${this.toast.id}`;
+        return `toast-success-${this.id}`;
       case ToastType.Error:
-        return `toast-error-${this.toast.id}`;
+        return `toast-error-${this.id}`;
       case ToastType.Warning:
-        return `toast-warning-${this.toast.id}`;
+        return `toast-warning-${this.id}`;
       default:
-        return `toast-default-${this.toast.id}`;
+        return `toast-default-${this.id}`;
     }
   }
 
   closeToast() {
     this.closeBtn?.nativeElement?.click();
     setTimeout(() => {
-      if (!this.toast.id) return;
-      this.toastProviderService.remove(this.toast.id);
+      if (!this.id) return;
+      this.toastProviderService.remove(this.id);
     }, 500);
   }
 
   ngOnDestroy(): void {
-    if (!this.toast.id) return;
-    this.toastProviderService.remove(this.toast.id);
+    if (!this.id) return;
+    this.toastProviderService.remove(this.id);
   }
 
   public get dismissTargetId() {
     return `#${this.toastElementId}`;
-  }
-
-  public get id(): string | undefined {
-    return this.toast.id;
-  }
-
-  public get message(): string {
-    return this.toast.message;
-  }
-
-  public get type(): string {
-    return this.toast.type;
   }
 }
