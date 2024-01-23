@@ -102,7 +102,7 @@ describe('ContentWallPageComponent', () => {
     const { component, facade } = await setup({ loading: false });
 
     tick(1000);
-    spyOn(component?.modal as Modal, 'show');
+    const method = spyOn(component?.modal as Modal, 'show');
 
     const content = { ...mockContent[0] };
 
@@ -110,6 +110,8 @@ describe('ContentWallPageComponent', () => {
 
     expect(component?.modal?.show).toHaveBeenCalled();
     expect(facade.getContentById).toHaveBeenCalled();
+
+    method.calls.reset();
   }));
 
   it('should trigger clear content method when the button comments is clicked', fakeAsync(async () => {
@@ -118,7 +120,7 @@ describe('ContentWallPageComponent', () => {
     //Wait for after view init
     tick(1000);
 
-    spyOn(
+    const method = spyOn(
       (component?.modal as Modal)?._options as ModalOptions,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       'onHide' as any
@@ -138,6 +140,7 @@ describe('ContentWallPageComponent', () => {
     tick(1000);
 
     expect(component?.modal?._options?.onHide).toHaveBeenCalled();
+    method.calls.reset();
   }));
 
   it('should call facade when clear content method is triggered', fakeAsync(async () => {

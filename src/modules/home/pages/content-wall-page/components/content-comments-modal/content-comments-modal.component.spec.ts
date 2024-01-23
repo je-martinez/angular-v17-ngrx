@@ -77,7 +77,7 @@ describe('ContentCommentsModalComponent', () => {
 
     fixture.detectChanges();
 
-    spyOn(component.modalInstance, 'show');
+    const method = spyOn(component.modalInstance, 'show');
 
     tick();
 
@@ -85,6 +85,7 @@ describe('ContentCommentsModalComponent', () => {
 
     expect(component.modalInstance.show).toHaveBeenCalled();
     expect(facade.getContentById).toHaveBeenCalled();
+    method.calls.reset();
   }));
 
   it('should trigger show method on Modal Instance when showModal method is called', fakeAsync(async () => {
@@ -96,13 +97,14 @@ describe('ContentCommentsModalComponent', () => {
 
     tick();
 
-    spyOn(component.modalInstance, 'show');
+    const method = spyOn(component.modalInstance, 'show');
 
     component.showModal();
 
     fixture.detectChanges();
 
     expect(component.modalInstance.show).toHaveBeenCalled();
+    method.calls.reset();
   }));
 
   it('should trigger hide method on Modal Instance when hideModal method is called', fakeAsync(async () => {
@@ -130,7 +132,7 @@ describe('ContentCommentsModalComponent', () => {
 
     fixture.detectChanges();
 
-    spyOn(component.modalInstance, 'show');
+    const method = spyOn(component.modalInstance, 'show');
 
     tick();
 
@@ -138,5 +140,6 @@ describe('ContentCommentsModalComponent', () => {
 
     expect(component.modalInstance.show).toHaveBeenCalled();
     expect(facade.getContentById).toHaveBeenCalled();
+    method.calls.reset();
   }));
 });
