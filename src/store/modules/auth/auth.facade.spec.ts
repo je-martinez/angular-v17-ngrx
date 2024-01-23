@@ -70,7 +70,7 @@ describe('AuthFacade', () => {
   });
 
   it('should dispatch recover user from storage', () => {
-    service.signOut();
+    service.recoveUserFromStorage();
     expect(store.dispatch).toHaveBeenCalled();
     expect(store.dispatch).toHaveBeenCalledWith(
       AuthActions.recoverUserFromStorage()
