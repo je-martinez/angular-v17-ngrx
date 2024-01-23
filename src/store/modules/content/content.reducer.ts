@@ -12,13 +12,13 @@ export const contentFeatureKey = 'content';
 export interface ContentState {
   posts: Post[];
   loadingGetPosts: boolean;
-  errorGetPosts: Error | undefined;
+  errorGetPosts: Error | string | undefined;
   comments: PostComment[];
   loadingGetComments: boolean;
-  errorGetComments: Error | undefined;
+  errorGetComments: Error | string | undefined;
   users: User[];
   loadingGetUsers: boolean;
-  errorGetUsers: Error | undefined;
+  errorGetUsers: Error | string | undefined;
   contentId: number | undefined;
 }
 

@@ -7,20 +7,22 @@ export const authFeatureKey = 'auth';
 export interface AuthState {
   user: User | undefined;
   loadingSignInWithGoogle: boolean;
+  onErrorSignInWithGoogle: Error | string | undefined;
   loadingSignInWithGithub: boolean;
-  onErrorSignInWithGoogle: Error | undefined;
+  onErrorSignInWithGithub: Error | string | undefined;
   loadingSignUpWithEmailAndPassword: boolean;
-  onErrorSignUpWithEmailAndPassword: Error | undefined;
+  onErrorSignUpWithEmailAndPassword: Error | string | undefined;
   loadingSignInWithEmailAndPassword: boolean;
-  onErrorSignInWithEmailAndPassword: Error | undefined;
+  onErrorSignInWithEmailAndPassword: Error | string | undefined;
   loadingSignOut: boolean;
 }
 
 export const initialState: AuthState = {
   user: undefined,
   loadingSignInWithGoogle: false,
-  loadingSignInWithGithub: false,
   onErrorSignInWithGoogle: undefined,
+  loadingSignInWithGithub: false,
+  onErrorSignInWithGithub: undefined,
   loadingSignUpWithEmailAndPassword: false,
   onErrorSignUpWithEmailAndPassword: undefined,
   loadingSignInWithEmailAndPassword: false,
@@ -51,7 +53,7 @@ export const reducer = createReducer(
     (state, action): AuthState => ({
       ...state,
       loadingSignInWithGoogle: false,
-      onErrorSignInWithGoogle: { ...action.error }
+      onErrorSignInWithGoogle: action.error
     })
   ),
 
@@ -76,7 +78,7 @@ export const reducer = createReducer(
     (state, action): AuthState => ({
       ...state,
       loadingSignInWithGithub: false,
-      onErrorSignInWithGoogle: { ...action.error }
+      onErrorSignInWithGithub: action.error
     })
   ),
 
@@ -98,8 +100,9 @@ export const reducer = createReducer(
   ),
   on(
     AuthActions.signUpWEmailAndPasswordFailure,
-    (state): AuthState => ({
+    (state, action): AuthState => ({
       ...state,
+      onErrorSignUpWithEmailAndPassword: action.error,
       loadingSignUpWithEmailAndPassword: false
     })
   ),
@@ -122,8 +125,9 @@ export const reducer = createReducer(
   ),
   on(
     AuthActions.signInWEmailAndPasswordFailure,
-    (state): AuthState => ({
+    (state, action): AuthState => ({
       ...state,
+      onErrorSignInWithEmailAndPassword: action.error,
       loadingSignInWithEmailAndPassword: false
     })
   ),
