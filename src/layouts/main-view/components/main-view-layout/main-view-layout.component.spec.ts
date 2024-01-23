@@ -16,6 +16,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { AuthFacade } from '@store/modules/auth/auth.facade';
 import { generateMockAuthFacade } from '@mocks/facades/auth.facade.mock';
+import { MainViewNavbarComponent } from '../main-view-navbar/main-view-navbar.component';
+import { MainViewFooterComponent } from '../main-view-footer/main-view-footer.component';
 
 describe('MainViewLayoutComponent', () => {
   let component: MainViewLayoutComponent;
@@ -33,6 +35,8 @@ describe('MainViewLayoutComponent', () => {
         AuthStoreModule,
         ToastProviderComponent,
         MainViewLeftPanelComponent,
+        MainViewNavbarComponent,
+        MainViewFooterComponent,
         RouterTestingModule,
         provideFirebaseApp(() => initializeApp(environment.firebase)),
         provideAuth(() => getAuth()),
