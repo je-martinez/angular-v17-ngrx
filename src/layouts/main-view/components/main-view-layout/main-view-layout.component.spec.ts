@@ -76,10 +76,11 @@ describe('MainViewLayoutComponent', () => {
 
   it('should close menu if this is open on xs dimensions', () => {
     const dummyElement = document.createElement('div');
-    document.getElementById = jasmine
-      .createSpy('HTML Element')
-      .and.returnValue(dummyElement);
+    const documentSpy = spyOn(document, 'getElementById').and.returnValue(
+      dummyElement
+    );
     component.signOut();
     expect(authFacade.signOut).toHaveBeenCalled();
+    documentSpy.calls.reset();
   });
 });
