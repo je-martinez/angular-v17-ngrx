@@ -2,15 +2,27 @@ import { TestBed } from '@angular/core/testing';
 
 import { LocalStorageService } from './local-storage.service';
 import { environment } from '@env/environment';
-import { decryptString } from '../utils/encryption.utils';
+import { decryptString, encryptString } from '../utils/encryption.utils';
 
 describe('LocalStorageService', () => {
   let service: LocalStorageService;
   const fakeKeys: Record<string, string> = {
-    'test-key-1': 'test-value-1',
-    'test-key-2': 'test-value-2',
-    'test-key-3': 'test-value-3',
-    'test-key-4': 'test-value-4'
+    'test-key-1': encryptString(
+      'test-value-1',
+      environment.encryption.localStorageKey
+    ),
+    'test-key-2': encryptString(
+      'test-value-2',
+      environment.encryption.localStorageKey
+    ),
+    'test-key-3': encryptString(
+      'test-value-3',
+      environment.encryption.localStorageKey
+    ),
+    'test-key-4': encryptString(
+      'test-value-4',
+      environment.encryption.localStorageKey
+    )
   };
 
   beforeEach(() => {
@@ -39,7 +51,7 @@ describe('LocalStorageService', () => {
     const key = 'test-key-1';
     const value = service.getItem(key);
     const decryptedValue = decryptString(
-      value!,
+      fakeKeys[key],
       environment.encryption.localStorageKey
     );
     expect(value).toBe(decryptedValue);
