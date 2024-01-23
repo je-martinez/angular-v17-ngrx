@@ -9,6 +9,7 @@ import { ToastNotificationComponent } from './toast-notification.component';
 import { ToastProviderService } from '@shared/services/toast-provider.service';
 import { generateMockToastProviderService } from '@mocks/services/toast-provider-service.mock';
 import { mockToasts } from '@mocks/data/toasts.mock';
+import { ToastPosition } from '@shared/types/toast-provider.enums';
 
 describe('ToastNotificationComponent', () => {
   let component: ToastNotificationComponent;
@@ -17,6 +18,8 @@ describe('ToastNotificationComponent', () => {
   const successToast = mockToasts.success[0];
   const errorToast = mockToasts.error[0];
   const warningToast = mockToasts.warning[0];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const customToast = { ...mockToasts.success[1], type: 'custom' as any };
 
   beforeEach(async () => {
     facade = generateMockToastProviderService();
@@ -77,4 +80,40 @@ describe('ToastNotificationComponent', () => {
     fixture.detectChanges();
     expect(facade.remove).not.toHaveBeenCalled();
   }));
+
+  it('should return the right styles by toast type', () => {
+    component.toast = successToast;
+    fixture.detectChanges();
+    expect(component.toastClass).toContain('text-green-500');
+
+    component.toast = errorToast;
+    fixture.detectChanges();
+    expect(component.toastClass).toContain('text-red-500');
+
+    component.toast = warningToast;
+    fixture.detectChanges();
+    expect(component.toastClass).toContain('text-orange-500');
+
+    component.toast = customToast;
+    fixture.detectChanges();
+    expect(component.toastClass).toContain('toast-default');
+  });
+
+  it('should return the right aligment by toast position', () => {
+    component.toast = { ...successToast, position: ToastPosition.TopCenter };
+    fixture.detectChanges();
+    expect(component.classAligment).toContain('justify-center');
+
+    component.toast = { ...successToast, position: ToastPosition.TopLeft };
+    fixture.detectChanges();
+    expect(component.classAligment).toContain('justify-start');
+
+    component.toast = { ...successToast, position: ToastPosition.TopRight };
+    fixture.detectChanges();
+    expect(component.classAligment).toContain('justify-end');
+
+    component.toast = { ...successToast, position: undefined };
+    fixture.detectChanges();
+    expect(component.classAligment).toContain('justify-center');
+  });
 });
