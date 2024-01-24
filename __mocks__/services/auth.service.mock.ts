@@ -1,9 +1,9 @@
 import { mockLoggedUser } from '@mocks/data/users.mock';
 import { AuthService } from '@modules/auth/services/auth.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 export const generateMockAuthService = ({
-  signInWithGoogleError = false
+  errorOnSignInWithGoogle = false
 }): AuthService => {
   const service = jasmine.createSpyObj<AuthService>('AuthService', [
     'createAccount',
@@ -17,6 +17,7 @@ export const generateMockAuthService = ({
     'signInWithGoogle',
     'signOut'
   ]);
+
   service.createAccount.and.returnValue(of());
   service.getUserFromLocalStorage.and.returnValue(of());
   service.removeUserFromLocalStorage.and.returnValue();
@@ -24,7 +25,9 @@ export const generateMockAuthService = ({
   service.sendEmailVerification.and.returnValue(of());
   service.signInWithEmailAndPassword.and.returnValue(of());
   service.signInWithGithub.and.returnValue(of());
-  service.signInWithGoogle.and.returnValue(of(mockLoggedUser));
+  service.signInWithGoogle.and.returnValue(
+    errorOnSignInWithGoogle ? of(mockLoggedUser) : throwError(() => 'error')
+  );
   service.signOut.and.returnValue(of());
   return service;
 };
