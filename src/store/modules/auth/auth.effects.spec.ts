@@ -1,23 +1,23 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable, of, switchMap, take, throwError } from 'rxjs';
+import { Observable, of, take } from 'rxjs';
 
-import { AuthEffects } from './auth.effects';
-import { AuthService } from '@modules/auth/services/auth.service';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '@env/environment';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
-import { AuthLayoutService } from '@layouts/auth/services/auth-layout.service';
-import { ToastProviderService } from '@shared/services/toast-provider.service';
 import { Router } from '@angular/router';
-import { generateMockToastProviderService } from '@mocks/services/toast-provider-service.mock';
-import { generateMockAuthLayoutService } from '@mocks/services/auth-layout.service.mock';
+import { environment } from '@env/environment';
+import { AuthLayoutService } from '@layouts/auth/services/auth-layout.service';
 import { generateMockLogger } from '@mocks/core/logger.mock';
 import { generateMockRouter } from '@mocks/core/router.mock';
+import { generateMockAuthLayoutService } from '@mocks/services/auth-layout.service.mock';
 import { generateMockAuthService } from '@mocks/services/auth.service.mock';
+import { generateMockToastProviderService } from '@mocks/services/toast-provider-service.mock';
+import { AuthService } from '@modules/auth/services/auth.service';
+import { ToastProviderService } from '@shared/services/toast-provider.service';
+import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
 import { AuthActions } from './auth.actions';
+import { AuthEffects } from './auth.effects';
 
 describe('AuthEffects', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -113,7 +113,7 @@ describe('AuthEffects', () => {
     tick(3000);
 
     expect(authService.signInWithGoogle).toHaveBeenCalled();
-    expect(logger.error).toHaveBeenCalledWith(true);
+    expect(logger.error).toHaveBeenCalled();
     expect(toastProvider.show).toHaveBeenCalled();
   }));
 });

@@ -25,9 +25,12 @@ export const generateMockAuthService = ({
   service.sendEmailVerification.and.returnValue(of());
   service.signInWithEmailAndPassword.and.returnValue(of());
   service.signInWithGithub.and.returnValue(of());
-  service.signInWithGoogle.and.returnValue(
-    errorOnSignInWithGoogle ? of(mockLoggedUser) : throwError(() => 'error')
-  );
+  if (errorOnSignInWithGoogle) {
+    const error = throwError(() => new Error('Fake error'));
+    service.signInWithGoogle.and.returnValue(error);
+  } else {
+    service.signInWithGoogle.and.returnValue(of(mockLoggedUser));
+  }
   service.signOut.and.returnValue(of());
   return service;
 };
