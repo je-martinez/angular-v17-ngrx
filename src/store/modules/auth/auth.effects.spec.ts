@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable } from 'rxjs';
+import { Observable, of, take } from 'rxjs';
 
 import { AuthEffects } from './auth.effects';
 import { AuthService } from '@modules/auth/services/auth.service';
@@ -17,8 +17,10 @@ import { generateMockAuthLayoutService } from '@mocks/services/auth-layout.servi
 import { generateMockLogger } from '@mocks/core/logger.mock';
 import { generateMockRouter } from '@mocks/core/router.mock';
 import { generateMockAuthService } from '@mocks/services/auth.service.mock';
+import { AuthActions } from './auth.actions';
 
 describe('AuthEffects', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let actions$: Observable<any>;
   let effects: AuthEffects;
   let authService: AuthService;
@@ -75,4 +77,18 @@ describe('AuthEffects', () => {
   it('should be created', () => {
     expect(effects).toBeTruthy();
   });
+
+  it('should execute sign in with google workflow [Success]', fakeAsync(() => {
+    actions$ = of(AuthActions.signInWGoogle());
+
+    effects.signInWGoogle$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authLayoutService.showTopProgressBar).toHaveBeenCalled();
+    expect(authService.signInWithGoogle).toHaveBeenCalled();
+    expect(authService.saveUserOnLocalStorage).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalled();
+    expect(toastProvider.show).toHaveBeenCalled();
+  }));
 });
