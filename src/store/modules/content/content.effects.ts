@@ -4,6 +4,7 @@ import { catchError, map, exhaustMap, debounceTime } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ContentActions } from './content.actions';
 import { ContentService } from '@modules/home/services/content.service';
+import { NGXLogger } from 'ngx-logger';
 
 const DELAY = 1500;
 
@@ -16,7 +17,10 @@ export class ContentEffects {
       exhaustMap(() =>
         this.contentService.getPostsFromApi().pipe(
           map((data) => ContentActions.getPostsSuccess({ data })),
-          catchError((error) => of(ContentActions.getPostsFailure({ error })))
+          catchError((error) => {
+            this.logger.error({ error });
+            return of(ContentActions.getPostsFailure({ error }));
+          })
         )
       )
     );
@@ -29,9 +33,10 @@ export class ContentEffects {
       exhaustMap(() =>
         this.contentService.getCommentsFromApi().pipe(
           map((data) => ContentActions.getCommentsSuccess({ data })),
-          catchError((error) =>
-            of(ContentActions.getCommentsFailure({ error }))
-          )
+          catchError((error) => {
+            this.logger.error({ error });
+            return of(ContentActions.getCommentsFailure({ error }));
+          })
         )
       )
     );
@@ -44,7 +49,10 @@ export class ContentEffects {
       exhaustMap(() =>
         this.contentService.getUsersFromApi().pipe(
           map((data) => ContentActions.getUsersSuccess({ data })),
-          catchError((error) => of(ContentActions.getUsersFailure({ error })))
+          catchError((error) => {
+            this.logger.error({ error });
+            return of(ContentActions.getUsersFailure({ error }));
+          })
         )
       )
     );
@@ -52,6 +60,7 @@ export class ContentEffects {
 
   constructor(
     private actions$: Actions,
-    private readonly contentService: ContentService
+    private readonly contentService: ContentService,
+    private readonly logger: NGXLogger
   ) {}
 }

@@ -3,7 +3,7 @@ import { ContentWallPageComponent } from './content-wall-page.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { CommonModule } from '@angular/common';
-import { ContentModule } from '@store/modules/content/content.module';
+import { ContentStoreModule } from '@store/modules/content/content.store.module';
 import { ContentCardComponent } from './components/content-card/content-card.component';
 import { ContentCardSkeletonComponent } from './components/content-card-skeleton/content-card-skeleton.component';
 import { ContentCommentsModalComponent } from './components/content-comments-modal/content-comments-modal.component';
@@ -14,6 +14,7 @@ import { By } from '@angular/platform-browser';
 import { ModalUtils } from '@modules/home/utils/modal.utils';
 import { mockContent } from '@mocks/data/content.mock';
 import { Modal, ModalOptions } from 'flowbite';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 describe('ContentWallPageComponent', () => {
   const setup = async ({ loading = false }) => {
@@ -23,12 +24,16 @@ describe('ContentWallPageComponent', () => {
       imports: [
         StoreModule.forRoot([]),
         EffectsModule.forRoot([]),
-        ContentModule,
+        ContentStoreModule,
         ContentCardComponent,
         ContentCardSkeletonComponent,
         ContentCommentsModalComponent,
         CommonModule,
-        HttpClientModule
+        HttpClientModule,
+        LoggerModule.forRoot({
+          level: NgxLoggerLevel.DEBUG,
+          serverLogLevel: NgxLoggerLevel.ERROR
+        })
       ],
       providers: [{ provide: ContentFacade, useValue: facade }]
     }).compileComponents();

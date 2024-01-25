@@ -6,12 +6,13 @@ import { generateMockContentFacade } from '@mocks/facades/content.facade.mock';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { ContentFacade } from '@store/modules/content/content.facade';
-import { ContentModule } from '@store/modules/content/content.module';
+import { ContentStoreModule } from '@store/modules/content/content.store.module';
 import { Modal } from 'flowbite';
 import { ContentCommentCardComponent } from '../content-comment-card/content-comment-card.component';
 import { ContentCommentsModalComponent } from './content-comments-modal.component';
 import { Content, PostComment } from '@modules/home/types/content-wall.types';
 import { take } from 'rxjs';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 describe('ContentCommentsModalComponent', () => {
   const setup = async ({ customContentById = mockContent[0] }) => {
@@ -28,10 +29,14 @@ describe('ContentCommentsModalComponent', () => {
         ContentCommentsModalComponent,
         StoreModule.forRoot([]),
         EffectsModule.forRoot([]),
-        ContentModule,
+        ContentStoreModule,
         ContentCommentCardComponent,
         CommonModule,
-        HttpClientModule
+        HttpClientModule,
+        LoggerModule.forRoot({
+          level: NgxLoggerLevel.DEBUG,
+          serverLogLevel: NgxLoggerLevel.ERROR
+        })
       ],
       providers: [{ provide: ContentFacade, useValue: facade }]
     }).compileComponents();

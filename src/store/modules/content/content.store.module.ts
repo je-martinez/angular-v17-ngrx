@@ -12,4 +12,4 @@ import { contentFeature } from './content.reducer';
     EffectsModule.forFeature([ContentEffects])
   ]
 })
-export class ContentModule {}
+export class ContentStoreModule {}
