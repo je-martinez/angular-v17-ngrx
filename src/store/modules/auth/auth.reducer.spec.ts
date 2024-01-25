@@ -13,7 +13,9 @@ describe('Auth Reducer', () => {
 
       expect(result).toBe(initialState);
     });
+  });
 
+  describe('an known action', () => {
     it('should return the desire state on Sign In w Google', () => {
       const action = AuthActions.signInWGoogle();
 

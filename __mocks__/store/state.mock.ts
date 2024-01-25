@@ -11,7 +11,7 @@ import {
 } from '@store/modules/content/content.reducer';
 import { RootState } from '@store/modules/types/store.types';
 
-export const createRootState = (): RootState => ({
+export const createMockRootState = (): RootState => ({
   auth: {
     ...AuthInitialState,
     user: mockLoggedUser
