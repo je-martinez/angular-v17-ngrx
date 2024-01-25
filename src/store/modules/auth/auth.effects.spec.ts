@@ -18,14 +18,29 @@ import { ToastProviderService } from '@shared/services/toast-provider.service';
 import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
 import { AuthActions } from './auth.actions';
 import { AuthEffects } from './auth.effects';
+import { SignUpOrLoginFormDTO } from '@modules/auth/types/auth.DTOs';
 
 describe('AuthEffects', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let actions$: Observable<any>;
-  const setup = async ({ errorOnSignInWithGoogle = false }) => {
+  const setup = async ({
+    errorOnSignInWithGoogle = false,
+    errorOnSignInWithGithub = false,
+    errorOnSignInWithEmailAndPassword = false,
+    errorOnSignUpWithEmailAndPassword = false,
+    errorOnSignOut = false,
+    errorOnGetUserFromLocalStorage = false,
+    userOnStorage = true
+  }) => {
     const toastProvider = generateMockToastProviderService();
     const authService = generateMockAuthService({
-      errorOnSignInWithGoogle
+      errorOnSignInWithGoogle,
+      errorOnSignInWithGithub,
+      errorOnSignInWithEmailAndPassword,
+      errorOnSignUpWithEmailAndPassword,
+      errorOnSignOut,
+      errorOnGetUserFromLocalStorage,
+      userOnStorage
     });
     const authLayoutService = generateMockAuthLayoutService();
     const logger = generateMockLogger();
@@ -115,5 +130,200 @@ describe('AuthEffects', () => {
     expect(authService.signInWithGoogle).toHaveBeenCalled();
     expect(logger.error).toHaveBeenCalled();
     expect(toastProvider.show).toHaveBeenCalled();
+  }));
+
+  it('should execute sign in with Github workflow [Success]', fakeAsync(async () => {
+    const { effects, authLayoutService, authService, router, toastProvider } =
+      await setup({});
+
+    actions$ = of(AuthActions.signInWGithub());
+
+    effects.signInWGithub$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authLayoutService.showTopProgressBar).toHaveBeenCalledWith(true);
+    expect(authService.signInWithGithub).toHaveBeenCalled();
+    expect(authService.saveUserOnLocalStorage).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalled();
+    expect(toastProvider.show).toHaveBeenCalled();
+    expect(authLayoutService.showTopProgressBar).toHaveBeenCalledWith(false);
+  }));
+
+  it('should execute sign in with Github workflow [Failure]', fakeAsync(async () => {
+    const { effects, logger, authService, toastProvider } = await setup({
+      errorOnSignInWithGithub: true
+    });
+    actions$ = of(AuthActions.signInWGithub());
+
+    effects.signInWGithub$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authService.signInWithGithub).toHaveBeenCalled();
+    expect(logger.error).toHaveBeenCalled();
+    expect(toastProvider.show).toHaveBeenCalled();
+  }));
+
+  it('should execute sign in with email and password workflow [Success]', fakeAsync(async () => {
+    const { effects, authLayoutService, authService, router, toastProvider } =
+      await setup({});
+
+    const input: SignUpOrLoginFormDTO = {
+      email: 'fake-email@mail.com',
+      password: 'fake-password'
+    };
+
+    actions$ = of(AuthActions.signInWEmailAndPassword({ input }));
+
+    effects.signInWEmailAndPassword$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authLayoutService.showTopProgressBar).toHaveBeenCalledWith(true);
+    expect(authService.signInWithEmailAndPassword).toHaveBeenCalled();
+    expect(authService.saveUserOnLocalStorage).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalled();
+    expect(toastProvider.show).toHaveBeenCalled();
+    expect(authLayoutService.showTopProgressBar).toHaveBeenCalledWith(false);
+  }));
+
+  it('should execute sign in with email and password workflow [Failure]', fakeAsync(async () => {
+    const { effects, logger, authService, toastProvider } = await setup({
+      errorOnSignInWithEmailAndPassword: true
+    });
+
+    const input: SignUpOrLoginFormDTO = {
+      email: 'fake-email@mail.com',
+      password: 'fake-password'
+    };
+
+    actions$ = of(AuthActions.signInWEmailAndPassword({ input }));
+
+    effects.signInWEmailAndPassword$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authService.signInWithEmailAndPassword).toHaveBeenCalled();
+    expect(logger.error).toHaveBeenCalled();
+    expect(toastProvider.show).toHaveBeenCalled();
+  }));
+
+  it('should execute sign up with email and password workflow [Success]', fakeAsync(async () => {
+    const { effects, authLayoutService, authService, router, toastProvider } =
+      await setup({});
+
+    const input: SignUpOrLoginFormDTO = {
+      email: 'fake-email@mail.com',
+      password: 'fake-password'
+    };
+
+    actions$ = of(AuthActions.signUpWEmailAndPassword({ input }));
+
+    effects.signUpWEmailAndPassword$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authLayoutService.showTopProgressBar).toHaveBeenCalledWith(true);
+    expect(authService.createAccount).toHaveBeenCalled();
+    expect(authService.saveUserOnLocalStorage).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalled();
+    expect(toastProvider.show).toHaveBeenCalled();
+    expect(authLayoutService.showTopProgressBar).toHaveBeenCalledWith(false);
+  }));
+
+  it('should execute sign up with email and password workflow [Failure]', fakeAsync(async () => {
+    const { effects, logger, authService, toastProvider } = await setup({
+      errorOnSignUpWithEmailAndPassword: true
+    });
+
+    const input: SignUpOrLoginFormDTO = {
+      email: 'fake-email@mail.com',
+      password: 'fake-password'
+    };
+
+    actions$ = of(AuthActions.signUpWEmailAndPassword({ input }));
+
+    effects.signUpWEmailAndPassword$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authService.createAccount).toHaveBeenCalled();
+    expect(logger.error).toHaveBeenCalled();
+    expect(toastProvider.show).toHaveBeenCalled();
+  }));
+
+  it('should execute sign out workflow [Success]', fakeAsync(async () => {
+    const { effects, authService, router, toastProvider } = await setup({});
+
+    actions$ = of(AuthActions.signOut());
+
+    effects.signOut$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authService.signOut).toHaveBeenCalled();
+    expect(authService.removeUserFromLocalStorage).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalled();
+    expect(toastProvider.show).toHaveBeenCalled();
+  }));
+
+  it('should execute sign out workflow [Failure]', fakeAsync(async () => {
+    const { effects, logger, authService, toastProvider } = await setup({
+      errorOnSignOut: true
+    });
+
+    actions$ = of(AuthActions.signOut());
+
+    effects.signOut$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authService.signOut).toHaveBeenCalled();
+    expect(logger.error).toHaveBeenCalled();
+    expect(toastProvider.show).toHaveBeenCalled();
+  }));
+
+  it('should execute recover user from storage workflow [Success]', fakeAsync(async () => {
+    const { effects, authService, logger } = await setup({});
+
+    actions$ = of(AuthActions.recoverUserFromStorage());
+
+    effects.recoverUserFromStorage$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authService.getUserFromLocalStorage).toHaveBeenCalled();
+    expect(logger.error).not.toHaveBeenCalled();
+  }));
+
+  it('should execute recover user from storage workflow [Success - No User on Local Storage]', fakeAsync(async () => {
+    const { effects, authService, logger } = await setup({
+      userOnStorage: false
+    });
+
+    actions$ = of(AuthActions.recoverUserFromStorage());
+
+    effects.recoverUserFromStorage$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authService.getUserFromLocalStorage).toHaveBeenCalled();
+    expect(logger.error).not.toHaveBeenCalled();
+  }));
+
+  it('should execute recover user from storage workflow [Failure]', fakeAsync(async () => {
+    const { effects, logger, authService } = await setup({
+      errorOnGetUserFromLocalStorage: true
+    });
+
+    actions$ = of(AuthActions.recoverUserFromStorage());
+
+    effects.recoverUserFromStorage$.pipe(take(1)).subscribe();
+
+    tick(3000);
+
+    expect(authService.getUserFromLocalStorage).toHaveBeenCalled();
+    expect(logger.error).toHaveBeenCalled();
   }));
 });
