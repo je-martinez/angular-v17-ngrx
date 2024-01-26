@@ -1,22 +1,17 @@
 import { Injectable } from '@angular/core';
 import {
   Auth,
-  createUserWithEmailAndPassword,
+  GithubAuthProvider,
   GoogleAuthProvider,
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  signOut,
-  sendEmailVerification,
-  User,
-  GithubAuthProvider
+  User
 } from '@angular/fire/auth';
-import { from, map, of, Observable } from 'rxjs';
-import { USER_LOCAL_STORAGE_KEY } from '../constants/auth.constants';
 import { environment } from '@env/environment';
-import { SignUpOrLoginFormDTO } from '../types/auth.DTOs';
-import { hashString } from '@shared/utils/encryption.utils';
 import { LocalStorageService } from '@shared/services/local-storage.service';
+import { hashString } from '@shared/utils/encryption.utils';
+import { Observable, from, map, of } from 'rxjs';
+import { USER_LOCAL_STORAGE_KEY } from '../constants/auth.constants';
+import { SignUpOrLoginFormDTO } from '../types/auth.DTOs';
+import { AuthUtils } from '../utils/auth.utils';
 
 @Injectable({
   providedIn: 'root'
@@ -41,15 +36,15 @@ export class AuthService {
   }
 
   signInWithGoogle(): Observable<User> {
-    return from(signInWithPopup(this.auth, new GoogleAuthProvider())).pipe(
-      map((userCredential) => userCredential.user.toJSON() as User)
-    );
+    return from(
+      AuthUtils.signInWithPopup(this.auth, new GoogleAuthProvider())
+    ).pipe(map((userCredential) => userCredential.user.toJSON() as User));
   }
 
   signInWithGithub(): Observable<User> {
-    return from(signInWithPopup(this.auth, new GithubAuthProvider())).pipe(
-      map((userCredential) => userCredential.user.toJSON() as User)
-    );
+    return from(
+      AuthUtils.signInWithPopup(this.auth, new GithubAuthProvider())
+    ).pipe(map((userCredential) => userCredential.user.toJSON() as User));
   }
 
   signInWithEmailAndPassword({
@@ -61,7 +56,7 @@ export class AuthService {
       environment.encryption.passwordKey
     );
     return from(
-      signInWithEmailAndPassword(this.auth, email, hashPassword)
+      AuthUtils.signInWithEmailAndPassword(this.auth, email, hashPassword)
     ).pipe(map((userCredential) => userCredential.user.toJSON() as User));
   }
 
@@ -71,19 +66,19 @@ export class AuthService {
       environment.encryption.passwordKey
     );
     return from(
-      createUserWithEmailAndPassword(this.auth, email, hashPassword)
+      AuthUtils.createUserWithEmailAndPassword(this.auth, email, hashPassword)
     ).pipe(map((userCredential) => userCredential.user.toJSON() as User));
   }
 
   sendEmailVerification(): Observable<void> {
-    return from(sendEmailVerification(this.auth.currentUser!));
+    return from(AuthUtils.sendEmailVerification(this.auth.currentUser!));
   }
 
   signOut(): Observable<void> {
-    return from(signOut(this.auth));
+    return from(AuthUtils.signOut(this.auth));
   }
 
   sendPasswordResetEmail(email: string): Observable<void> {
-    return from(sendPasswordResetEmail(this.auth, email));
+    return from(AuthUtils.sendPasswordResetEmail(this.auth, email));
   }
 }

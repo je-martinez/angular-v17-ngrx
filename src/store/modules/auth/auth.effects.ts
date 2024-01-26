@@ -139,6 +139,15 @@ export class AuthEffects {
           tap({
             next: () => this.router.navigate(['home/content-wall'])
           }),
+          tap({
+            next: () => {
+              this.toastProvider.show({
+                message: 'Welcome to the app!',
+                type: ToastType.Success,
+                position: ToastPosition.TopRight
+              });
+            }
+          }),
           map((data) => AuthActions.signInWEmailAndPasswordSuccess({ data })),
           catchError((error: FirebaseAuthError) => {
             this.logger.error({ error });

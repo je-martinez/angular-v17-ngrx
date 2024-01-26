@@ -32,6 +32,7 @@ export class ContentFacade {
   );
   public readonly contentById$ = this.store.select(selectContentById);
 
+  // eslint-disable-next-line @ngrx/no-typed-global-store
   constructor(private store: Store<RootState>) {}
 
   getPosts() {

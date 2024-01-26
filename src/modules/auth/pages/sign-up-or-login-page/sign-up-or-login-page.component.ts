@@ -158,6 +158,7 @@ export class SignUpOrLoginPageComponent {
 
   public onSubmit() {
     if (this.signUpOrLoginForm?.invalid) {
+      this.signUpOrLoginForm.markAllAsTouched();
       return;
     }
 

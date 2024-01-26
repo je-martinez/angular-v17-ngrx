@@ -2,8 +2,14 @@
   <div class="rounded-xl border p-5 shadow-md bg-white">
     <div class="flex w-full items-center justify-between border-b pb-3">
       <div class="flex items-center space-x-3">
-        <img class="h-8 w-8 rounded-full bg-slate-400" [src]="avatar" alt="" />
-        <div class="text-lg font-bold text-slate-700">{{ name }}</div>
+        <img
+          id="content-avatar"
+          class="h-8 w-8 rounded-full bg-slate-400"
+          [src]="avatar"
+          alt="" />
+        <div id="content-name" class="text-lg font-bold text-slate-700">
+          {{ name }}
+        </div>
       </div>
       <div class="flex items-center space-x-8">
         <div class="text-xs text-neutral-500">{{ time }}</div>
@@ -11,10 +17,10 @@
     </div>
 
     <div class="mt-4 mb-6">
-      <div class="mb-3 text-xl font-bold">
+      <div id="content-title" class="mb-3 text-xl font-bold">
         {{ title }}
       </div>
-      <div class="text-sm text-neutral-600">
+      <div id="content-body" class="text-sm text-neutral-600">
         {{ body }}
       </div>
     </div>
@@ -23,6 +29,7 @@
       <div class="flex items-center justify-between text-slate-500">
         <div class="flex space-x-4 md:space-x-8">
           <button
+            id="content-comments-button"
             (click)="selectContentHandler()"
             type="button"
             class="flex cursor-pointer items-center transition hover:text-slate-600">
@@ -38,7 +45,7 @@
                 stroke-linejoin="round"
                 d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
             </svg>
-            <span>{{ commentsCount }}</span>
+            <span id="content-commentsCount">{{ commentsCount }}</span>
           </button>
         </div>
       </div>

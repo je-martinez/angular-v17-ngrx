@@ -1,7 +1,7 @@
 import { Modal } from 'flowbite';
 import type { ModalOptions } from 'flowbite';
 
-export const getModalInstancebyId = (id: string, options?: ModalOptions) => {
+const getModalInstancebyId = (id: string, options?: ModalOptions) => {
   const $targetEl = document.getElementById(id);
   if ($targetEl) {
     const instanceOptions = {
@@ -11,4 +11,8 @@ export const getModalInstancebyId = (id: string, options?: ModalOptions) => {
     return new Modal($targetEl, options ?? {}, instanceOptions);
   }
   return null;
+};
+
+export const ModalUtils = {
+  getModalInstancebyId
 };

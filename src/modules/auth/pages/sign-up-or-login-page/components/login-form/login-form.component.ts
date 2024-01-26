@@ -24,9 +24,9 @@ export class LoginFormComponent {
   @Input() public loginForm: FormGroup | undefined;
   @Input() public emailErrors: SignUpOrLoginErrorForm[] = [];
   @Input() public passwordErrors: SignUpOrLoginErrorForm[] = [];
-  @Output() public loginWithEmailAndPassword = new EventEmitter();
-  @Output() public googleSignIn = new EventEmitter();
-  @Output() public githubSignUp = new EventEmitter();
+  @Output() public readonly loginWithEmailAndPassword = new EventEmitter();
+  @Output() public readonly googleSignIn = new EventEmitter();
+  @Output() public readonly githubSignUp = new EventEmitter();
 
   public get emailInputHasErrors() {
     return this.emailErrors?.length > 0;

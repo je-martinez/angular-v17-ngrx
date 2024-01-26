@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-main-view-footer',
+  selector: 'main-view-footer',
   standalone: true,
   imports: [],
   templateUrl: './main-view-footer.component.html',

@@ -7,9 +7,7 @@ describe('LogoInteractionComponent', () => {
   let fixture: ComponentFixture<LogoInteractionComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [LogoInteractionComponent]
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(LogoInteractionComponent);
     component = fixture.componentInstance;

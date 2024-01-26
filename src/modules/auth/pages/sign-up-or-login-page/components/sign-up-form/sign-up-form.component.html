@@ -5,6 +5,7 @@
 <div class="mt-4 flex flex-col lg:flex-row items-center justify-between">
   <div class="w-full lg:w-1/2 mb-2 lg:mb-0">
     <button
+      id="google-sign-up-button"
       (click)="onGoogleSignIn()"
       type="button"
       class="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300">
@@ -31,6 +32,7 @@
   </div>
   <div class="w-full lg:w-1/2 ml-0 lg:ml-2">
     <button
+      id="github-sign-up-button"
       (click)="onGithubSignIn()"
       type="button"
       class="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300">
@@ -92,6 +94,7 @@
     </div>
     <div>
       <button
+        id="sign-up-button"
         (click)="onSubmit()"
         type="submit"
         class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300">

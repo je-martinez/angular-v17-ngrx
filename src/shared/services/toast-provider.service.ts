@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
   providedIn: 'root'
 })
 export class ToastProviderService {
-  private toastsBS = new BehaviorSubject<ToastNotification[]>([]);
+  private readonly toastsBS = new BehaviorSubject<ToastNotification[]>([]);
   public toasts$ = this.toastsBS.asObservable();
 
   public show({

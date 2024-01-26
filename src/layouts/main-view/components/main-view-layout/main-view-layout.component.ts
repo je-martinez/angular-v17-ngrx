@@ -21,12 +21,14 @@ export class MainViewLayoutComponent {
 
   signOut() {
     const $targetEl = document.getElementById('default-sidebar');
-    const instanceOptions = {
-      id: 'default-sidebar',
-      override: true
-    };
-    const drawer = new Drawer($targetEl, {}, instanceOptions);
-    drawer.hide();
+    if ($targetEl) {
+      const instanceOptions = {
+        id: 'default-sidebar',
+        override: true
+      };
+      const drawer = new Drawer($targetEl, {}, instanceOptions);
+      drawer.hide();
+    }
     this.authFacade.signOut();
   }
 }
