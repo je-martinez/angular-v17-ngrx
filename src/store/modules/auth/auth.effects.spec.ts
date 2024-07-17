@@ -48,9 +48,6 @@ describe('AuthEffects', () => {
     const mockActions = provideMockActions(() => actions$);
     await TestBed.configureTestingModule({
       imports: [
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth()),
-        provideFirestore(() => getFirestore()),
         LoggerModule.forRoot({
           level: NgxLoggerLevel.DEBUG,
           serverLogLevel: NgxLoggerLevel.ERROR
@@ -78,7 +75,10 @@ describe('AuthEffects', () => {
           useValue: router
         },
         AuthEffects,
-        mockActions
+        mockActions,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore())
       ]
     });
 

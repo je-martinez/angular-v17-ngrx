@@ -13,8 +13,8 @@ describe('ContentCommentCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        ContentCommentCardComponent,
+      imports: [ContentCommentCardComponent],
+      providers: [
         provideFirebaseApp(() => initializeApp(environment.firebase)),
         provideAuth(() => getAuth()),
         provideFirestore(() => getFirestore())

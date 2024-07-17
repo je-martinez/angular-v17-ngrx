@@ -38,15 +38,17 @@ describe('MainViewLayoutComponent', () => {
         MainViewNavbarComponent,
         MainViewFooterComponent,
         RouterTestingModule,
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth()),
-        provideFirestore(() => getFirestore()),
         LoggerModule.forRoot({
           level: NgxLoggerLevel.DEBUG,
           serverLogLevel: NgxLoggerLevel.ERROR
         })
       ],
-      providers: [{ provide: AuthFacade, useValue: authFacade }]
+      providers: [
+        { provide: AuthFacade, useValue: authFacade },
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore())
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainViewLayoutComponent);

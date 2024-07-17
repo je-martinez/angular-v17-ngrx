@@ -20,11 +20,7 @@ describe('AuthService', () => {
 
     const localStorageService = generateMockLocalStorageService(emptyUser);
     await TestBed.configureTestingModule({
-      imports: [
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth()),
-        provideFirestore(() => getFirestore())
-      ],
+      imports: [],
       providers: [
         {
           provide: LocalStorageService,
@@ -33,7 +29,10 @@ describe('AuthService', () => {
         {
           provide: Auth,
           useValue: mockAuth
-        }
+        },
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore())
       ]
     });
     const service = TestBed.inject(AuthService);
